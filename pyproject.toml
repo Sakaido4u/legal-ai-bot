@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "legal-ai-bot"
+version = "0.1.0"
+description = "RAG system for cross-jurisdictional product compliance (GDPR, DPDP, CCPA)"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.27",
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "numpy>=1.24",
+  "requests>=2.31",
+  "beautifulsoup4>=4.12",
+  "tqdm>=4.66",
+  "sentence-transformers>=2.6",
+  "faiss-cpu>=1.7.4",
+  "pymupdf>=1.24",
+  "torch>=2.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

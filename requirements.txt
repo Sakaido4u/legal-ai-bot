@@ -1,7 +1,14 @@
-pypdf
-beautifulsoup4
-requests
-tqdm
-sentence-transformers
-faiss-cpu
-numpy
+# Install from pyproject for consistency: pip install -e .
+# Pin file kept for quick `pip install -r` in CI / course VMs.
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.6
+pydantic-settings>=2.2
+numpy>=1.24
+requests>=2.31
+beautifulsoup4>=4.12
+tqdm>=4.66
+sentence-transformers>=2.6
+faiss-cpu>=1.7.4
+pymupdf>=1.24
+torch>=2.1
