@@ -8,19 +8,26 @@ __pycache__/
 # Virtual environments
 venv/
 .env/
+.env
+
+# Generated demo artifacts
+demo_output.json
 
 # Datasets
 data/raw/
 data/processed/
+temp_auto_push.bat
 
 # Vector database
 vector_store/
+
+# Fine-tuned models
+models/
 
 # Logs
 logs/
 
 # IDE
-.vscode/
 .idea/
 
 # Jupyter
@@ -28,4 +35,5 @@ logs/
 
 # OS
 .DS_Store
-Thumbs.db
+Thumbs.db.gitignore
+branch_structure.json

@@ -6,7 +6,8 @@ from pathlib import Path
 from ml.cross_jurisdiction import compare_cross_jurisdiction
 from ml.demo_corpus import demo_chunks
 from ml.embeddings import EmbeddingBackend
-from ml.llm_citations import generate_citation_bound_answer, passages_to_citations, validate_citation_coverage
+from ml.llm_backend import generate_with_llm
+from ml.llm_citations import passages_to_citations, validate_citation_coverage
 from ml.retriever import HighPrecisionRetriever
 from ml.risk_scorer import score_passage
 from ml.schemas import Citation, CrossJurisdictionResult, Jurisdiction, LLMComplianceAnswer, RiskScore
@@ -29,6 +30,8 @@ def build_engine(settings: Settings) -> RAGEngine:
 
     if settings.index_dir:
         p = Path(settings.index_dir)
+        if not p.is_absolute():
+            p = Path(__file__).resolve().parents[2] / p
         if (p / "manifest.json").is_file():
             store = ComplianceVectorStore.load(p)
 
@@ -66,10 +69,16 @@ def run_compliance_analysis(
     citations: list[Citation] = passages_to_citations(passages)
     risk_scores = [score_passage(p) for p in passages]
     cross = compare_cross_jurisdiction(passages, jurisdictions=jurisdictions)
-    llm: LLMComplianceAnswer = generate_citation_bound_answer(
+    llm: LLMComplianceAnswer = generate_with_llm(
         query=query,
         product_feature=product_feature,
         citations=citations,
+        provider=engine.settings.llm_provider,  # type: ignore[arg-type]
+        model=engine.settings.llm_model,
+        api_key=engine.settings.llm_api_key,
+        openai_base_url=engine.settings.openai_base_url,
+        ollama_base_url=engine.settings.ollama_base_url,
+        timeout=engine.settings.llm_timeout_seconds,
     )
     if llm.answer_text and not validate_citation_coverage(llm.answer_text, [c.citation_id for c in citations]):
         llm = LLMComplianceAnswer(
