@@ -9,10 +9,14 @@ from sentence_transformers import SentenceTransformer
 logger = logging.getLogger(__name__)
 
 
+from .ollama_health import resolve_embedding_model_path
+
+
 @lru_cache(maxsize=2)
 def _load_model(model_name: str) -> SentenceTransformer:
-    logger.info("Loading sentence-transformers model: %s", model_name)
-    return SentenceTransformer(model_name)
+    resolved = resolve_embedding_model_path(model_name)
+    logger.info("Loading sentence-transformers model: %s", resolved)
+    return SentenceTransformer(resolved)
 
 
 class EmbeddingBackend:
