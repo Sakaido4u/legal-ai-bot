@@ -1,0 +1,43 @@
+{
+  "documents": [
+    {
+      "doc_id": "gdpr-2016-679-eurlex-pdf",
+      "jurisdiction": "GDPR",
+      "title": "Regulation (EU) 2016/679 (GDPR) — snapshot",
+      "source_url": "https://www.legislation.gov.uk/eur/2016/679/pdfs/eur_20160679_adopted_en.pdf",
+      "local_path": "documents/gdpr/gdpr_2016_679.pdf",
+      "downloaded_at": "2026-06-25T09:26:18+00:00",
+      "sha256": "bd84e63f5b622b739a83389afc3b30d240f792bb88d8eb03a816c9a82b0c2499",
+      "effective_date": "2018-05-25",
+      "amendment_date": null,
+      "supersedes": null,
+      "superseded_by": null
+    },
+    {
+      "doc_id": "dpdp-2023-indiacode-pdf",
+      "jurisdiction": "DPDP",
+      "title": "Digital Personal Data Protection Act, 2023 — India Code PDF",
+      "source_url": "https://egazette.gov.in/WriteReadData/2023/248045.pdf",
+      "local_path": "documents/dpdp/dpdp_act_2023.pdf",
+      "downloaded_at": "2026-06-25T09:26:22+00:00",
+      "sha256": "4deb23981d3010c8225a2ff6149e7243dc2268455b299e283afebdd7b72a7d15",
+      "effective_date": null,
+      "amendment_date": null,
+      "supersedes": null,
+      "superseded_by": null
+    },
+    {
+      "doc_id": "ccpa-oag-html",
+      "jurisdiction": "CCPA",
+      "title": "California DOJ / OAG CCPA overview — HTML snapshot",
+      "source_url": "https://oag.ca.gov/privacy/ccpa",
+      "local_path": "documents/ccpa/ccpa_oag_snapshot.html",
+      "downloaded_at": "2026-06-25T09:26:24+00:00",
+      "sha256": "3ae537e48fd2bbaf443e6f64aba1a62a5705cd0eabd772278c9b0b08b0fea4a1",
+      "effective_date": null,
+      "amendment_date": null,
+      "supersedes": null,
+      "superseded_by": null
+    }
+  ]
+}
