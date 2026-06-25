@@ -36,40 +36,14 @@ def generate_citation_bound_answer(
     product_feature: str,
     citations: list[Citation],
 ) -> LLMComplianceAnswer:
-    """
-    Placeholder "LLM" that never hallucinates: only summarizes using explicit citation markers.
-    Swap this for a quantized HF model with constrained decoding + citation mask.
-    """
-    if not citations:
-        return LLMComplianceAnswer(
-            answer_text="",
-            citation_ids_used=[],
-            refused_insufficient_citations=True,
-        )
+    """Backward-compatible wrapper; defaults to template provider."""
+    from .llm_backend import generate_with_llm
 
-    lines: list[str] = [
-        f"**Query focus:** {query.strip()}",
-        f"**Product feature:** {product_feature.strip()}",
-        "",
-        "**Evidence-linked notes (demo template - replace with HF generation):**",
-    ]
-    used: list[str] = []
-    for c in citations[:5]:
-        tag = f"[{c.citation_id}]"
-        used.append(c.citation_id)
-        lines.append(
-            f"- {tag} ({c.jurisdiction.value} - {c.source_label}) excerpt indicates relevant "
-            f"obligations or limits on processing; stance must be validated against full instruments "
-            f"and your factual record."
-        )
-
-    lines.append(
-        "\n*Every substantive claim above is tied to a bracketed citation id drawn from retrieval only.*"
-    )
-    return LLMComplianceAnswer(
-        answer_text="\n".join(lines),
-        citation_ids_used=used,
-        refused_insufficient_citations=False,
+    return generate_with_llm(
+        query=query,
+        product_feature=product_feature,
+        citations=citations,
+        provider="template",
     )
 
 

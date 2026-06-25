@@ -9,6 +9,7 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from ml.ollama_health import check_ollama_llm
 from ml.schemas import Jurisdiction
 
 from .config import Settings
@@ -26,6 +27,12 @@ async def lifespan(app: FastAPI):
     settings = Settings()
     _engine = build_engine(settings)
     logger.info("RAG engine ready (index vectors=%s)", _engine.store.ntotal())
+    if settings.llm_provider == "ollama":
+        ollama = check_ollama_llm(settings.ollama_base_url, settings.llm_model)
+        if ollama["status"] != "ok":
+            logger.warning("Ollama LLM degraded: %s", ollama)
+        else:
+            logger.info("Ollama LLM ready: model=%s", settings.llm_model)
     yield
     _engine = None
 
@@ -60,15 +67,36 @@ class AnalyzeRequest(BaseModel):
     top_k: int | None = Field(default=None, ge=1, le=24)
 
 
+@app.get("/")
+async def root():
+    return {
+        "service": "Cross-Jurisdictional Product Compliance RAG",
+        "docs": "/docs",
+        "health": "/health",
+        "analyze": "POST /v1/compliance/analyze",
+        "jurisdictions": "/v1/compliance/jurisdictions",
+    }
+
+
 @app.get("/health")
 async def health():
     if _engine is None:
         return {"status": "starting", "index_vectors": 0, "embedding_model": None}
-    return {
+    payload = {
         "status": "ok",
         "index_vectors": _engine.store.ntotal(),
         "embedding_model": _engine.settings.embedding_model,
+        "llm_provider": _engine.settings.llm_provider,
+        "llm_model": _engine.settings.llm_model,
     }
+    if _engine.settings.llm_provider == "ollama":
+        payload["ollama"] = check_ollama_llm(
+            _engine.settings.ollama_base_url,
+            _engine.settings.llm_model,
+        )
+        if payload["ollama"]["status"] != "ok":
+            payload["status"] = "degraded"
+    return payload
 
 
 @app.post("/v1/compliance/analyze")
