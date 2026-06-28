@@ -1,0 +1,302 @@
+import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import {
+  TrendingUp, FileText, AlertTriangle,
+  CheckCircle, Plus, ArrowRight,
+} from 'lucide-react'
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  Tooltip, ResponsiveContainer, Cell,
+} from 'recharts'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
+import { Button }   from '@/components/ui/Button'
+import { Badge }    from '@/components/ui/Badge'
+import { RiskBadge } from '@/components/ui/Badge'
+import { ROUTES }   from '@/constants/app'
+import { useAuth }  from '@/context/AuthContext'
+import { formatDate, scoreToColor } from '@/utils/formatters'
+import { MOCK_HISTORY } from '@/services/complianceService'
+
+// ── Stats data ─────────────────────────────────────────────────
+const STATS = [
+  {
+    label: 'Total Analyses',
+    value: '24',
+    delta: '+3 this week',
+    icon:  FileText,
+    color: 'text-blue-500',
+    bg:    'bg-blue-50 dark:bg-blue-950/40',
+  },
+  {
+    label: 'Avg Compliance Score',
+    value: '78%',
+    delta: '+5% vs last month',
+    icon:  TrendingUp,
+    color: 'text-green-500',
+    bg:    'bg-green-50 dark:bg-green-950/40',
+  },
+  {
+    label: 'High Risk Items',
+    value: '7',
+    delta: '-2 resolved this week',
+    icon:  AlertTriangle,
+    color: 'text-red-500',
+    bg:    'bg-red-50 dark:bg-red-950/40',
+  },
+  {
+    label: 'Resolved Issues',
+    value: '18',
+    delta: 'All time',
+    icon:  CheckCircle,
+    color: 'text-teal-500',
+    bg:    'bg-teal-50 dark:bg-teal-950/40',
+  },
+]
+
+// ── Chart data ─────────────────────────────────────────────────
+const CHART_DATA = [
+  { month: 'Jan', analyses: 2 },
+  { month: 'Feb', analyses: 4 },
+  { month: 'Mar', analyses: 3 },
+  { month: 'Apr', analyses: 6 },
+  { month: 'May', analyses: 5 },
+  { month: 'Jun', analyses: 4 },
+]
+
+// ── Score ring SVG ─────────────────────────────────────────────
+function ScoreRing({ score }: { score: number }) {
+  const color = score >= 80 ? '#22C55E' : score >= 60 ? '#F59E0B' : '#EF4444'
+  const circumference = 2 * Math.PI * 14  // r=14
+  const dash = (score / 100) * circumference
+
+  return (
+    <div className="relative w-10 h-10 shrink-0">
+      <svg className="w-10 h-10 -rotate-90" viewBox="0 0 36 36">
+        <circle cx="18" cy="18" r="14"
+          fill="none" stroke="var(--border)" strokeWidth="3" />
+        <circle cx="18" cy="18" r="14"
+          fill="none" stroke={color} strokeWidth="3"
+          strokeDasharray={`${dash} ${circumference}`}
+          strokeLinecap="round"
+        />
+      </svg>
+      <span
+        className="absolute inset-0 flex items-center justify-center text-[10px] font-bold"
+        style={{ color }}
+      >
+        {score}
+      </span>
+    </div>
+  )
+}
+
+// ── Quick actions ──────────────────────────────────────────────
+const QUICK_ACTIONS = [
+  { label: 'Run new analysis',  path: ROUTES.ANALYZE,  primary: true },
+  { label: 'View all reports',  path: ROUTES.REPORTS },
+  { label: 'Browse citations',  path: '/citations' },
+  { label: 'Settings',          path: ROUTES.SETTINGS },
+]
+
+// ── Component ──────────────────────────────────────────────────
+export function DashboardPage() {
+  const { user } = useAuth()
+
+  const hour     = new Date().getHours()
+  const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
+
+  return (
+    <div className="space-y-6">
+
+      {/* ── Page header ──────────────────────────────────── */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-[var(--text)]">
+            {greeting}, {user?.name?.split(' ')[0] ?? 'there'} 👋
+          </h1>
+          <p className="text-sm text-[var(--text-muted)] mt-0.5">
+            Here&apos;s your compliance overview for today.
+          </p>
+        </div>
+        <Link to={ROUTES.ANALYZE}>
+          <Button leftIcon={<Plus className="w-4 h-4" />}>
+            New Analysis
+          </Button>
+        </Link>
+      </div>
+
+      {/* ── Stats grid ───────────────────────────────────── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {STATS.map((stat, i) => {
+          const Icon = stat.icon
+          return (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.06 }}
+            >
+              <Card padding="md" className="h-full">
+                <div className="flex items-start justify-between gap-3">
+                  <div className="min-w-0">
+                    <p className="text-sm text-[var(--text-muted)] mb-1 truncate">
+                      {stat.label}
+                    </p>
+                    <p className="text-2xl font-bold text-[var(--text)]">
+                      {stat.value}
+                    </p>
+                    <p className="text-xs text-[var(--text-subtle)] mt-1">
+                      {stat.delta}
+                    </p>
+                  </div>
+                  <div className={`${stat.bg} p-2.5 rounded-xl shrink-0`}>
+                    <Icon className={`w-5 h-5 ${stat.color}`} />
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
+          )
+        })}
+      </div>
+
+      {/* ── Chart + Quick actions ─────────────────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+
+        {/* Bar chart */}
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle>Analysis Activity</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={220}>
+              <BarChart data={CHART_DATA} barSize={32} barCategoryGap="30%">
+                <CartesianGrid
+                  strokeDasharray="3 3"
+                  stroke="var(--border)"
+                  vertical={false}
+                />
+                <XAxis
+                  dataKey="month"
+                  tick={{ fontSize: 12, fill: 'var(--text-muted)' }}
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <YAxis
+                  tick={{ fontSize: 12, fill: 'var(--text-muted)' }}
+                  axisLine={false}
+                  tickLine={false}
+                  allowDecimals={false}
+                />
+                <Tooltip
+                  cursor={{ fill: 'var(--bg-raised)' }}
+                  contentStyle={{
+                    background:   'var(--bg-surface)',
+                    border:       '1px solid var(--border)',
+                    borderRadius: '10px',
+                    color:        'var(--text)',
+                    fontSize:     '12px',
+                    boxShadow:    '0 4px 12px rgb(0 0 0 / 0.1)',
+                  }}
+                />
+                <Bar dataKey="analyses" radius={[6, 6, 0, 0]}>
+                  {CHART_DATA.map((_, i) => (
+                    <Cell
+                      key={i}
+                      fill={i === CHART_DATA.length - 1 ? '#2563EB' : '#BFDBFE'}
+                    />
+                  ))}
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        {/* Quick actions */}
+        <Card>
+          <CardHeader>
+            <CardTitle>Quick Actions</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {QUICK_ACTIONS.map(action => (
+                <Link key={action.path} to={action.path}>
+                  <Button
+                    variant={action.primary ? 'primary' : 'ghost'}
+                    className="w-full justify-between"
+                    rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+                  >
+                    {action.label}
+                  </Button>
+                </Link>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* ── Recent analyses table ─────────────────────────── */}
+      <Card padding="none">
+        {/* Table header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-[var(--border)]">
+          <h3 className="font-semibold text-[var(--text)]">Recent Analyses</h3>
+          <Link to={ROUTES.REPORTS}>
+            <Button variant="ghost" size="sm"
+              rightIcon={<ArrowRight className="w-3.5 h-3.5" />}>
+              View all
+            </Button>
+          </Link>
+        </div>
+
+        {/* Scrollable table */}
+        <div className="overflow-x-auto">
+          <table className="w-full">
+            <thead>
+              <tr className="bg-[var(--bg-raised)] border-b border-[var(--border)]">
+                {['Query', 'Jurisdiction', 'Score', 'Risk', 'Date'].map(h => (
+                  <th key={h}
+                    className="px-5 py-2.5 text-left text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-[var(--border)]">
+              {MOCK_HISTORY.map((row, i) => (
+                <motion.tr
+                  key={row.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 + i * 0.05 }}
+                  className="hover:bg-[var(--bg-raised)] transition-colors group"
+                >
+                  <td className="px-5 py-3.5">
+                    <p className="text-sm font-medium text-[var(--text)] max-w-[240px] truncate">
+                      {row.query}
+                    </p>
+                  </td>
+                  <td className="px-5 py-3.5">
+                    <Badge variant="outline">{row.jurisdiction}</Badge>
+                  </td>
+                  <td className="px-5 py-3.5">
+                    <div className="flex items-center gap-2">
+                      <ScoreRing score={row.compliance_score} />
+                      <span className={`text-xs font-medium ${scoreToColor(row.compliance_score)}`}>
+                        {row.compliance_score}
+                      </span>
+                    </div>
+                  </td>
+                  <td className="px-5 py-3.5">
+                    <RiskBadge level={row.risk_level} />
+                  </td>
+                  <td className="px-5 py-3.5 text-xs text-[var(--text-muted)]">
+                    {formatDate(row.created_at)}
+                  </td>
+                </motion.tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  )
+}

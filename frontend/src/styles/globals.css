@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg:            #F8FAFC;
+    --bg-surface:    #FFFFFF;
+    --bg-raised:     #F1F5F9;
+    --border:        #E2E8F0;
+    --border-strong: #CBD5E1;
+    --text:          #0F172A;
+    --text-muted:    #64748B;
+    --text-subtle:   #94A3B8;
+    --accent:        #2563EB;
+    --accent-hover:  #1D4ED8;
+    --accent-fg:     #FFFFFF;
+    --sidebar-bg:    #FFFFFF;
+    --sidebar-border:#E2E8F0;
+  }
+
+  .dark {
+    --bg:            #0D1117;
+    --bg-surface:    #161B22;
+    --bg-raised:     #21262D;
+    --border:        #21262D;
+    --border-strong: #30363D;
+    --text:          #F0F6FF;
+    --text-muted:    #8B949E;
+    --text-subtle:   #6E7681;
+    --accent:        #3B82F6;
+    --accent-hover:  #60A5FA;
+    --accent-fg:     #FFFFFF;
+    --sidebar-bg:    #161B22;
+    --sidebar-border:#21262D;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border-strong);
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--text-subtle);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    line-height: 1.25;
+  }
+}
+
+@layer components {
+  .card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  .card-hover:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.08);
+  }
+
+  /* Left blue bar on active nav items */
+  .nav-item-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    bottom: 4px;
+    width: 2.5px;
+    background-color: var(--accent);
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* Shimmer skeleton loader */
+  .skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--bg-raised) 25%,
+      var(--border) 50%,
+      var(--bg-raised) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 0.375rem;
+  }
+
+  /* Badge base */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.125rem 0.5rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+  }
+}
+
+@layer utilities {
+  .text-muted  { color: var(--text-muted); }
+  .text-subtle { color: var(--text-subtle); }
+  .bg-surface  { background-color: var(--bg-surface); }
+  .bg-raised   { background-color: var(--bg-raised); }
+
+  .truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Keyframe animations used by Tailwind's animation utilities */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
