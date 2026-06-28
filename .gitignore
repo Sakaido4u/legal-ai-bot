@@ -8,6 +8,10 @@ __pycache__/
 # Virtual environments
 venv/
 .env/
+.env
+
+# Generated demo artifacts
+demo_output.json
 
 # Datasets
 data/raw/
@@ -15,6 +19,9 @@ data/processed/
 
 # Vector database
 vector_store/
+
+# Fine-tuned models
+models/
 
 # Logs
 logs/
