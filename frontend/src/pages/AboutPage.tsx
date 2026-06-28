@@ -5,23 +5,38 @@ import { Badge } from '@/components/ui/Badge'
 import { APP_NAME, APP_VERSION } from '@/constants/app'
 
 const FEATURES = [
-  { emoji: '⚖️', title: 'Compliance Analysis',   desc: 'AI-powered analysis against 15+ legal jurisdictions' },
-  { emoji: '🔍', title: 'Risk Detection',          desc: 'Identify high, medium, and low risk areas'            },
-  { emoji: '📚', title: 'Smart Citations',         desc: 'Automatic legal citations with section references'    },
-  { emoji: '📊', title: 'Visual Reports',          desc: 'Interactive charts and compliance score gauges'       },
-  { emoji: '🌙', title: 'Dark Mode',               desc: 'Full dark and light mode support'                     },
-  { emoji: '📱', title: 'Responsive Design',       desc: 'Works perfectly on mobile, tablet, and desktop'      },
+  { emoji: '⚖️', title: 'Compliance Analysis',   desc: 'AI-powered analysis against 15+ legal jurisdictions'  },
+  { emoji: '🔍', title: 'Risk Detection',          desc: 'Identify high, medium, and low risk areas'             },
+  { emoji: '📚', title: 'Smart Citations',         desc: 'Automatic legal citations with section references'     },
+  { emoji: '📊', title: 'Visual Reports',          desc: 'Interactive charts and compliance score gauges'        },
+  { emoji: '🌙', title: 'Dark Mode',               desc: 'Full dark and light mode support'                      },
+  { emoji: '📱', title: 'Responsive Design',       desc: 'Works perfectly on mobile, tablet, and desktop'       },
 ]
 
 const ENDPOINTS = [
-  { method: 'GET',  path: '/health',                     desc: 'Backend health check'       },
-  { method: 'POST', path: '/v1/compliance/analyze',       desc: 'Run compliance analysis'    },
-  { method: 'GET',  path: '/v1/compliance/jurisdictions', desc: 'List available jurisdictions' },
+  { method: 'GET',  path: '/health',                      desc: 'Backend health check'          },
+  { method: 'POST', path: '/v1/compliance/analyze',        desc: 'Run compliance analysis'       },
+  { method: 'GET',  path: '/v1/compliance/jurisdictions',  desc: 'List available jurisdictions'  },
+]
+
+const TECH_STACK = [
+  { name: 'React 18',        role: 'UI framework'        },
+  { name: 'TypeScript',      role: 'Type safety'         },
+  { name: 'Vite',            role: 'Build tool'          },
+  { name: 'Tailwind CSS',    role: 'Styling'             },
+  { name: 'React Router v6', role: 'Client-side routing' },
+  { name: 'Axios',           role: 'HTTP client'         },
+  { name: 'React Hook Form', role: 'Form management'     },
+  { name: 'Zod',             role: 'Schema validation'   },
+  { name: 'Framer Motion',   role: 'Animations'          },
+  { name: 'Recharts',        role: 'Data visualization'  },
+  { name: 'FastAPI',         role: 'Backend REST API'    },
 ]
 
 export function AboutPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
+
       {/* Hero */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -35,22 +50,23 @@ export function AboutPage() {
         <p className="text-[var(--text-muted)] mt-2 mb-3">
           Intelligent Legal Research & Compliance Analysis System
         </p>
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-center gap-2 flex-wrap">
           <Badge variant="primary">v{APP_VERSION}</Badge>
-          <Badge variant="success">Final Year Project</Badge>
           <Badge variant="default">React + FastAPI</Badge>
         </div>
       </motion.div>
 
       {/* About */}
       <Card>
-        <CardHeader><CardTitle>About This Project</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>About This Project</CardTitle>
+        </CardHeader>
         <CardContent>
           <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-            LexAI is an AI-powered legal research and compliance analysis system built as a
-            Final Year Project. It combines a modern React frontend with a FastAPI backend
-            to deliver instant compliance analysis, risk detection, and smart legal citations
-            across multiple international jurisdictions.
+            LexAI is an AI-powered legal research and compliance analysis system. It combines
+            a modern React frontend with a FastAPI backend to deliver instant compliance
+            analysis, risk detection, and smart legal citations across multiple international
+            jurisdictions.
           </p>
           <p className="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
             The system analyzes legal queries using natural language processing and maps
@@ -63,7 +79,9 @@ export function AboutPage() {
 
       {/* Features */}
       <Card>
-        <CardHeader><CardTitle>Key Features</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Key Features</CardTitle>
+        </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FEATURES.map((f, i) => (
@@ -77,7 +95,9 @@ export function AboutPage() {
                 <span className="text-xl shrink-0">{f.emoji}</span>
                 <div>
                   <p className="text-sm font-semibold text-[var(--text)]">{f.title}</p>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5 leading-relaxed">{f.desc}</p>
+                  <p className="text-xs text-[var(--text-muted)] mt-0.5 leading-relaxed">
+                    {f.desc}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -85,9 +105,35 @@ export function AboutPage() {
         </CardContent>
       </Card>
 
+      {/* Tech stack */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Technology Stack</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1">
+            {TECH_STACK.map(tech => (
+              <div
+                key={tech.name}
+                className="flex items-center justify-between px-3 py-2.5 rounded-lg hover:bg-[var(--bg-raised)] transition-colors"
+              >
+                <span className="text-sm font-medium text-[var(--text)]">
+                  {tech.name}
+                </span>
+                <span className="text-xs text-[var(--text-muted)]">
+                  {tech.role}
+                </span>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
       {/* API Endpoints */}
       <Card>
-        <CardHeader><CardTitle>Backend API Endpoints</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Backend API Endpoints</CardTitle>
+        </CardHeader>
         <CardContent className="space-y-2">
           {ENDPOINTS.map(ep => (
             <div
@@ -110,7 +156,9 @@ export function AboutPage() {
 
       {/* Links */}
       <Card>
-        <CardHeader><CardTitle>Links & Contact</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Links & Contact</CardTitle>
+        </CardHeader>
         <CardContent className="flex flex-wrap gap-3">
           <a
             href="https://github.com"
@@ -118,14 +166,16 @@ export function AboutPage() {
             rel="noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--border)] text-sm text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-raised)] transition-all"
           >
-            <GitBranch className="w-4 h-4" /> GitHub Repository
+            <GitBranch className="w-4 h-4" />
+            GitHub Repository
             <ExternalLink className="w-3 h-3" />
           </a>
           <a
-            href="mailto:student@university.edu"
+            href="mailto:contact@lexai.com"
             className="flex items-center gap-2 px-4 py-2 rounded-lg border border-[var(--border)] text-sm text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--bg-raised)] transition-all"
           >
-            <Mail className="w-4 h-4" /> Contact
+            <Mail className="w-4 h-4" />
+            Contact
           </a>
         </CardContent>
       </Card>

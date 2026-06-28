@@ -3,51 +3,98 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
-import { Button }   from '@/components/ui/Button'
-import { Input }    from '@/components/ui/Input'
-import { useAuth }  from '@/context/AuthContext'
-import { ROUTES }   from '@/constants/app'
-import toast        from 'react-hot-toast'
+import { Mail, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { Button }      from '@/components/ui/Button'
+import { Input }       from '@/components/ui/Input'
+import { useAuth }     from '@/context/AuthContext'
+import { authService } from '@/services/authService'
+import { ROUTES }      from '@/constants/app'
+import toast           from 'react-hot-toast'
 
+// ── Validation schema ─────────────────────────────────────────
 const loginSchema = z.object({
-  email:    z.string().min(1, 'Email is required').email('Enter a valid email'),
-  password: z.string().min(6, 'Password must be at least 6 characters'),
+  email:    z.string().min(1, 'Email is required').email('Enter a valid email address'),
+  password: z.string().min(1, 'Password is required'),
 })
 
 type LoginFormData = z.infer<typeof loginSchema>
 
+// ── Component ─────────────────────────────────────────────────
 export function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
-  const { login } = useAuth()
-  const navigate  = useNavigate()
-  const location  = useLocation()
-  const from = (location.state as { from?: { pathname: string } } | null)
-    ?.from?.pathname ?? ROUTES.DASHBOARD
+  const [authError,    setAuthError]    = useState<string | null>(null)
+
+  const { login }   = useAuth()
+  const navigate    = useNavigate()
+  const location    = useLocation()
+
+  // Redirect back to the page they were trying to access
+  const from =
+    (location.state as { from?: { pathname: string } } | null)?.from?.pathname ??
+    ROUTES.DASHBOARD
 
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormData>({ resolver: zodResolver(loginSchema) })
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  })
 
+  // ── Submit ───────────────────────────────────────────────────
   const onSubmit = async (data: LoginFormData) => {
+    // Clear any previous auth error on new submit attempt
+    setAuthError(null)
+
     try {
-      // Simulate API call — replace with real backend call later
-      await new Promise(res => setTimeout(res, 800))
+      const response = await authService.login({
+        email:    data.email,
+        password: data.password,
+      })
+
+      // Successful login — store user + token in AuthContext & localStorage
       login(
-        { id: '1', name: 'Demo User', email: data.email },
-        'mock-jwt-token-12345'
+        {
+          id:    response.user.id,
+          name:  response.user.name,
+          email: response.user.email,
+        },
+        response.access_token
       )
-      toast.success('Welcome back!')
+
+      toast.success(`Welcome back, ${response.user.name}!`)
       navigate(from, { replace: true })
-    } catch {
-      toast.error('Login failed. Please try again.')
+
+    } catch (err: unknown) {
+      // Extract the most meaningful error message
+      let message = 'Invalid email or password'
+
+      if (err && typeof err === 'object') {
+        const axiosErr = err as {
+          response?: { status?: number; data?: { detail?: string; message?: string } }
+          message?: string
+        }
+
+        if (axiosErr.response?.status === 401 || axiosErr.response?.status === 403) {
+          message = 'Invalid email or password'
+        } else if (axiosErr.response?.data?.detail) {
+          message = axiosErr.response.data.detail
+        } else if (axiosErr.response?.data?.message) {
+          message = axiosErr.response.data.message
+        } else if (axiosErr.message && axiosErr.message !== 'Network Error') {
+          message = axiosErr.message
+        }
+      }
+
+      // Show the error inside the form (not as a toast — better UX for auth errors)
+      setAuthError(message)
     }
   }
 
+  // ── Render ───────────────────────────────────────────────────
   return (
     <div className="space-y-6">
+
       {/* Heading */}
       <div className="space-y-1">
         <h1 className="text-2xl font-bold text-[var(--text)]">Welcome back</h1>
@@ -56,6 +103,19 @@ export function LoginPage() {
         </p>
       </div>
 
+      {/* Auth error banner — only shown after a failed login attempt */}
+      {authError && (
+        <div
+          role="alert"
+          className="flex items-start gap-2.5 p-3.5 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+        >
+          <AlertCircle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+          <p className="text-sm text-red-700 dark:text-red-400 font-medium">
+            {authError}
+          </p>
+        </div>
+      )}
+
       {/* Form */}
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
         <Input
@@ -63,6 +123,7 @@ export function LoginPage() {
           type="email"
           placeholder="you@example.com"
           autoComplete="email"
+          autoFocus
           error={errors.email?.message}
           leftElement={<Mail className="w-4 h-4" />}
           {...register('email')}
@@ -71,7 +132,7 @@ export function LoginPage() {
         <Input
           label="Password"
           type={showPassword ? 'text' : 'password'}
-          placeholder="••••••••"
+          placeholder="Enter your password"
           autoComplete="current-password"
           error={errors.password?.message}
           leftElement={<Lock className="w-4 h-4" />}
@@ -84,7 +145,8 @@ export function LoginPage() {
             >
               {showPassword
                 ? <EyeOff className="w-4 h-4" />
-                : <Eye className="w-4 h-4" />}
+                : <Eye    className="w-4 h-4" />
+              }
             </button>
           }
           {...register('password')}
@@ -93,7 +155,7 @@ export function LoginPage() {
         <div className="flex justify-end">
           <Link
             to={ROUTES.FORGOT}
-            className="text-xs text-brand-600 hover:underline"
+            className="text-xs text-brand-600 hover:text-brand-700 hover:underline transition-colors"
           >
             Forgot password?
           </Link>
@@ -103,17 +165,25 @@ export function LoginPage() {
           type="submit"
           className="w-full"
           isLoading={isSubmitting}
+          disabled={isSubmitting}
         >
-          Sign in
+          {isSubmitting ? 'Signing in…' : 'Sign in'}
         </Button>
       </form>
 
       {/* Demo credentials hint */}
-      <div className="rounded-lg bg-[var(--bg-raised)] border border-[var(--border)] p-3">
-        <p className="text-xs text-[var(--text-muted)] text-center">
-          <span className="font-medium text-[var(--text)]">Demo:</span>{' '}
-          Use any email + any password (6+ chars)
+      <div className="rounded-xl bg-[var(--bg-raised)] border border-[var(--border)] p-4">
+        <p className="text-xs font-semibold text-[var(--text)] mb-2">
+          Demo credentials
         </p>
+        <div className="space-y-1">
+          <p className="text-xs text-[var(--text-muted)] font-mono">
+            demo@lexai.com / Demo@1234
+          </p>
+          <p className="text-xs text-[var(--text-muted)] font-mono">
+            admin@lexai.com / Admin@1234
+          </p>
+        </div>
       </div>
 
       {/* Sign up link */}
