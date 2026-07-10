@@ -20,3 +20,7 @@ class Settings(BaseSettings):
     openai_base_url: str = "https://api.openai.com/v1"
     ollama_base_url: str = "http://127.0.0.1:11434"
     llm_timeout_seconds: float = 60.0
+
+    # PostgreSQL
+    database_url: str = "postgresql+psycopg2://postgres:postgres@localhost:5432/legal_ai"
+    upload_dir: str = "data/uploads"

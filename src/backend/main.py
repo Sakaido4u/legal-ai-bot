@@ -9,24 +9,32 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+from database.session import init_db
 from ml.ollama_health import check_ollama_llm
 from ml.schemas import Jurisdiction
 
 from .config import Settings
+from .deps import get_engine, set_engine
+from .middleware import RequestLoggingMiddleware
 from .rag_service import RAGEngine, build_engine, run_compliance_analysis
+from .routes import router
 
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
+)
 logger = logging.getLogger(__name__)
 
-_engine: RAGEngine | None = None
 _boot_settings = Settings()
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global _engine
     settings = Settings()
-    _engine = build_engine(settings)
-    logger.info("RAG engine ready (index vectors=%s)", _engine.store.ntotal())
+    init_db()
+    engine = build_engine(settings)
+    set_engine(engine)
+    logger.info("RAG engine ready (index vectors=%s)", engine.store.ntotal())
     if settings.llm_provider == "ollama":
         ollama = check_ollama_llm(settings.ollama_base_url, settings.llm_model)
         if ollama["status"] != "ok":
@@ -34,15 +42,16 @@ async def lifespan(app: FastAPI):
         else:
             logger.info("Ollama LLM ready: model=%s", settings.llm_model)
     yield
-    _engine = None
+    set_engine(None)
 
 
 app = FastAPI(
-    title="Cross-Jurisdictional Product Compliance RAG",
-    version="0.1.0",
+    title="Legal AI Compliance Assistant",
+    version="1.0.0",
     lifespan=lifespan,
 )
 
+app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[o.strip() for o in _boot_settings.cors_origins.split(",") if o.strip()],
@@ -51,11 +60,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-def get_engine() -> RAGEngine:
-    if _engine is None:
-        raise HTTPException(status_code=503, detail="Engine not initialized")
-    return _engine
+app.include_router(router)
 
 
 class AnalyzeRequest(BaseModel):
@@ -70,29 +75,37 @@ class AnalyzeRequest(BaseModel):
 @app.get("/")
 async def root():
     return {
-        "service": "Cross-Jurisdictional Product Compliance RAG",
+        "service": "Legal AI Compliance Assistant",
         "docs": "/docs",
         "health": "/health",
-        "analyze": "POST /v1/compliance/analyze",
-        "jurisdictions": "/v1/compliance/jurisdictions",
+        "endpoints": {
+            "upload": "POST /documents/upload",
+            "documents": "GET /documents",
+            "legal_query": "POST /legal_query",
+            "risk_analysis": "POST /risk_analysis",
+            "legacy_analyze": "POST /v1/compliance/analyze",
+        },
     }
 
 
 @app.get("/health")
 async def health():
-    if _engine is None:
+    try:
+        engine = get_engine()
+    except HTTPException:
         return {"status": "starting", "index_vectors": 0, "embedding_model": None}
+
     payload = {
         "status": "ok",
-        "index_vectors": _engine.store.ntotal(),
-        "embedding_model": _engine.settings.embedding_model,
-        "llm_provider": _engine.settings.llm_provider,
-        "llm_model": _engine.settings.llm_model,
+        "index_vectors": engine.store.ntotal(),
+        "embedding_model": engine.settings.embedding_model,
+        "llm_provider": engine.settings.llm_provider,
+        "llm_model": engine.settings.llm_model,
     }
-    if _engine.settings.llm_provider == "ollama":
+    if engine.settings.llm_provider == "ollama":
         payload["ollama"] = check_ollama_llm(
-            _engine.settings.ollama_base_url,
-            _engine.settings.llm_model,
+            engine.settings.ollama_base_url,
+            engine.settings.llm_model,
         )
         if payload["ollama"]["status"] != "ok":
             payload["status"] = "degraded"
