@@ -58,6 +58,7 @@ export function LoginPage() {
           id:    response.user.id,
           name:  response.user.name,
           email: response.user.email,
+          is_admin: response.user.is_admin ?? false,
         },
         response.access_token
       )
@@ -66,16 +67,22 @@ export function LoginPage() {
       navigate(from, { replace: true })
 
     } catch (err: unknown) {
-      // Extract the most meaningful error message
       let message = 'Invalid email or password'
 
       if (err && typeof err === 'object') {
         const axiosErr = err as {
+          code?: string
           response?: { status?: number; data?: { detail?: string; message?: string } }
           message?: string
         }
 
-        if (axiosErr.response?.status === 401 || axiosErr.response?.status === 403) {
+        if (
+          axiosErr.code === 'ERR_NETWORK' ||
+          axiosErr.message?.includes("Can't reach the server")
+        ) {
+          message =
+            "Can't reach the server — check that the API is running and try again shortly."
+        } else if (axiosErr.response?.status === 401 || axiosErr.response?.status === 403) {
           message = 'Invalid email or password'
         } else if (axiosErr.response?.data?.detail) {
           message = axiosErr.response.data.detail
@@ -83,10 +90,12 @@ export function LoginPage() {
           message = axiosErr.response.data.message
         } else if (axiosErr.message && axiosErr.message !== 'Network Error') {
           message = axiosErr.message
+        } else if (axiosErr.message === 'Network Error') {
+          message =
+            "Can't reach the server — check that the API is running and try again shortly."
         }
       }
 
-      // Show the error inside the form (not as a toast — better UX for auth errors)
       setAuthError(message)
     }
   }

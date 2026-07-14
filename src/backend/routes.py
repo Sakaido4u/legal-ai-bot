@@ -4,13 +4,14 @@ import asyncio
 import logging
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, UploadFile
 from sqlalchemy.orm import Session
 
 from backend.auth import get_current_user
 from backend.config import Settings
 from backend.deps import get_engine, get_settings
 from backend.rag_service import RAGEngine
+from backend.rate_limit import UPLOAD_LIMIT, limiter
 from database import crud
 from database.session import get_db
 from ml.schemas import Jurisdiction
@@ -53,7 +54,9 @@ def _parse_jurisdictions(raw: list[str]) -> list[Jurisdiction]:
 
 
 @router.post("/documents/upload", response_model=DocumentUploadResponse)
+@limiter.limit(UPLOAD_LIMIT)
 async def upload_document(
+    request: Request,
     db: Annotated[Session, Depends(get_db)],
     engine: Annotated[RAGEngine, Depends(get_engine)],
     settings: Annotated[Settings, Depends(get_settings)],
@@ -90,7 +93,7 @@ async def upload_document(
         )
 
     except Exception as exc:
-        logger.exception("Document upload failed")
+        logger.exception("upload_failure filename=%s", file.filename)
 
         raise HTTPException(
             status_code=500,

@@ -23,6 +23,7 @@ import type {
   StoredAnalysis,
 } from '@/types/api'
 import { formatDate, scoreToLabel } from '@/utils/formatters'
+import { exportAnalysisPdf } from '@/utils/exportAnalysisPdf'
 import { ROUTES } from '@/constants/app'
 import { cn } from '@/utils/cn'
 import type { RiskLevel } from '@/constants/app'
@@ -441,6 +442,7 @@ export function ResultsPage() {
             variant="outline"
             size="sm"
             leftIcon={<Download className="w-4 h-4" />}
+            onClick={() => exportAnalysisPdf(result, stored.created_at)}
           >
             Export PDF
           </Button>
@@ -697,6 +699,7 @@ export function ResultsPage() {
         <Button
           leftIcon={<Download className="w-4 h-4" />}
           className="w-full sm:w-auto"
+          onClick={() => exportAnalysisPdf(result, stored.created_at)}
         >
           Export PDF Report
         </Button>

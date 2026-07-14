@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "dev": "node api.js && vite",
+    "build": "node api.js && tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -28,6 +28,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
     "framer-motion": "^12.41.0",
+    "jspdf": "^4.2.1",
     "lucide-react": "^1.21.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

@@ -13,6 +13,7 @@ import { ResultsPage }     from '@/pages/ResultsPage'
 import { CitationsPage }   from '@/pages/CitationsPage'
 import { ReportsPage }     from '@/pages/ReportsPage'
 import { DocumentsPage }   from '@/pages/DocumentsPage'
+import { AdminPage }       from '@/pages/AdminPage'
 import { SettingsPage }    from '@/pages/SettingsPage'
 import { AboutPage }       from '@/pages/AboutPage'
 import { NotFoundPage }    from '@/pages/NotFoundPage'
@@ -37,6 +38,7 @@ export function AppRouter() {
             <Route path={ROUTES.CITATIONS} element={<CitationsPage />} />
             <Route path={ROUTES.REPORTS}   element={<ReportsPage />} />
             <Route path={ROUTES.DOCUMENTS} element={<DocumentsPage />} />
+            <Route path={ROUTES.ADMIN}     element={<AdminPage />} />
             <Route path={ROUTES.SETTINGS}  element={<SettingsPage />} />
             <Route path={ROUTES.ABOUT}     element={<AboutPage />} />
           </Route>
