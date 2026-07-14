@@ -5,15 +5,19 @@ import logging
 import sys
 from pathlib import Path
 
+from typing import TYPE_CHECKING, Any
+
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from backend.config import Settings
-from backend.rag_service import RAGEngine
 from database import crud
 from database.models import Document, ProcessingStatus
 from ml.legal_chunking import sections_to_chunks
 from ml.schemas import ChunkRecord, Jurisdiction
+
+if TYPE_CHECKING:
+    from backend.rag_service import RAGEngine
 
 logger = logging.getLogger(__name__)
 

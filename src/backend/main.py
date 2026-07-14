@@ -34,7 +34,6 @@ from .config import Settings
 from .deps import get_engine, set_engine
 from .email_service import send_password_reset_email
 from .middleware import RequestLoggingMiddleware
-from .rag_service import RAGEngine, build_engine, run_compliance_analysis
 from .rate_limit import ANALYZE_LIMIT, AUTH_LIMIT, limiter
 from .routes import router
 from .schemas import (
@@ -65,6 +64,9 @@ _started_at = datetime.now(timezone.utc)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    import os
+    import sys
+
     settings = Settings()
     init_db()
 
@@ -78,15 +80,37 @@ async def lifespan(app: FastAPI):
     finally:
         db.close()
 
-    engine = build_engine(settings)
-    set_engine(engine)
-    logger.info("RAG engine ready (index vectors=%s)", engine.store.ntotal())
-    if settings.llm_provider == "ollama":
-        ollama = check_ollama_llm(settings.ollama_base_url, settings.llm_model)
-        if ollama["status"] != "ok":
-            logger.warning("Ollama LLM degraded: %s", ollama)
-        else:
-            logger.info("Ollama LLM ready: model=%s", settings.llm_model)
+    # Lazy RAG load. Importing torch/FAISS can hard-crash (segfault) on some
+    # Windows + Python builds — that cannot be caught with try/except.
+    # Default: skip on Windows unless COMPLIANCE_LOAD_RAG=1.
+    load_flag = os.getenv("COMPLIANCE_LOAD_RAG", "").strip().lower()
+    should_load = load_flag in {"1", "true", "yes"} or (
+        load_flag == "" and sys.platform != "win32"
+    )
+    if not should_load:
+        set_engine(None)
+        logger.warning(
+            "Skipping RAG engine at startup (set COMPLIANCE_LOAD_RAG=1 to load). "
+            "Auth and health still work; analyze/upload need the engine."
+        )
+    else:
+        try:
+            from .rag_service import build_engine
+
+            engine = build_engine(settings)
+            set_engine(engine)
+            logger.info("RAG engine ready (index vectors=%s)", engine.store.ntotal())
+            if settings.llm_provider == "ollama":
+                ollama = check_ollama_llm(settings.ollama_base_url, settings.llm_model)
+                if ollama["status"] != "ok":
+                    logger.warning("Ollama LLM degraded: %s", ollama)
+                else:
+                    logger.info("Ollama LLM ready: model=%s", settings.llm_model)
+        except Exception:
+            set_engine(None)
+            logger.exception(
+                "RAG engine failed to load — auth still works; analyze/upload return 503"
+            )
     yield
     set_engine(None)
 
@@ -427,10 +451,12 @@ async def compliance_history(
 async def compliance_analyze(
     request: Request,
     body: ComplianceAnalyzeRequest,
-    engine: Annotated[RAGEngine, Depends(get_engine)],
+    engine: Annotated[Any, Depends(get_engine)],
     db: Annotated[Session, Depends(get_db)],
     _: Annotated[User, Depends(get_current_user)],
 ):
+    from .rag_service import run_compliance_analysis
+
     try:
         js = [Jurisdiction(j) for j in body.jurisdictions]
     except ValueError as e:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
-from typing import Annotated
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, File, Form, HTTPException, Request, UploadFile
 from sqlalchemy.orm import Session
@@ -10,7 +10,6 @@ from sqlalchemy.orm import Session
 from backend.auth import get_current_user
 from backend.config import Settings
 from backend.deps import get_engine, get_settings
-from backend.rag_service import RAGEngine
 from backend.rate_limit import UPLOAD_LIMIT, limiter
 from database import crud
 from database.session import get_db
@@ -58,7 +57,7 @@ def _parse_jurisdictions(raw: list[str]) -> list[Jurisdiction]:
 async def upload_document(
     request: Request,
     db: Annotated[Session, Depends(get_db)],
-    engine: Annotated[RAGEngine, Depends(get_engine)],
+    engine: Annotated[Any, Depends(get_engine)],
     settings: Annotated[Settings, Depends(get_settings)],
     file: UploadFile = File(...),
     jurisdiction: str = Form(...),
@@ -162,7 +161,7 @@ def get_document(
 async def delete_document(
     document_id: int,
     db: Annotated[Session, Depends(get_db)],
-    engine: Annotated[RAGEngine, Depends(get_engine)],
+    engine: Annotated[Any, Depends(get_engine)],
     settings: Annotated[Settings, Depends(get_settings)],
 ):
     doc = crud.get_document(
@@ -201,7 +200,7 @@ async def delete_document(
 async def legal_query(
     body: LegalQueryRequest,
     db: Annotated[Session, Depends(get_db)],
-    engine: Annotated[RAGEngine, Depends(get_engine)],
+    engine: Annotated[Any, Depends(get_engine)],
 ):
     if engine.store.is_empty():
         raise HTTPException(
@@ -252,7 +251,7 @@ async def legal_query(
 async def risk_analysis(
     body: RiskAnalysisRequest,
     db: Annotated[Session, Depends(get_db)],
-    engine: Annotated[RAGEngine, Depends(get_engine)],
+    engine: Annotated[Any, Depends(get_engine)],
 ):
     if engine.store.is_empty():
         raise HTTPException(

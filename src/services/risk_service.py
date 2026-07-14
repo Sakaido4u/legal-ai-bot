@@ -3,13 +3,17 @@ from __future__ import annotations
 import logging
 import time
 
+from typing import TYPE_CHECKING
+
 from sqlalchemy.orm import Session
 
-from backend.rag_service import RAGEngine
 from database import crud
 from ml.llm_citations import passages_to_citations
 from ml.risk_scorer import score_passage
 from ml.schemas import Jurisdiction, RetrievedPassage
+
+if TYPE_CHECKING:
+    from backend.rag_service import RAGEngine
 
 logger = logging.getLogger(__name__)
 
