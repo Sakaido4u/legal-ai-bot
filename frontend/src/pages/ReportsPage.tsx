@@ -13,6 +13,7 @@ import { RiskBadge } from '@/components/ui/Badge'
 import { ROUTES }    from '@/constants/app'
 import { formatDate, formatRelative, scoreToColor } from '@/utils/formatters'
 import { complianceService } from '@/services/complianceService'
+import { exportHistoryRowPdf } from '@/utils/exportAnalysisPdf'
 import type { AnalysisHistory } from '@/types/api'
 import { cn }        from '@/utils/cn'
 // ── Types ──────────────────────────────────────────────────────
@@ -300,7 +301,12 @@ export function ReportsPage() {
                               <Eye className="w-4 h-4" />
                             </Button>
                           </Link>
-                          <Button variant="ghost" size="icon" title="Download PDF">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            title="Download PDF"
+                            onClick={() => exportHistoryRowPdf(row)}
+                          >
                             <Download className="w-4 h-4" />
                           </Button>
                         </div>

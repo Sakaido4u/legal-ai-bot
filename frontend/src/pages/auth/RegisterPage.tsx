@@ -65,6 +65,7 @@ export function RegisterPage() {
           id:    response.user.id,
           name:  response.user.name,
           email: response.user.email,
+          is_admin: response.user.is_admin ?? false,
         },
         response.access_token
       )
@@ -77,14 +78,22 @@ export function RegisterPage() {
 
       if (err && typeof err === 'object') {
         const axiosErr = err as {
+          code?: string
           response?: { data?: { detail?: string; message?: string } }
           message?: string
         }
-        if (axiosErr.response?.data?.detail) {
+        if (
+          axiosErr.code === 'ERR_NETWORK' ||
+          axiosErr.message?.includes("Can't reach the server") ||
+          axiosErr.message === 'Network Error'
+        ) {
+          message =
+            "Can't reach the server — check that the API is running and try again shortly."
+        } else if (axiosErr.response?.data?.detail) {
           message = axiosErr.response.data.detail
         } else if (axiosErr.response?.data?.message) {
           message = axiosErr.response.data.message
-        } else if (axiosErr.message && axiosErr.message !== 'Network Error') {
+        } else if (axiosErr.message) {
           message = axiosErr.message
         }
       }

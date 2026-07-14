@@ -251,7 +251,17 @@ COMPLIANCE_OLLAMA_BASE_URL=http://127.0.0.1:11434
 COMPLIANCE_DATABASE_URL=postgresql+psycopg2://postgres:postgres@localhost:5432/legal_ai
 COMPLIANCE_UPLOAD_DIR=data/uploads
 COMPLIANCE_CORS_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+
+# Required — API will not start without a strong secret (≥32 chars):
+#   openssl rand -hex 32
+COMPLIANCE_JWT_SECRET=
+COMPLIANCE_APP_ENV=development
+COMPLIANCE_RATE_LIMIT_AUTH=10/minute
+COMPLIANCE_RATE_LIMIT_UPLOAD=20/minute
+COMPLIANCE_RATE_LIMIT_ANALYZE=30/minute
 ```
+
+Corpus / index / Ollama ops: see [`docs/corpus_ops.md`](docs/corpus_ops.md).
 
 Frontend (`frontend/.env`):
 

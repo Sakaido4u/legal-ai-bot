@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
-  Tooltip, ResponsiveContainer, Cell,
+  Tooltip, ResponsiveContainer, Cell, PieChart, Pie,
 } from 'recharts'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { Button }   from '@/components/ui/Button'
@@ -18,16 +18,6 @@ import { useAuth }  from '@/context/AuthContext'
 import { formatDate, scoreToColor } from '@/utils/formatters'
 import { complianceService } from '@/services/complianceService'
 import type { AnalysisHistory } from '@/types/api'
-
-// ── Chart data ─────────────────────────────────────────────────
-const CHART_DATA = [
-  { month: 'Jan', analyses: 2 },
-  { month: 'Feb', analyses: 4 },
-  { month: 'Mar', analyses: 3 },
-  { month: 'Apr', analyses: 6 },
-  { month: 'May', analyses: 5 },
-  { month: 'Jun', analyses: 4 },
-]
 
 // ── Score ring SVG ─────────────────────────────────────────────
 function ScoreRing({ score }: { score: number }) {
@@ -80,6 +70,40 @@ export function DashboardPage() {
   }, [])
 
   const recent = useMemo(() => history.slice(0, 5), [history])
+
+  const chartData = useMemo(() => {
+    const byMonth = new Map<string, { month: string; analyses: number; avgScore: number; highRisk: number; _sum: number }>()
+    for (const row of history) {
+      const d = new Date(row.created_at)
+      if (Number.isNaN(d.getTime())) continue
+      const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`
+      const label = d.toLocaleString(undefined, { month: 'short', year: '2-digit' })
+      const cur = byMonth.get(key) ?? { month: label, analyses: 0, avgScore: 0, highRisk: 0, _sum: 0 }
+      cur.analyses += 1
+      cur._sum += row.compliance_score
+      if (row.risk_level === 'high') cur.highRisk += 1
+      cur.avgScore = Math.round(cur._sum / cur.analyses)
+      byMonth.set(key, cur)
+    }
+    return [...byMonth.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .slice(-6)
+      .map(([, v]) => ({ month: v.month, analyses: v.analyses, avgScore: v.avgScore, highRisk: v.highRisk }))
+  }, [history])
+
+  const riskBreakdown = useMemo(() => {
+    const counts = { low: 0, medium: 0, high: 0 }
+    for (const row of history) {
+      if (row.risk_level === 'low' || row.risk_level === 'medium' || row.risk_level === 'high') {
+        counts[row.risk_level] += 1
+      }
+    }
+    return [
+      { name: 'Low', value: counts.low, fill: '#22C55E' },
+      { name: 'Medium', value: counts.medium, fill: '#F59E0B' },
+      { name: 'High', value: counts.high, fill: '#EF4444' },
+    ].filter(r => r.value > 0)
+  }, [history])
 
   const liveStats = useMemo(() => {
     const total = history.length
@@ -183,74 +207,126 @@ export function DashboardPage() {
       {/* ── Chart + Quick actions ─────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
 
-        {/* Bar chart */}
+        {/* Bar chart — live history */}
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle>Analysis Activity</CardTitle>
           </CardHeader>
           <CardContent>
-            <ResponsiveContainer width="100%" height={220}>
-              <BarChart data={CHART_DATA} barSize={32} barCategoryGap="30%">
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  stroke="var(--border)"
-                  vertical={false}
-                />
-                <XAxis
-                  dataKey="month"
-                  tick={{ fontSize: 12, fill: 'var(--text-muted)' }}
-                  axisLine={false}
-                  tickLine={false}
-                />
-                <YAxis
-                  tick={{ fontSize: 12, fill: 'var(--text-muted)' }}
-                  axisLine={false}
-                  tickLine={false}
-                  allowDecimals={false}
-                />
-                <Tooltip
-                  cursor={{ fill: 'var(--bg-raised)' }}
-                  contentStyle={{
-                    background:   'var(--bg-surface)',
-                    border:       '1px solid var(--border)',
-                    borderRadius: '10px',
-                    color:        'var(--text)',
-                    fontSize:     '12px',
-                    boxShadow:    '0 4px 12px rgb(0 0 0 / 0.1)',
-                  }}
-                />
-                <Bar dataKey="analyses" radius={[6, 6, 0, 0]}>
-                  {CHART_DATA.map((_, i) => (
-                    <Cell
-                      key={i}
-                      fill={i === CHART_DATA.length - 1 ? '#2563EB' : '#BFDBFE'}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+            {chartData.length === 0 ? (
+              <p className="text-sm text-[var(--text-muted)] py-16 text-center">
+                No history yet — charts populate after you run analyses.
+              </p>
+            ) : (
+              <ResponsiveContainer width="100%" height={220}>
+                <BarChart data={chartData} barSize={32} barCategoryGap="30%">
+                  <CartesianGrid
+                    strokeDasharray="3 3"
+                    stroke="var(--border)"
+                    vertical={false}
+                  />
+                  <XAxis
+                    dataKey="month"
+                    tick={{ fontSize: 12, fill: 'var(--text-muted)' }}
+                    axisLine={false}
+                    tickLine={false}
+                  />
+                  <YAxis
+                    tick={{ fontSize: 12, fill: 'var(--text-muted)' }}
+                    axisLine={false}
+                    tickLine={false}
+                    allowDecimals={false}
+                  />
+                  <Tooltip
+                    cursor={{ fill: 'var(--bg-raised)' }}
+                    contentStyle={{
+                      background:   'var(--bg-surface)',
+                      border:       '1px solid var(--border)',
+                      borderRadius: '10px',
+                      color:        'var(--text)',
+                      fontSize:     '12px',
+                      boxShadow:    '0 4px 12px rgb(0 0 0 / 0.1)',
+                    }}
+                  />
+                  <Bar dataKey="analyses" name="Analyses" radius={[6, 6, 0, 0]}>
+                    {chartData.map((_, i) => (
+                      <Cell
+                        key={i}
+                        fill={i === chartData.length - 1 ? '#2563EB' : '#BFDBFE'}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            )}
           </CardContent>
         </Card>
 
-        {/* Quick actions */}
+        {/* Risk breakdown from live history */}
         <Card>
           <CardHeader>
-            <CardTitle>Quick Actions</CardTitle>
+            <CardTitle>Risk mix</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-2">
-              {QUICK_ACTIONS.map(action => (
-                <Link key={action.path} to={action.path}>
-                  <Button
-                    variant={action.primary ? 'primary' : 'ghost'}
-                    className="w-full justify-between"
-                    rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
-                  >
-                    {action.label}
-                  </Button>
-                </Link>
-              ))}
-            </div>
+            {riskBreakdown.length === 0 ? (
+              <div className="space-y-2">
+                <p className="text-sm text-[var(--text-muted)] py-8 text-center">
+                  Risk levels appear after analyses.
+                </p>
+                {QUICK_ACTIONS.slice(0, 2).map(action => (
+                  <Link key={action.path} to={action.path}>
+                    <Button
+                      variant={action.primary ? 'primary' : 'ghost'}
+                      className="w-full justify-between"
+                      rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+                    >
+                      {action.label}
+                    </Button>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <>
+                <ResponsiveContainer width="100%" height={160}>
+                  <PieChart>
+                    <Pie
+                      data={riskBreakdown}
+                      dataKey="value"
+                      nameKey="name"
+                      innerRadius={40}
+                      outerRadius={65}
+                      paddingAngle={2}
+                    >
+                      {riskBreakdown.map(entry => (
+                        <Cell key={entry.name} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      contentStyle={{
+                        background:   'var(--bg-surface)',
+                        border:       '1px solid var(--border)',
+                        borderRadius: '10px',
+                        color:        'var(--text)',
+                        fontSize:     '12px',
+                      }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="space-y-2 mt-2">
+                  {QUICK_ACTIONS.slice(0, 2).map(action => (
+                    <Link key={action.path} to={action.path}>
+                      <Button
+                        variant={action.primary ? 'primary' : 'ghost'}
+                        className="w-full justify-between"
+                        rightIcon={<ArrowRight className="w-3.5 h-3.5" />}
+                      >
+                        {action.label}
+                      </Button>
+                    </Link>
+                  ))}
+                </div>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>

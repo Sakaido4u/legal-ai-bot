@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from pydantic import AliasChoices, Field, field_validator
+from pydantic import AliasChoices, Field, field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -43,10 +43,30 @@ class Settings(BaseSettings):
     )
     upload_dir: str = "data/uploads"
 
-    # Auth / JWT (env: COMPLIANCE_JWT_SECRET, COMPLIANCE_JWT_EXPIRE_MINUTES)
-    jwt_secret: str = "lexai-dev-secret-change-in-production"
+    # Auth / JWT — REQUIRED from env (COMPLIANCE_JWT_SECRET). No weak defaults.
+    jwt_secret: str = Field(..., min_length=32)
     jwt_expire_minutes: int = 60 * 24 * 7
     jwt_algorithm: str = "HS256"
+
+    # development | production — controls reset-token leak + email logging
+    app_env: str = Field(
+        default="development",
+        validation_alias=AliasChoices("COMPLIANCE_APP_ENV", "APP_ENV", "ENV"),
+    )
+
+    # Rate limits (requests per window; window defaults to 60s)
+    rate_limit_auth: str = "10/minute"
+    rate_limit_upload: str = "20/minute"
+    rate_limit_analyze: str = "30/minute"
+
+    # SMTP password reset (optional — when unset, log-only delivery in development)
+    smtp_host: str | None = None
+    smtp_port: int = 587
+    smtp_user: str | None = None
+    smtp_password: str | None = None
+    smtp_from: str = "noreply@lexai.local"
+    smtp_use_tls: bool = True
+    frontend_base_url: str = "http://localhost:3000"
 
     @field_validator("database_url", mode="before")
     @classmethod
@@ -61,3 +81,30 @@ class Settings(BaseSettings):
         if value.startswith("postgresql://"):
             return "postgresql+psycopg2://" + value.removeprefix("postgresql://")
         return value
+
+    @field_validator("jwt_secret", mode="before")
+    @classmethod
+    def reject_placeholder_secret(cls, value: object) -> object:
+        if not isinstance(value, str):
+            return value
+        weak = {
+            "",
+            "lexai-dev-secret-change-in-production",
+            "change-me",
+            "secret",
+        }
+        if value.strip() in weak:
+            raise ValueError(
+                "COMPLIANCE_JWT_SECRET is missing or weak. "
+                "Generate one with: openssl rand -hex 32"
+            )
+        return value
+
+    @model_validator(mode="after")
+    def normalize_app_env(self) -> Settings:
+        self.app_env = (self.app_env or "development").strip().lower()
+        return self
+
+    @property
+    def is_development(self) -> bool:
+        return self.app_env in {"development", "dev", "local", "test"}

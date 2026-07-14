@@ -5,30 +5,24 @@ import {
   type ReactNode,
 } from 'react'
 import { STORAGE_KEYS } from '@/constants/app'
-
-interface User {
-  id: string
-  name: string
-  email: string
-  avatar?: string
-}
+import type { AuthUser } from '@/types/auth'
 
 interface AuthContextValue {
-  user: User | null
+  user: AuthUser | null
   isAuthenticated: boolean
   isLoading: boolean
-  login: (user: User, token: string) => void
+  login: (user: AuthUser, token: string) => void
   logout: () => void
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(() => {
+  const [user, setUser] = useState<AuthUser | null>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.AUTH)
       if (!stored) return null
-      const parsed: { user: User } = JSON.parse(stored)
+      const parsed: { user: AuthUser } = JSON.parse(stored)
       if (parsed?.user?.id && parsed?.user?.email) return parsed.user
       return null
     } catch {
@@ -39,7 +33,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const [isLoading] = useState(false)
 
-  const login = (user: User, token: string) => {
+  const login = (user: AuthUser, token: string) => {
     setUser(user)
     localStorage.setItem(STORAGE_KEYS.AUTH, JSON.stringify({ user, token }))
   }
