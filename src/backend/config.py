@@ -11,7 +11,10 @@ class Settings(BaseSettings):
     use_demo_index: bool = True
     min_retrieval_score: float = 0.22
     retrieval_top_k: int = 6
-    cors_origins: str = "http://localhost:5173,http://127.0.0.1:5173"
+    cors_origins: str = (
+        "http://localhost:3000,http://127.0.0.1:3000,"
+        "http://localhost:5173,http://127.0.0.1:5173"
+    )
 
     # LLM: template | openai | ollama
     llm_provider: str = "ollama"

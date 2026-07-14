@@ -51,11 +51,15 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+# Middleware is stacked LIFO: last added runs first on the request.
+# CORS must be outermost so preflight OPTIONS gets Access-Control-* headers
+# before RequestLoggingMiddleware (and the route) run.
 app.add_middleware(RequestLoggingMiddleware)
 app.add_middleware(
     CORSMiddleware,
+    # Env: COMPLIANCE_CORS_ORIGINS (comma-separated). See Settings.cors_origins.
     allow_origins=[o.strip() for o in _boot_settings.cors_origins.split(",") if o.strip()],
-    allow_credentials=True,
+    allow_credentials=True,  # Authorization / cookies from the SPA
     allow_methods=["*"],
     allow_headers=["*"],
 )
