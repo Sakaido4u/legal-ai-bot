@@ -4,13 +4,13 @@
 
 import { useState, useCallback } from 'react'
 import { complianceService } from '@/services/complianceService'
-import type { AnalyzeRequest, ComplianceResult } from '@/types/api'
+import type { AnalyzeRequest, AnalyzeResponse } from '@/types/api'
 import toast from 'react-hot-toast'
 
 export function useCompliance() {
   const [isLoading, setIsLoading] = useState(false)
   const [error,     setError]     = useState<string | null>(null)
-  const [result,    setResult]    = useState<ComplianceResult | null>(null)
+  const [result,    setResult]    = useState<AnalyzeResponse | null>(null)
 
   const analyze = useCallback(async (request: AnalyzeRequest) => {
     setIsLoading(true)

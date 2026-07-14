@@ -33,12 +33,20 @@ export default defineConfig({
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
-        // Split vendor code into separate chunks for better caching
-        manualChunks: {
-          vendor:   ['react', 'react-dom', 'react-router-dom'],
-          charts:   ['recharts'],
-          motion:   ['framer-motion'],
-          ui:       ['@radix-ui/react-dialog', '@radix-ui/react-dropdown-menu'],
+        // Vite 8 / Rollup typing expects a function (object map form is rejected by TS)
+        manualChunks(id: string) {
+          if (!id.includes('node_modules')) return
+          if (id.includes('recharts')) return 'charts'
+          if (id.includes('framer-motion')) return 'motion'
+          if (id.includes('@radix-ui')) return 'ui'
+          if (
+            id.includes('react-router') ||
+            id.includes('react-dom') ||
+            id.includes(`${path.sep}react${path.sep}`) ||
+            id.includes('/react/')
+          ) {
+            return 'vendor'
+          }
         },
       },
     },

@@ -10,6 +10,7 @@ import {
   Info,
   ChevronLeft,
   Scale,
+  FolderOpen,
 } from 'lucide-react'
 
 interface NavItem {
@@ -22,6 +23,7 @@ interface NavItem {
 const NAV_ITEMS: NavItem[] = [
   { label: 'Dashboard', path: ROUTES.DASHBOARD, icon: LayoutDashboard },
   { label: 'Analyze',   path: ROUTES.ANALYZE,   icon: Search,       badge: 'New' },
+  { label: 'Documents', path: ROUTES.DOCUMENTS, icon: FolderOpen },
   { label: 'Reports',   path: ROUTES.REPORTS,   icon: ClipboardList },
   { label: 'Citations', path: '/citations',      icon: BookOpen },
   { label: 'Settings',  path: ROUTES.SETTINGS,  icon: Settings },

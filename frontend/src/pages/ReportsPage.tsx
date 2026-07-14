@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -12,10 +12,9 @@ import { Badge }     from '@/components/ui/Badge'
 import { RiskBadge } from '@/components/ui/Badge'
 import { ROUTES }    from '@/constants/app'
 import { formatDate, formatRelative, scoreToColor } from '@/utils/formatters'
-import { MOCK_HISTORY }      from '@/services/complianceService'
+import { complianceService } from '@/services/complianceService'
 import type { AnalysisHistory } from '@/types/api'
 import { cn }        from '@/utils/cn'
-
 // ── Types ──────────────────────────────────────────────────────
 type SortKey = keyof Pick<AnalysisHistory, 'created_at' | 'compliance_score' | 'jurisdiction'>
 type SortDir = 'asc' | 'desc'
@@ -47,6 +46,32 @@ export function ReportsPage() {
   const [sortDir,    setSortDir]    = useState<SortDir>('desc')
   const [riskFilter, setRiskFilter] = useState<RiskFilter>('all')
   const [page,       setPage]       = useState(1)
+  const [history,    setHistory]    = useState<AnalysisHistory[]>([])
+  const [loading,    setLoading]    = useState(true)
+  const [loadError,  setLoadError]  = useState<string | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    setLoading(true)
+    complianceService
+      .getHistory()
+      .then(rows => {
+        if (!cancelled) {
+          setHistory(rows)
+          setLoadError(null)
+        }
+      })
+      .catch(err => {
+        if (!cancelled) {
+          setHistory([])
+          setLoadError(err instanceof Error ? err.message : 'Failed to load history')
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => { cancelled = true }
+  }, [])
 
   // ── Toggle sort ──────────────────────────────────────────────
   const handleSort = (key: SortKey) => {
@@ -61,7 +86,7 @@ export function ReportsPage() {
 
   // ── Filtered + sorted data ───────────────────────────────────
   const processed = useMemo(() => {
-    let data = [...MOCK_HISTORY]
+    let data = [...history]
 
     // Search filter
     if (search.trim()) {
@@ -97,7 +122,7 @@ export function ReportsPage() {
     })
 
     return data
-  }, [search, riskFilter, sortKey, sortDir])
+  }, [history, search, riskFilter, sortKey, sortDir])
 
   // ── Pagination ───────────────────────────────────────────────
   const totalPages = Math.ceil(processed.length / PER_PAGE)
@@ -127,8 +152,13 @@ export function ReportsPage() {
         <div>
           <h1 className="text-2xl font-bold text-[var(--text)]">Reports</h1>
           <p className="text-sm text-[var(--text-muted)] mt-0.5">
-            {processed.length} analysis report{processed.length !== 1 ? 's' : ''}
+            {loading
+              ? 'Loading…'
+              : `${processed.length} analysis report${processed.length !== 1 ? 's' : ''}`}
           </p>
+          {loadError && (
+            <p className="text-xs text-red-500 mt-1">{loadError}</p>
+          )}
         </div>
         <Link to={ROUTES.ANALYZE}>
           <Button leftIcon={<Plus className="w-4 h-4" />}>

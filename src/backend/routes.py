@@ -7,6 +7,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from sqlalchemy.orm import Session
 
+from backend.auth import get_current_user
 from backend.config import Settings
 from backend.deps import get_engine, get_settings
 from backend.rag_service import RAGEngine
@@ -34,7 +35,11 @@ from .schemas import (
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(tags=["compliance"])
+# All routes on this router require a valid JWT (Bearer token).
+router = APIRouter(
+    tags=["compliance"],
+    dependencies=[Depends(get_current_user)],
+)
 
 
 def _parse_jurisdictions(raw: list[str]) -> list[Jurisdiction]:

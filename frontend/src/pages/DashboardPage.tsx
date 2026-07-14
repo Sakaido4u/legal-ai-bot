@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -15,43 +16,8 @@ import { RiskBadge } from '@/components/ui/Badge'
 import { ROUTES }   from '@/constants/app'
 import { useAuth }  from '@/context/AuthContext'
 import { formatDate, scoreToColor } from '@/utils/formatters'
-import { MOCK_HISTORY } from '@/services/complianceService'
-
-// ── Stats data ─────────────────────────────────────────────────
-const STATS = [
-  {
-    label: 'Total Analyses',
-    value: '24',
-    delta: '+3 this week',
-    icon:  FileText,
-    color: 'text-blue-500',
-    bg:    'bg-blue-50 dark:bg-blue-950/40',
-  },
-  {
-    label: 'Avg Compliance Score',
-    value: '78%',
-    delta: '+5% vs last month',
-    icon:  TrendingUp,
-    color: 'text-green-500',
-    bg:    'bg-green-50 dark:bg-green-950/40',
-  },
-  {
-    label: 'High Risk Items',
-    value: '7',
-    delta: '-2 resolved this week',
-    icon:  AlertTriangle,
-    color: 'text-red-500',
-    bg:    'bg-red-50 dark:bg-red-950/40',
-  },
-  {
-    label: 'Resolved Issues',
-    value: '18',
-    delta: 'All time',
-    icon:  CheckCircle,
-    color: 'text-teal-500',
-    bg:    'bg-teal-50 dark:bg-teal-950/40',
-  },
-]
+import { complianceService } from '@/services/complianceService'
+import type { AnalysisHistory } from '@/types/api'
 
 // ── Chart data ─────────────────────────────────────────────────
 const CHART_DATA = [
@@ -101,6 +67,61 @@ const QUICK_ACTIONS = [
 // ── Component ──────────────────────────────────────────────────
 export function DashboardPage() {
   const { user } = useAuth()
+  const [history, setHistory] = useState<AnalysisHistory[]>([])
+
+  useEffect(() => {
+    let cancelled = false
+    complianceService.getHistory().then(rows => {
+      if (!cancelled) setHistory(rows)
+    }).catch(() => {
+      if (!cancelled) setHistory([])
+    })
+    return () => { cancelled = true }
+  }, [])
+
+  const recent = useMemo(() => history.slice(0, 5), [history])
+
+  const liveStats = useMemo(() => {
+    const total = history.length
+    const avg = total
+      ? Math.round(history.reduce((s, r) => s + r.compliance_score, 0) / total)
+      : 0
+    const high = history.filter(r => r.risk_level === 'high').length
+    return [
+      {
+        label: 'Total Analyses',
+        value: String(total),
+        delta: total ? 'From compliance history' : 'Run an analysis to populate',
+        icon:  FileText,
+        color: 'text-blue-500',
+        bg:    'bg-blue-50 dark:bg-blue-950/40',
+      },
+      {
+        label: 'Avg Compliance Score',
+        value: total ? `${avg}%` : '—',
+        delta: 'Derived from peak risk',
+        icon:  TrendingUp,
+        color: 'text-green-500',
+        bg:    'bg-green-50 dark:bg-green-950/40',
+      },
+      {
+        label: 'High Risk Items',
+        value: String(high),
+        delta: 'Analyses tagged high risk',
+        icon:  AlertTriangle,
+        color: 'text-red-500',
+        bg:    'bg-red-50 dark:bg-red-950/40',
+      },
+      {
+        label: 'Resolved Issues',
+        value: String(history.filter(r => r.risk_level === 'low').length),
+        delta: 'Low-risk analyses',
+        icon:  CheckCircle,
+        color: 'text-teal-500',
+        bg:    'bg-teal-50 dark:bg-teal-950/40',
+      },
+    ]
+  }, [history])
 
   const hour     = new Date().getHours()
   const greeting = hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
@@ -112,7 +133,7 @@ export function DashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-[var(--text)]">
-            {greeting}, {user?.name?.split(' ')[0] ?? 'there'} 👋
+            {greeting}, {user?.name?.split(' ')[0] ?? 'there'}
           </h1>
           <p className="text-sm text-[var(--text-muted)] mt-0.5">
             Here&apos;s your compliance overview for today.
@@ -127,7 +148,7 @@ export function DashboardPage() {
 
       {/* ── Stats grid ───────────────────────────────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {STATS.map((stat, i) => {
+        {liveStats.map((stat, i) => {
           const Icon = stat.icon
           return (
             <motion.div
@@ -261,7 +282,13 @@ export function DashboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-[var(--border)]">
-              {MOCK_HISTORY.map((row, i) => (
+              {recent.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="px-5 py-8 text-sm text-[var(--text-muted)] text-center">
+                    No analyses yet — run one from Analyze.
+                  </td>
+                </tr>
+              ) : recent.map((row, i) => (
                 <motion.tr
                   key={row.id}
                   initial={{ opacity: 0 }}

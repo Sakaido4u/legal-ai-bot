@@ -2,10 +2,13 @@ import api from '@/api/axiosInstance'
 import type {
   AnalyzeRequest,
   AnalyzeResponse,
-  ComplianceResult,
   Jurisdiction,
   HealthResponse,
   AnalysisHistory,
+  LegalQueryRequest,
+  LegalQueryResponse,
+  RiskAnalysisRequest,
+  RiskAnalysisResponse,
 } from '@/types/api'
 
 // ── Compliance Service ────────────────────────────────────────
@@ -15,29 +18,51 @@ import type {
 export const complianceService = {
 
   // POST /v1/compliance/analyze
-  async analyze(request: AnalyzeRequest): Promise<ComplianceResult> {
-    const res = await api.post<AnalyzeResponse>('/v1/compliance/analyze', request)
-    if (!res.data.success) {
-      throw new Error(res.data.message ?? 'Analysis failed')
-    }
-    return res.data.data
-  },
-
-  // GET /v1/compliance/jurisdictions
-  async getJurisdictions(): Promise<Jurisdiction[]> {
-    const res = await api.get<Jurisdiction[]>('/v1/compliance/jurisdictions')
+  async analyze(request: AnalyzeRequest): Promise<AnalyzeResponse> {
+    // Analysis + LLM can exceed the default 30s timeout.
+    const res = await api.post<AnalyzeResponse>(
+      '/v1/compliance/analyze',
+      request,
+      { timeout: 180_000 },
+    )
     return res.data
   },
 
-  // GET /v1/compliance/history  (future endpoint)
+  // POST /legal_query
+  async legalQuery(request: LegalQueryRequest): Promise<LegalQueryResponse> {
+    const res = await api.post<LegalQueryResponse>('/legal_query', request, {
+      timeout: 180_000,
+    })
+    return res.data
+  },
+
+  // POST /risk_analysis
+  async riskAnalysis(request: RiskAnalysisRequest): Promise<RiskAnalysisResponse> {
+    const res = await api.post<RiskAnalysisResponse>('/risk_analysis', request, {
+      timeout: 180_000,
+    })
+    return res.data
+  },
+
+  // GET /v1/compliance/jurisdictions → { jurisdictions: string[] }
+  async getJurisdictions(): Promise<Jurisdiction[]> {
+    const res = await api.get<{ jurisdictions: string[] }>('/v1/compliance/jurisdictions')
+    const codes = res.data.jurisdictions ?? []
+    return codes.map(code => ({
+      code,
+      name: code,
+      country:
+        code === 'GDPR' ? 'European Union'
+        : code === 'DPDP' ? 'India'
+        : code === 'CCPA' ? 'United States'
+        : code,
+    }))
+  },
+
+  // GET /v1/compliance/history
   async getHistory(): Promise<AnalysisHistory[]> {
-    try {
-      const res = await api.get<AnalysisHistory[]>('/v1/compliance/history')
-      return res.data
-    } catch {
-      // Return mock data if endpoint not yet implemented
-      return MOCK_HISTORY
-    }
+    const res = await api.get<AnalysisHistory[]>('/v1/compliance/history')
+    return res.data
   },
 }
 
@@ -59,9 +84,9 @@ export const MOCK_HISTORY: AnalysisHistory[] = [
   { id: '5', query: 'Patent infringement analysis',     jurisdiction: 'US', compliance_score: 73, risk_level: 'medium', created_at: '2025-06-01T11:00:00Z' },
 ]
 
+/** Fallback when /v1/compliance/jurisdictions is unreachable — must match backend Jurisdiction enum. */
 export const MOCK_JURISDICTIONS: Jurisdiction[] = [
-  { code: 'IN', name: 'India',          country: 'India' },
-  { code: 'US', name: 'United States',  country: 'United States' },
-  { code: 'EU', name: 'European Union', country: 'European Union' },
-  { code: 'UK', name: 'United Kingdom', country: 'United Kingdom' },
+  { code: 'GDPR', name: 'GDPR', country: 'European Union' },
+  { code: 'DPDP', name: 'DPDP', country: 'India' },
+  { code: 'CCPA', name: 'CCPA', country: 'United States' },
 ]

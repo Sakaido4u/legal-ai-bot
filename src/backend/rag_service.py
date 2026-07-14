@@ -10,10 +10,21 @@ from ml.llm_backend import generate_with_llm, resolve_llm_provider
 from ml.llm_citations import passages_to_citations, validate_citation_answer
 from ml.retriever import HighPrecisionRetriever
 from ml.risk_scorer import score_passage
-from ml.schemas import Citation, CrossJurisdictionResult, Jurisdiction, LLMComplianceAnswer, RiskScore
+from backend.analysis_summary import derived_compliance_score, derived_risk_level
+from ml.schemas import Citation, CrossJurisdictionResult, Jurisdiction, LLMComplianceAnswer, RetrievedPassage, RiskScore
 from ml.vector_store import ComplianceVectorStore
 
 from .config import Settings
+
+
+def _filter_passages_by_document(
+    passages: list[RetrievedPassage],
+    allowed_refs: set[str],
+) -> list[RetrievedPassage]:
+    """Keep passages whose chunk_id appears in the document's vector_reference set."""
+    if not allowed_refs:
+        return []
+    return [p for p in passages if any(ref.endswith(p.chunk_id) for ref in allowed_refs)]
 
 
 @dataclass
@@ -58,14 +69,28 @@ def run_compliance_analysis(
     product_feature: str,
     jurisdictions: list[Jurisdiction],
     top_k: int | None = None,
+    document_id: int | None = None,
+    allowed_chunk_refs: set[str] | None = None,
 ) -> dict:
+    """
+    Run RAG compliance analysis.
+
+    When ``allowed_chunk_refs`` is provided (from an uploaded ``document_id``),
+    passages are filtered to that document's indexed chunks so the answer is
+    grounded in the uploaded PDF — same pattern as ``/legal_query``.
+    """
     k = top_k or engine.settings.retrieval_top_k
+    # Pull a wider candidate set when scoping to a document, then filter.
+    retrieve_k = k * 4 if allowed_chunk_refs is not None else k
     passages = engine.retriever.retrieve(
         query,
         jurisdictions,
-        top_k=k,
+        top_k=retrieve_k,
         use_mmr=True,
     )
+    if allowed_chunk_refs is not None:
+        passages = _filter_passages_by_document(passages, allowed_chunk_refs)[:k]
+
     citations: list[Citation] = passages_to_citations(passages)
     risk_scores = [score_passage(p) for p in passages]
     cross = compare_cross_jurisdiction(passages, jurisdictions=jurisdictions)
@@ -107,16 +132,26 @@ def run_compliance_analysis(
             }
         )
 
+    risk_dicts = [r.model_dump(mode="json") for r in risk_scores]
+    compliance_score = derived_compliance_score(risk_dicts)
+    risk_level = derived_risk_level(risk_dicts)
+
     return {
         "query": query,
         "product_feature": product_feature,
-        "citations": [c.model_dump() for c in citations],
-        "risk_scores": [r.model_dump() for r in risk_scores],
+        "citations": [c.model_dump(mode="json") for c in citations],
+        "risk_scores": risk_dicts,
         "risk_heatmap": heatmap_rows,
-        "cross_jurisdiction": cross.model_dump(),
-        "llm": llm.model_dump(),
+        "cross_jurisdiction": cross.model_dump(mode="json"),
+        "llm": llm.model_dump(mode="json"),
+        "compliance_score": compliance_score,
+        "risk_level": risk_level,
         "meta": {
             "index_total_vectors": engine.store.ntotal(),
             "retrieval_min_score": engine.settings.min_retrieval_score,
+            "document_id": document_id,
+            "document_scoped": allowed_chunk_refs is not None,
+            "passages_found": len(passages),
+            "score_method": "100 - peak_risk*100",
         },
     }

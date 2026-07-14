@@ -2,22 +2,40 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import secrets
 from contextlib import asynccontextmanager
+from datetime import datetime, timedelta, timezone
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
+from sqlalchemy.orm import Session
 
-from database.session import init_db
+from database import crud
+from database.models import User
+from database.session import SessionLocal, get_db, init_db
 from ml.ollama_health import check_ollama_llm
 from ml.schemas import Jurisdiction
 
+from .analysis_summary import summarize_jurisdictions
+from .auth import create_access_token, get_current_user, hash_password, verify_password
 from .config import Settings
 from .deps import get_engine, set_engine
 from .middleware import RequestLoggingMiddleware
 from .rag_service import RAGEngine, build_engine, run_compliance_analysis
 from .routes import router
+from .schemas import (
+    AnalysisHistoryItem,
+    AuthLoginRequest,
+    AuthRegisterRequest,
+    AuthTokenResponse,
+    AuthUserOut,
+    ComplianceAnalyzeRequest,
+    ComplianceAnalyzeResponse,
+    ForgotPasswordRequest,
+    ForgotPasswordResponse,
+    ResetPasswordRequest,
+)
 
 logging.basicConfig(
     level=logging.INFO,
@@ -26,12 +44,24 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 _boot_settings = Settings()
+_started_at = datetime.now(timezone.utc)
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = Settings()
     init_db()
+
+    db = SessionLocal()
+    try:
+        crud.seed_demo_users(db, hash_password)
+        logger.info("Demo users ready (demo@lexai.com / admin@lexai.com)")
+    except Exception:
+        db.rollback()
+        logger.exception("Failed to seed demo users")
+    finally:
+        db.close()
+
     engine = build_engine(settings)
     set_engine(engine)
     logger.info("RAG engine ready (index vectors=%s)", engine.store.ntotal())
@@ -63,13 +93,97 @@ app.add_middleware(
 app.include_router(router)
 
 
-class AnalyzeRequest(BaseModel):
-    query: str = Field(..., min_length=3, max_length=4000)
-    product_feature: str = Field(..., min_length=2, max_length=2000)
-    jurisdictions: list[str] = Field(
-        default_factory=lambda: [Jurisdiction.GDPR.value, Jurisdiction.DPDP.value, Jurisdiction.CCPA.value]
+def _auth_response(user: User, settings: Settings | None = None) -> AuthTokenResponse:
+    cfg = settings or Settings()
+    return AuthTokenResponse(
+        access_token=create_access_token(
+            user_id=user.id,
+            email=user.email,
+            settings=cfg,
+        ),
+        token_type="bearer",
+        user=AuthUserOut(id=str(user.id), name=user.name, email=user.email),
     )
-    top_k: int | None = Field(default=None, ge=1, le=24)
+
+
+@app.post("/auth/login", response_model=AuthTokenResponse)
+async def auth_login(
+    body: AuthLoginRequest,
+    db: Annotated[Session, Depends(get_db)],
+):
+    email = body.email.strip().lower()
+    user = crud.get_user_by_email(db, email)
+    if user is None or not verify_password(body.password, user.hashed_password):
+        raise HTTPException(status_code=401, detail="Invalid email or password")
+    return _auth_response(user)
+
+
+@app.post("/auth/register", response_model=AuthTokenResponse)
+async def auth_register(
+    body: AuthRegisterRequest,
+    db: Annotated[Session, Depends(get_db)],
+):
+    email = body.email.strip().lower()
+    if crud.get_user_by_email(db, email) is not None:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    user = crud.create_user(
+        db,
+        email=email,
+        name=body.name.strip(),
+        hashed_password=hash_password(body.password),
+    )
+    db.commit()
+    db.refresh(user)
+    return _auth_response(user)
+
+
+@app.post("/auth/forgot-password", response_model=ForgotPasswordResponse)
+async def auth_forgot_password(
+    body: ForgotPasswordRequest,
+    db: Annotated[Session, Depends(get_db)],
+):
+    email = body.email.strip().lower()
+    user = crud.get_user_by_email(db, email)
+    generic = ForgotPasswordResponse(
+        message="If that email exists, a reset link has been issued.",
+        reset_token=None,
+    )
+    if user is None:
+        return generic
+
+    raw = secrets.token_urlsafe(32)
+    crud.create_password_reset_token(
+        db,
+        user_id=user.id,
+        token=raw,
+        expires_at=datetime.now(timezone.utc) + timedelta(hours=1),
+    )
+    db.commit()
+    return ForgotPasswordResponse(message=generic.message, reset_token=raw)
+
+
+@app.post("/auth/reset-password")
+async def auth_reset_password(
+    body: ResetPasswordRequest,
+    db: Annotated[Session, Depends(get_db)],
+):
+    row = crud.get_password_reset_token(db, body.token.strip())
+    if row is None or row.used_at is not None:
+        raise HTTPException(status_code=400, detail="Invalid or expired reset token")
+    expires = row.expires_at
+    if expires.tzinfo is None:
+        expires = expires.replace(tzinfo=timezone.utc)
+    if expires < datetime.now(timezone.utc):
+        raise HTTPException(status_code=400, detail="Invalid or expired reset token")
+
+    user = crud.get_user_by_id(db, row.user_id)
+    if user is None:
+        raise HTTPException(status_code=400, detail="Invalid or expired reset token")
+
+    user.hashed_password = hash_password(body.new_password)
+    row.used_at = datetime.now(timezone.utc)
+    db.commit()
+    return {"message": "Password updated. You can log in with your new password."}
 
 
 @app.get("/")
@@ -78,25 +192,48 @@ async def root():
         "service": "Legal AI Compliance Assistant",
         "docs": "/docs",
         "health": "/health",
-        "endpoints": {
-            "upload": "POST /documents/upload",
-            "documents": "GET /documents",
-            "legal_query": "POST /legal_query",
-            "risk_analysis": "POST /risk_analysis",
-            "legacy_analyze": "POST /v1/compliance/analyze",
+        "auth": {
+            "public": [
+                "POST /auth/login",
+                "POST /auth/register",
+                "POST /auth/forgot-password",
+                "POST /auth/reset-password",
+                "GET /health",
+                "GET /",
+                "GET /v1/compliance/jurisdictions",
+            ],
+            "jwt_protected": [
+                "POST /v1/compliance/analyze",
+                "GET /v1/compliance/history",
+                "POST /documents/upload",
+                "GET /documents",
+                "GET /documents/{id}",
+                "DELETE /documents/{id}",
+                "POST /legal_query",
+                "POST /risk_analysis",
+            ],
         },
     }
 
 
 @app.get("/health")
 async def health():
+    uptime = int((datetime.now(timezone.utc) - _started_at).total_seconds())
     try:
         engine = get_engine()
     except HTTPException:
-        return {"status": "starting", "index_vectors": 0, "embedding_model": None}
+        return {
+            "status": "starting",
+            "version": app.version,
+            "uptime_seconds": uptime,
+            "index_vectors": 0,
+            "embedding_model": None,
+        }
 
     payload = {
         "status": "ok",
+        "version": app.version,
+        "uptime_seconds": uptime,
         "index_vectors": engine.store.ntotal(),
         "embedding_model": engine.settings.embedding_model,
         "llm_provider": engine.settings.llm_provider,
@@ -112,10 +249,31 @@ async def health():
     return payload
 
 
-@app.post("/v1/compliance/analyze")
+@app.get("/v1/compliance/history", response_model=list[AnalysisHistoryItem])
+async def compliance_history(
+    db: Annotated[Session, Depends(get_db)],
+    _: Annotated[User, Depends(get_current_user)],
+):
+    rows = crud.list_compliance_analyses(db, limit=200)
+    return [
+        AnalysisHistoryItem(
+            id=str(row.id),
+            query=row.query,
+            jurisdiction=row.jurisdiction,
+            compliance_score=row.compliance_score,
+            risk_level=row.risk_level,
+            created_at=row.created_at.isoformat() if row.created_at else "",
+        )
+        for row in rows
+    ]
+
+
+@app.post("/v1/compliance/analyze", response_model=ComplianceAnalyzeResponse)
 async def compliance_analyze(
-    body: AnalyzeRequest,
+    body: ComplianceAnalyzeRequest,
     engine: Annotated[RAGEngine, Depends(get_engine)],
+    db: Annotated[Session, Depends(get_db)],
+    _: Annotated[User, Depends(get_current_user)],
 ):
     try:
         js = [Jurisdiction(j) for j in body.jurisdictions]
@@ -128,14 +286,52 @@ async def compliance_analyze(
             detail="Vector index is empty. Ingest documents or set COMPLIANCE_USE_DEMO_INDEX=true.",
         )
 
-    return await asyncio.to_thread(
+    allowed_refs: set[str] | None = None
+    product_feature = body.product_feature
+    if body.document_id is not None:
+        doc = crud.get_document(db, body.document_id)
+        if doc is None:
+            raise HTTPException(status_code=404, detail="Referenced document not found.")
+        allowed_refs = crud.get_chunk_vector_references_for_document(db, body.document_id)
+        if not allowed_refs:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "Document has no indexed chunks yet. Wait for processing to finish "
+                    "or re-upload the PDF."
+                ),
+            )
+        excerpt = crud.get_document_text_excerpt(db, body.document_id)
+        if excerpt:
+            product_feature = (
+                f"{body.product_feature}\n\n--- Uploaded document excerpt ---\n{excerpt}"
+            )[:2000]
+
+    result = await asyncio.to_thread(
         run_compliance_analysis,
         engine,
         query=body.query,
-        product_feature=body.product_feature,
+        product_feature=product_feature,
         jurisdictions=js,
         top_k=body.top_k,
+        document_id=body.document_id,
+        allowed_chunk_refs=allowed_refs,
     )
+
+    try:
+        crud.create_compliance_analysis(
+            db,
+            query=body.query,
+            jurisdiction=summarize_jurisdictions(body.jurisdictions),
+            compliance_score=int(result.get("compliance_score", 0)),
+            risk_level=str(result.get("risk_level", "low")),
+        )
+        db.commit()
+    except Exception:
+        db.rollback()
+        logger.exception("Failed to persist compliance analysis history row")
+
+    return result
 
 
 @app.get("/v1/compliance/jurisdictions")

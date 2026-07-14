@@ -242,6 +242,8 @@ function ApiStatusTab() {
 
   const ENDPOINTS = [
     { method: 'GET',  path: '/health',                      desc: 'Health check'       },
+    { method: 'POST', path: '/auth/login',                   desc: 'Login'              },
+    { method: 'POST', path: '/documents/upload',             desc: 'Upload PDF'         },
     { method: 'POST', path: '/v1/compliance/analyze',        desc: 'Run analysis'       },
     { method: 'GET',  path: '/v1/compliance/jurisdictions',  desc: 'List jurisdictions' },
   ]
@@ -271,7 +273,14 @@ function ApiStatusTab() {
               <p className={cn('font-semibold text-sm', cfg.color)}>{cfg.label}</p>
               {details && (
                 <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                  v{details.version} · Uptime: {Math.floor(details.uptime_seconds / 60)}m
+                  {details.version ? `v${details.version}` : 'API'}
+                  {typeof details.index_vectors === 'number'
+                    ? ` · Index: ${details.index_vectors}`
+                    : ''}
+                  {details.llm_provider ? ` · LLM: ${details.llm_provider}` : ''}
+                  {typeof details.uptime_seconds === 'number' && details.uptime_seconds > 0
+                    ? ` · Uptime: ${Math.floor(details.uptime_seconds / 60)}m`
+                    : ''}
                 </p>
               )}
               {lastCheck && (

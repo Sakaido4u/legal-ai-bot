@@ -7,8 +7,6 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from backend.config import Settings
 
-from .base import Base
-
 _settings = Settings()
 engine = create_engine(
     _settings.database_url,
@@ -20,10 +18,10 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 
 def init_db() -> None:
-    """Create all tables if they do not exist."""
+    """Register ORM models. Schema changes go through Alembic (`alembic upgrade head`)."""
     from database import models  # noqa: F401
 
-    Base.metadata.create_all(bind=engine)
+    # Intentionally no Base.metadata.create_all here — use migrations instead.
 
 
 def get_db() -> Generator[Session, None, None]:

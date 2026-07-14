@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Upload, X, FileText, Scale,
+  Upload, X, FileText, Scale, CheckCircle2,
   ChevronDown, AlertCircle, Lightbulb,
 } from 'lucide-react'
 import { Button }   from '@/components/ui/Button'
@@ -13,8 +13,11 @@ import { Card }     from '@/components/ui/Card'
 import { Spinner }  from '@/components/ui/Spinner'
 import { useCompliance } from '@/hooks/useCompliance'
 import { complianceService, MOCK_JURISDICTIONS } from '@/services/complianceService'
-import type { Jurisdiction } from '@/types/api'
+import { documentService, validatePdfFile } from '@/services/documentService'
+import type { DocumentUploadResponse, Jurisdiction } from '@/types/api'
 import { cn } from '@/utils/cn'
+
+type UploadUiStatus = 'idle' | 'uploading' | 'success' | 'error'
 
 // ── Zod schema ────────────────────────────────────────────────
 const analyzeSchema = z.object({
@@ -41,6 +44,9 @@ export function AnalyzePage() {
   const [isDragging,     setIsDragging]     = useState(false)
   const [jurisdictions,  setJurisdictions]  = useState<Jurisdiction[]>(MOCK_JURISDICTIONS)
   const [showExamples,   setShowExamples]   = useState(false)
+  const [uploadStatus,   setUploadStatus]   = useState<UploadUiStatus>('idle')
+  const [uploadError,    setUploadError]    = useState<string | null>(null)
+  const [uploadResult,   setUploadResult]   = useState<DocumentUploadResponse | null>(null)
   const { analyze, isLoading } = useCompliance()
   const navigate = useNavigate()
 
@@ -50,6 +56,21 @@ export function AnalyzePage() {
       .getJurisdictions()
       .then(setJurisdictions)
       .catch(() => setJurisdictions(MOCK_JURISDICTIONS))
+  }, [])
+
+  // Restore last successful upload so Analyze can pass document_id without re-upload
+  useEffect(() => {
+    const raw = sessionStorage.getItem('lexai-last-document')
+    if (!raw) return
+    try {
+      const doc = JSON.parse(raw) as DocumentUploadResponse
+      if (doc?.id) {
+        setUploadResult(doc)
+        setUploadStatus('success')
+      }
+    } catch {
+      // ignore corrupt session payload
+    }
   }, [])
 
   const {
@@ -63,18 +84,81 @@ export function AnalyzePage() {
   })
 
   const queryValue = watch('query', '')
+  const jurisdictionValue = watch('jurisdiction', '')
   const charCount  = queryValue.length
+
+  const resetUploadState = useCallback(() => {
+    setUploadedFile(null)
+    setUploadStatus('idle')
+    setUploadError(null)
+    setUploadResult(null)
+    sessionStorage.removeItem('lexai-last-document')
+  }, [])
+
+  const selectFile = useCallback((file: File | undefined) => {
+    if (!file) return
+    const validationError = validatePdfFile(file)
+    if (validationError) {
+      setUploadedFile(null)
+      setUploadResult(null)
+      setUploadStatus('error')
+      setUploadError(validationError)
+      return
+    }
+    setUploadedFile(file)
+    setUploadResult(null)
+    setUploadStatus('idle')
+    setUploadError(null)
+  }, [])
+
+  const handleUpload = useCallback(async () => {
+    if (!uploadedFile) return
+    if (!jurisdictionValue) {
+      setUploadStatus('error')
+      setUploadError('Select a jurisdiction before uploading.')
+      return
+    }
+
+    setUploadStatus('uploading')
+    setUploadError(null)
+    setUploadResult(null)
+
+    try {
+      const result = await documentService.upload(
+        uploadedFile,
+        jurisdictionValue,
+        uploadedFile.name.replace(/\.pdf$/i, ''),
+      )
+      setUploadResult(result)
+      setUploadStatus('success')
+      sessionStorage.setItem('lexai-last-document', JSON.stringify(result))
+    } catch (err) {
+      setUploadStatus('error')
+      setUploadResult(null)
+      setUploadError(
+        err instanceof Error ? err.message : 'Upload failed. Please try again.',
+      )
+    }
+  }, [uploadedFile, jurisdictionValue])
 
   // ── Submit ───────────────────────────────────────────────────
   const onSubmit = async (data: AnalyzeFormData) => {
     const result = await analyze({
-      query:        data.query,
-      jurisdiction: data.jurisdiction,
+      query: data.query,
+      // Backend requires product_feature; UI uses the legal query as the feature under review.
+      product_feature: data.query.slice(0, 2000),
+      jurisdictions: [data.jurisdiction],
+      // Scope retrieval to the uploaded PDF when present (optional).
+      document_id: uploadResult?.id ?? null,
     })
     if (result) {
-      // Store result so ResultsPage can read it
-      sessionStorage.setItem('lexai-last-result', JSON.stringify(result))
-      navigate(`/results/${result.id}`)
+      const stored = {
+        id: crypto.randomUUID(),
+        created_at: new Date().toISOString(),
+        result,
+      }
+      sessionStorage.setItem('lexai-last-result', JSON.stringify(stored))
+      navigate(`/results/${stored.id}`)
     }
   }
 
@@ -82,11 +166,8 @@ export function AnalyzePage() {
   const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
     setIsDragging(false)
-    const file = e.dataTransfer.files[0]
-    if (file && file.type === 'application/pdf') {
-      setUploadedFile(file)
-    }
-  }, [])
+    selectFile(e.dataTransfer.files[0])
+  }, [selectFile])
 
   const handleDragOver = useCallback((e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault()
@@ -96,8 +177,7 @@ export function AnalyzePage() {
   const handleDragLeave = useCallback(() => setIsDragging(false), [])
 
   const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) setUploadedFile(file)
+    selectFile(e.target.files?.[0])
     e.target.value = ''
   }
 
@@ -254,36 +334,80 @@ export function AnalyzePage() {
             className={cn(
               'relative p-8 rounded-xl border-2 border-dashed transition-all duration-200',
               'flex flex-col items-center justify-center gap-3 text-center min-h-[140px]',
-              isDragging
-                ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/10 scale-[1.01]'
-                : 'border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-raised)]',
+              uploadStatus === 'error' && 'border-red-400 bg-red-50/50 dark:bg-red-900/10',
+              uploadStatus === 'success' && 'border-emerald-400 bg-emerald-50/50 dark:bg-emerald-900/10',
+              uploadStatus !== 'error' && uploadStatus !== 'success' && (
+                isDragging
+                  ? 'border-brand-500 bg-brand-50 dark:bg-brand-900/10 scale-[1.01]'
+                  : 'border-[var(--border)] hover:border-[var(--border-strong)] hover:bg-[var(--bg-raised)]'
+              ),
             )}
           >
-            {uploadedFile ? (
-              /* File uploaded state */
-              <div className="flex items-center gap-4 w-full max-w-sm">
-                <div className="w-12 h-12 rounded-xl bg-brand-100 dark:bg-brand-900/30 flex items-center justify-center shrink-0">
-                  <FileText className="w-6 h-6 text-brand-600" />
+            {uploadedFile || uploadResult ? (
+              <div className="w-full max-w-md space-y-3">
+                <div className="flex items-center gap-4">
+                  <div className={cn(
+                    'w-12 h-12 rounded-xl flex items-center justify-center shrink-0',
+                    uploadStatus === 'success'
+                      ? 'bg-emerald-100 dark:bg-emerald-900/30'
+                      : 'bg-brand-100 dark:bg-brand-900/30',
+                  )}>
+                    {uploadStatus === 'success'
+                      ? <CheckCircle2 className="w-6 h-6 text-emerald-600" />
+                      : <FileText className="w-6 h-6 text-brand-600" />}
+                  </div>
+                  <div className="flex-1 text-left min-w-0">
+                    <p className="text-sm font-medium text-[var(--text)] truncate">
+                      {uploadedFile?.name ?? uploadResult?.filename ?? 'Uploaded PDF'}
+                    </p>
+                    <p className="text-xs text-[var(--text-muted)] mt-0.5">
+                      {uploadedFile
+                        ? `${(uploadedFile.size / 1024).toFixed(1)} KB · PDF`
+                        : 'PDF'}
+                      {uploadResult
+                        ? ` · Doc #${uploadResult.id} · ${uploadResult.processing_status}`
+                        : null}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={resetUploadState}
+                    disabled={uploadStatus === 'uploading'}
+                    className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors disabled:opacity-50"
+                    aria-label="Remove file"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
                 </div>
-                <div className="flex-1 text-left min-w-0">
-                  <p className="text-sm font-medium text-[var(--text)] truncate">
-                    {uploadedFile.name}
+
+                {uploadedFile && uploadStatus !== 'success' && (
+                  <Button
+                    type="button"
+                    size="sm"
+                    className="w-full"
+                    onClick={handleUpload}
+                    isLoading={uploadStatus === 'uploading'}
+                    disabled={uploadStatus === 'uploading'}
+                    leftIcon={
+                      uploadStatus !== 'uploading'
+                        ? <Upload className="w-4 h-4" />
+                        : undefined
+                    }
+                  >
+                    {uploadStatus === 'uploading'
+                      ? 'Uploading & processing…'
+                      : 'Upload to server'}
+                  </Button>
+                )}
+
+                {uploadStatus === 'uploading' && (
+                  <p className="flex items-center justify-center gap-2 text-xs text-[var(--text-muted)]">
+                    <Spinner className="w-3.5 h-3.5" />
+                    Parsing PDF and indexing — this can take a minute…
                   </p>
-                  <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                    {(uploadedFile.size / 1024).toFixed(1)} KB · PDF
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setUploadedFile(null)}
-                  className="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-                  aria-label="Remove file"
-                >
-                  <X className="w-4 h-4" />
-                </button>
+                )}
               </div>
             ) : (
-              /* Empty drop zone */
               <>
                 <div className="w-12 h-12 rounded-xl bg-[var(--bg-raised)] flex items-center justify-center">
                   <Upload className="w-6 h-6 text-[var(--text-subtle)]" />
@@ -295,19 +419,36 @@ export function AnalyzePage() {
                       browse
                       <input
                         type="file"
-                        accept="application/pdf"
+                        accept="application/pdf,.pdf"
                         className="sr-only"
                         onChange={handleFileInput}
                       />
                     </label>
                   </p>
                   <p className="text-xs text-[var(--text-muted)] mt-1">
-                    Optional · PDF only · Maximum 10 MB
+                    Optional · PDF only · Maximum 10 MB · Select jurisdiction first
                   </p>
                 </div>
               </>
             )}
           </div>
+
+          {uploadError && (
+            <p className="flex items-start gap-1.5 px-4 pb-4 text-xs text-red-500">
+              <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+              <span>{uploadError}</span>
+            </p>
+          )}
+
+          {uploadStatus === 'success' && uploadResult && !uploadError && (
+            <p className="flex items-start gap-1.5 px-4 pb-4 text-xs text-emerald-700 dark:text-emerald-400">
+              <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+              <span>
+                Linked to analysis — doc #{uploadResult.id} ({uploadResult.processing_status}).
+                Run analysis to scope retrieval to this PDF.
+              </span>
+            </p>
+          )}
         </Card>
 
         {/* ── Tips ─────────────────────────────────────── */}
@@ -333,7 +474,11 @@ export function AnalyzePage() {
           isLoading={isLoading}
           leftIcon={!isLoading ? <Scale className="w-5 h-5" /> : undefined}
         >
-          {isLoading ? 'Analyzing your query…' : 'Run Compliance Analysis'}
+          {isLoading ? 'Analyzing your query…' : (
+            uploadResult?.id
+              ? `Run Analysis (doc #${uploadResult.id})`
+              : 'Run Compliance Analysis'
+          )}
         </Button>
       </form>
 
