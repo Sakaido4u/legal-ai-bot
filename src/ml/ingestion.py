@@ -15,7 +15,7 @@ from .vector_store import ComplianceVectorStore
 
 logger = logging.getLogger(__name__)
 
-SourceType = Literal["url", "pdf", "text"]
+SourceType = Literal["url", "pdf", "html", "text"]
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(_REPO_ROOT) not in sys.path:
@@ -60,14 +60,31 @@ def _chunks_from_url(source: CorpusSource) -> list[ChunkRecord]:
     return sections_to_chunks(sections, jurisdiction=source.jurisdiction, source_label=source.label)
 
 
+def _resolve_local_path(path: str) -> Path:
+    p = Path(path)
+    if not p.is_absolute():
+        p = _REPO_ROOT / p
+    return p
+
+
+def _chunks_from_html(source: CorpusSource) -> list[ChunkRecord]:
+    from processing.web_scrapper import extract_structured_sections
+
+    if not source.path:
+        raise ValueError(f"HTML source missing path: {source.label}")
+    html_path = _resolve_local_path(source.path)
+    html = html_path.read_text(encoding="utf-8", errors="replace")
+    source_url = source.url or f"file://{html_path.as_posix()}"
+    sections = extract_structured_sections(html, source_url)
+    return sections_to_chunks(sections, jurisdiction=source.jurisdiction, source_label=source.label)
+
+
 def _chunks_from_pdf(source: CorpusSource) -> list[ChunkRecord]:
     from processing.pdf_parser import extract_legal_sections
 
     if not source.path:
         raise ValueError(f"PDF source missing path: {source.label}")
-    pdf_path = Path(source.path)
-    if not pdf_path.is_absolute():
-        pdf_path = _REPO_ROOT / pdf_path
+    pdf_path = _resolve_local_path(source.path)
     sections = extract_legal_sections(pdf_path)
     return sections_to_chunks(sections, jurisdiction=source.jurisdiction, source_label=source.label)
 
@@ -93,6 +110,8 @@ def source_to_chunks(source: CorpusSource) -> list[ChunkRecord]:
         return _chunks_from_url(source)
     if source.source_type == "pdf":
         return _chunks_from_pdf(source)
+    if source.source_type == "html":
+        return _chunks_from_html(source)
     if source.source_type == "text":
         return _chunks_from_text(source)
     raise ValueError(f"Unknown source type: {source.source_type}")

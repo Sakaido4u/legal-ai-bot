@@ -16,7 +16,7 @@ class Settings(BaseSettings):
 
     embedding_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     index_dir: str | None = "vector_store/regulatory"
-    use_demo_index: bool = True
+    use_demo_index: bool = False
     min_retrieval_score: float = 0.22
     retrieval_top_k: int = 6
     cors_origins: str = (

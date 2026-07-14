@@ -6,8 +6,8 @@ from pathlib import Path
 from ml.cross_jurisdiction import compare_cross_jurisdiction
 from ml.demo_corpus import demo_chunks
 from ml.embeddings import EmbeddingBackend
-from ml.llm_backend import generate_with_llm
-from ml.llm_citations import passages_to_citations, validate_citation_coverage
+from ml.llm_backend import generate_with_llm, resolve_llm_provider
+from ml.llm_citations import passages_to_citations, validate_citation_answer
 from ml.retriever import HighPrecisionRetriever
 from ml.risk_scorer import score_passage
 from backend.analysis_summary import derived_compliance_score, derived_risk_level
@@ -94,18 +94,25 @@ def run_compliance_analysis(
     citations: list[Citation] = passages_to_citations(passages)
     risk_scores = [score_passage(p) for p in passages]
     cross = compare_cross_jurisdiction(passages, jurisdictions=jurisdictions)
+    llm_provider = resolve_llm_provider(
+        engine.settings.llm_provider,
+        ollama_base_url=engine.settings.ollama_base_url,
+        llm_model=engine.settings.llm_model,
+    )
     llm: LLMComplianceAnswer = generate_with_llm(
         query=query,
         product_feature=product_feature,
         citations=citations,
-        provider=engine.settings.llm_provider,  # type: ignore[arg-type]
+        provider=llm_provider,
         model=engine.settings.llm_model,
         api_key=engine.settings.llm_api_key,
         openai_base_url=engine.settings.openai_base_url,
         ollama_base_url=engine.settings.ollama_base_url,
         timeout=engine.settings.llm_timeout_seconds,
     )
-    if llm.answer_text and not validate_citation_coverage(llm.answer_text, [c.citation_id for c in citations]):
+    if llm.answer_text and not validate_citation_answer(
+        llm.answer_text, [c.citation_id for c in citations], require_per_sentence=True
+    ):
         llm = LLMComplianceAnswer(
             answer_text="",
             citation_ids_used=[],
