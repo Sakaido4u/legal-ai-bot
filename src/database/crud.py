@@ -195,16 +195,22 @@ def create_compliance_analysis(
     jurisdiction: str,
     compliance_score: int,
     risk_level: str,
+    result_json: str | None = None,
 ) -> ComplianceAnalysisRecord:
     row = ComplianceAnalysisRecord(
         query=query,
         jurisdiction=jurisdiction,
         compliance_score=compliance_score,
         risk_level=risk_level,
+        result_json=result_json,
     )
     db.add(row)
     db.flush()
     return row
+
+
+def get_compliance_analysis(db: Session, analysis_id: int) -> ComplianceAnalysisRecord | None:
+    return db.get(ComplianceAnalysisRecord, analysis_id)
 
 
 def list_compliance_analyses(

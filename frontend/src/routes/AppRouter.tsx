@@ -23,6 +23,7 @@ export function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path={ROUTES.HOME}  element={<LandingPage />} />
+        <Route path={ROUTES.ABOUT} element={<AboutPage />} />
 
         <Route element={<AuthLayout />}>
           <Route path={ROUTES.LOGIN}    element={<LoginPage />} />
@@ -35,12 +36,12 @@ export function AppRouter() {
             <Route path={ROUTES.DASHBOARD} element={<DashboardPage />} />
             <Route path={ROUTES.ANALYZE}   element={<AnalyzePage />} />
             <Route path={ROUTES.RESULTS}   element={<ResultsPage />} />
+            <Route path={ROUTES.CITATIONS_HOME} element={<CitationsPage />} />
             <Route path={ROUTES.CITATIONS} element={<CitationsPage />} />
             <Route path={ROUTES.REPORTS}   element={<ReportsPage />} />
             <Route path={ROUTES.DOCUMENTS} element={<DocumentsPage />} />
             <Route path={ROUTES.ADMIN}     element={<AdminPage />} />
             <Route path={ROUTES.SETTINGS}  element={<SettingsPage />} />
-            <Route path={ROUTES.ABOUT}     element={<AboutPage />} />
           </Route>
         </Route>
 

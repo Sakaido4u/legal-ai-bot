@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   TrendingUp, FileText, AlertTriangle,
@@ -50,13 +50,13 @@ function ScoreRing({ score }: { score: number }) {
 const QUICK_ACTIONS = [
   { label: 'Run new analysis',  path: ROUTES.ANALYZE,  primary: true },
   { label: 'View all reports',  path: ROUTES.REPORTS },
-  { label: 'Browse citations',  path: '/citations' },
+  { label: 'Browse citations',  path: ROUTES.CITATIONS_HOME },
   { label: 'Settings',          path: ROUTES.SETTINGS },
 ]
-
 // ── Component ──────────────────────────────────────────────────
 export function DashboardPage() {
   const { user } = useAuth()
+  const navigate = useNavigate()
   const [history, setHistory] = useState<AnalysisHistory[]>([])
 
   useEffect(() => {
@@ -370,10 +370,11 @@ export function DashboardPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.2 + i * 0.05 }}
-                  className="hover:bg-[var(--bg-raised)] transition-colors group"
+                  className="hover:bg-[var(--bg-raised)] transition-colors group cursor-pointer"
+                  onClick={() => navigate(`/results/${row.id}`)}
                 >
                   <td className="px-5 py-3.5">
-                    <p className="text-sm font-medium text-[var(--text)] max-w-[240px] truncate">
+                    <p className="text-sm font-medium text-[var(--text)] max-w-[240px] truncate group-hover:text-brand-600">
                       {row.query}
                     </p>
                   </td>

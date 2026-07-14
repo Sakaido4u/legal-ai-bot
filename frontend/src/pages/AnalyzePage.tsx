@@ -152,8 +152,12 @@ export function AnalyzePage() {
       document_id: uploadResult?.id ?? null,
     })
     if (result) {
+      const analysisId =
+        typeof result.meta?.analysis_id === 'number'
+          ? String(result.meta.analysis_id)
+          : crypto.randomUUID()
       const stored = {
-        id: crypto.randomUUID(),
+        id: analysisId,
         created_at: new Date().toISOString(),
         result,
       }

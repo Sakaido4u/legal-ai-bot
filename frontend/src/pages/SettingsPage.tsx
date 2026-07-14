@@ -40,7 +40,7 @@ type ProfileFormData = z.infer<typeof profileSchema>
 
 // ── Profile Tab ────────────────────────────────────────────────
 function ProfileTab() {
-  const { user, login } = useAuth()
+  const { user, updateUser } = useAuth()
 
   const { register, handleSubmit, formState: { errors, isSubmitting, isDirty } } =
     useForm<ProfileFormData>({
@@ -52,12 +52,11 @@ function ProfileTab() {
     })
 
   const onSubmit = async (data: ProfileFormData) => {
-    await new Promise(r => setTimeout(r, 800))
-    // Update user in auth context (mock)
+    // Local profile display only — preserves the real JWT (no backend profile API yet).
     if (user) {
-      login({ ...user, name: data.name, email: data.email }, 'mock-token')
+      updateUser({ ...user, name: data.name, email: data.email })
     }
-    toast.success('Profile updated!')
+    toast.success('Profile updated locally')
   }
 
   return (

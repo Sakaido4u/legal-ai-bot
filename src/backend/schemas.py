@@ -209,3 +209,11 @@ class AnalysisHistoryItem(BaseModel):
     compliance_score: int
     risk_level: str
     created_at: str
+
+
+class AnalysisDetailResponse(BaseModel):
+    """Full stored analysis for Results / Citations by id."""
+
+    id: str
+    created_at: str
+    result: dict[str, Any]

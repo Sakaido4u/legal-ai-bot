@@ -80,12 +80,19 @@ def test_analyze_and_history(client):
     payload = analyze.json()
     assert payload["compliance_score"] == 80
     assert payload["risk_level"] == "low"
+    analysis_id = payload.get("meta", {}).get("analysis_id")
+    assert analysis_id is not None
 
     history = client.get("/v1/compliance/history", headers=headers)
     assert history.status_code == 200
     rows = history.json()
     assert len(rows) >= 1
     assert rows[0]["compliance_score"] == 80
+
+    detail = client.get(f"/v1/compliance/history/{analysis_id}", headers=headers)
+    assert detail.status_code == 200, detail.text
+    assert detail.json()["id"] == str(analysis_id)
+    assert detail.json()["result"]["query"]
 
 
 def test_admin_seeded_and_list(client):
