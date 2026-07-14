@@ -105,6 +105,8 @@ class ComplianceAnalysisRecord(Base):
     # Formalized summary score (100 - peak risk * 100). See analysis_summary.
     compliance_score: Mapped[int] = mapped_column(Integer, nullable=False)
     risk_level: Mapped[str] = mapped_column(String(16), nullable=False, index=True)
+    # Full AnalyzeResponse JSON — powers History → Results / Citations by id.
+    result_json: Mapped[str | None] = mapped_column(Text, nullable=True)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False, index=True
     )

@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import asyncio
+import json
 import logging
 import secrets
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta, timezone
-from typing import Annotated
+from typing import Annotated, Any
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,6 +40,7 @@ from .routes import router
 from .schemas import (
     AdminUserListResponse,
     AdminUserOut,
+    AnalysisDetailResponse,
     AnalysisHistoryItem,
     AuthLoginRequest,
     AuthRegisterRequest,
@@ -478,19 +480,51 @@ async def compliance_analyze(
         raise
 
     try:
-        crud.create_compliance_analysis(
+        # Make JSON-serializable for Postgres storage + History → Results reload.
+        serializable: dict[str, Any] = json.loads(json.dumps(result, default=str))
+        row = crud.create_compliance_analysis(
             db,
             query=body.query,
             jurisdiction=summarize_jurisdictions(body.jurisdictions),
             compliance_score=int(result.get("compliance_score", 0)),
             risk_level=str(result.get("risk_level", "low")),
+            result_json=json.dumps(serializable),
         )
         db.commit()
+        meta = serializable.setdefault("meta", {})
+        if isinstance(meta, dict):
+            meta["analysis_id"] = row.id
+        result = serializable
     except Exception:
         db.rollback()
         logger.exception("Failed to persist compliance analysis history row")
 
     return result
+
+
+@app.get("/v1/compliance/history/{analysis_id}", response_model=AnalysisDetailResponse)
+async def compliance_history_detail(
+    analysis_id: int,
+    db: Annotated[Session, Depends(get_db)],
+    _: Annotated[User, Depends(get_current_user)],
+):
+    row = crud.get_compliance_analysis(db, analysis_id)
+    if row is None:
+        raise HTTPException(status_code=404, detail="Analysis not found")
+    if not row.result_json:
+        raise HTTPException(
+            status_code=404,
+            detail="Full analysis payload not available for this history row. Re-run the analysis.",
+        )
+    try:
+        payload = json.loads(row.result_json)
+    except json.JSONDecodeError as exc:
+        raise HTTPException(status_code=500, detail="Stored analysis payload is corrupt") from exc
+    return AnalysisDetailResponse(
+        id=str(row.id),
+        created_at=row.created_at.isoformat() if row.created_at else "",
+        result=payload,
+    )
 
 
 @app.get("/v1/compliance/jurisdictions")

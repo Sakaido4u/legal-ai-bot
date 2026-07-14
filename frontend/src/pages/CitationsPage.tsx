@@ -1,48 +1,29 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  Copy, Check, ChevronDown, BookOpen, ArrowLeft, Search,
+  Copy, Check, ChevronDown, BookOpen, ArrowLeft, Search, AlertTriangle,
 } from 'lucide-react'
 import { Card }    from '@/components/ui/Card'
 import { Badge }   from '@/components/ui/Badge'
 import { Button }  from '@/components/ui/Button'
 import { cn }      from '@/utils/cn'
 import toast       from 'react-hot-toast'
+import { complianceService } from '@/services/complianceService'
+import { ROUTES } from '@/constants/app'
 import type { AnalyzeResponse, Citation, StoredAnalysis } from '@/types/api'
 
-const FALLBACK_CITATIONS: Citation[] = [
-  {
-    citation_id: 'C0',
-    jurisdiction: 'GDPR',
-    source_label: 'GDPR Art. 5(1)(e)',
-    heading: 'Storage limitation',
-    excerpt:
-      'Personal data shall be kept in a form which permits identification of data subjects for no longer than is necessary for the purposes for which the personal data are processed.',
-    similarity: 0.91,
-  },
-  {
-    citation_id: 'C1',
-    jurisdiction: 'GDPR',
-    source_label: 'GDPR Art. 7',
-    heading: 'Conditions for consent',
-    excerpt:
-      'If the data subject\'s consent is given in the context of a written declaration which also concerns other matters, the request for consent shall be presented in a manner which is clearly distinguishable.',
-    similarity: 0.87,
-  },
-]
-
-function loadCitations(): Citation[] {
+function parseSessionCitations(): Citation[] {
   const raw = sessionStorage.getItem('lexai-last-result')
-  if (!raw) return FALLBACK_CITATIONS
+  if (!raw) return []
   try {
     const parsed = JSON.parse(raw) as StoredAnalysis | AnalyzeResponse
     const result = 'result' in parsed && parsed.result
       ? parsed.result
       : (parsed as AnalyzeResponse)
-    return result.citations?.length ? result.citations : FALLBACK_CITATIONS
+    return result.citations ?? []
   } catch {
-    return FALLBACK_CITATIONS
+    return []
   }
 }
 
@@ -111,32 +92,19 @@ function CitationCard({ cite }: { cite: Citation }) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="px-5 pb-5 space-y-4 border-t border-[var(--border)] pt-4">
-              <blockquote className="relative pl-4 text-sm text-[var(--text-muted)] italic leading-relaxed">
-                <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-brand-500 rounded-full" />
-                "{cite.excerpt}"
-              </blockquote>
-
-              <p className="text-xs text-[var(--text-subtle)]">
-                <span className="font-medium text-[var(--text-muted)]">Source: </span>
-                {cite.source_label}
+            <div className="px-5 pb-5 pt-0 border-t border-[var(--border)]">
+              <p className="text-sm text-[var(--text-muted)] leading-relaxed mt-4">
+                {cite.excerpt}
               </p>
-
-              <div className="flex items-center gap-2 pt-1">
-                <button
-                  onClick={handleCopy}
-                  className={cn(
-                    'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all',
-                    copied
-                      ? 'bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-400'
-                      : 'bg-[var(--bg-raised)] text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--border)]',
-                  )}
+              <div className="mt-3 flex justify-end">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  leftIcon={copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                  onClick={() => void handleCopy()}
                 >
-                  {copied
-                    ? <><Check className="w-3.5 h-3.5" /> Copied!</>
-                    : <><Copy className="w-3.5 h-3.5" /> Copy citation</>
-                  }
-                </button>
+                  {copied ? 'Copied' : 'Copy'}
+                </Button>
               </div>
             </div>
           </motion.div>
@@ -147,28 +115,116 @@ function CitationCard({ cite }: { cite: Citation }) {
 }
 
 export function CitationsPage() {
-  const { id }       = useParams<{ id: string }>()
+  const { id } = useParams<{ id: string }>()
   const [search, setSearch] = useState('')
-  const citations = useMemo(() => loadCitations(), [])
+  const [citations, setCitations] = useState<Citation[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [resultId, setResultId] = useState<string | undefined>(id)
 
-  const filtered = citations.filter(c => {
+  useEffect(() => {
+    let cancelled = false
+
+    async function load() {
+      setLoading(true)
+      setError(null)
+
+      if (id && /^\d+$/.test(id)) {
+        try {
+          const detail = await complianceService.getAnalysis(id)
+          if (!cancelled) {
+            setCitations(detail.result.citations ?? [])
+            setResultId(detail.id)
+            sessionStorage.setItem('lexai-last-result', JSON.stringify(detail))
+          }
+        } catch (err) {
+          if (!cancelled) {
+            const session = parseSessionCitations()
+            if (session.length) {
+              setCitations(session)
+              setResultId(id)
+            } else {
+              setCitations([])
+              setError(err instanceof Error ? err.message : 'Could not load citations')
+            }
+          }
+        } finally {
+          if (!cancelled) setLoading(false)
+        }
+        return
+      }
+
+      const session = parseSessionCitations()
+      if (!cancelled) {
+        setCitations(session)
+        setResultId(
+          (() => {
+            try {
+              const raw = sessionStorage.getItem('lexai-last-result')
+              if (!raw) return undefined
+              const parsed = JSON.parse(raw) as StoredAnalysis
+              return parsed.id
+            } catch {
+              return undefined
+            }
+          })(),
+        )
+        if (!session.length) {
+          setError('No citations yet — run an analysis first.')
+        }
+        setLoading(false)
+      }
+    }
+
+    void load()
+    return () => { cancelled = true }
+  }, [id])
+
+  const filtered = useMemo(() => {
     const q = search.toLowerCase()
-    return (
+    if (!q) return citations
+    return citations.filter(c =>
       c.source_label.toLowerCase().includes(q) ||
       (c.heading?.toLowerCase().includes(q) ?? false) ||
       c.jurisdiction.toLowerCase().includes(q) ||
-      c.citation_id.toLowerCase().includes(q)
+      c.citation_id.toLowerCase().includes(q),
     )
-  })
+  }, [citations, search])
 
   const avgSimilarity = citations.length
     ? citations.reduce((s, c) => s + c.similarity, 0) / citations.length
     : 0
 
+  if (loading) {
+    return (
+      <div className="max-w-3xl mx-auto py-16 text-center text-sm text-[var(--text-muted)]">
+        Loading citations…
+      </div>
+    )
+  }
+
+  if (error && citations.length === 0) {
+    return (
+      <div className="max-w-lg mx-auto py-16 text-center space-y-4">
+        <AlertTriangle className="w-10 h-10 text-amber-500 mx-auto" />
+        <h1 className="text-xl font-bold text-[var(--text)]">No citations</h1>
+        <p className="text-sm text-[var(--text-muted)]">{error}</p>
+        <div className="flex justify-center gap-3">
+          <Link to={ROUTES.REPORTS}>
+            <Button variant="outline">View reports</Button>
+          </Link>
+          <Link to={ROUTES.ANALYZE}>
+            <Button>Run analysis</Button>
+          </Link>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
-        <Link to={id ? `/results/${id}` : -1 as unknown as string}>
+        <Link to={resultId ? `/results/${resultId}` : ROUTES.ANALYZE}>
           <Button variant="ghost" size="icon">
             <ArrowLeft className="w-4 h-4" />
           </Button>
@@ -178,59 +234,36 @@ export function CitationsPage() {
             Citation Viewer
           </h1>
           <p className="text-sm text-[var(--text-muted)] mt-0.5">
-            {citations.length} legal citations found
+            {citations.length} grounded passages · avg match {Math.round(avgSimilarity * 100)}%
           </p>
         </div>
       </div>
 
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-subtle)] pointer-events-none" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-muted)]" />
         <input
-          type="search"
           value={search}
           onChange={e => setSearch(e.target.value)}
           placeholder="Search citations by source, heading, or jurisdiction…"
           className={cn(
-            'w-full h-10 pl-10 pr-4 rounded-xl text-sm',
-            'bg-[var(--bg-surface)] border border-[var(--border)]',
-            'text-[var(--text)] placeholder:text-[var(--text-subtle)]',
-            'focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:border-[var(--accent)]',
-            'transition-all duration-150',
+            'w-full pl-10 pr-4 py-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-surface)]',
+            'text-[var(--text)] placeholder:text-[var(--text-subtle)] text-sm',
+            'focus:outline-none focus:ring-2 focus:ring-brand-500/30',
           )}
         />
       </div>
 
-      <div className="flex items-center gap-3 flex-wrap">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[var(--bg-raised)] border border-[var(--border)]">
-          <BookOpen className="w-3.5 h-3.5 text-brand-500" />
-          <span className="text-xs font-medium text-[var(--text-muted)]">
-            {filtered.length} citations
-          </span>
-        </div>
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-900/40">
-          <span className="text-xs font-medium text-green-700 dark:text-green-400">
-            Avg similarity: {Math.round(avgSimilarity * 100)}%
-          </span>
-        </div>
-      </div>
-
       {filtered.length === 0 ? (
-        <div className="text-center py-16">
-          <BookOpen className="w-12 h-12 text-[var(--text-subtle)] mx-auto mb-3" />
-          <p className="text-[var(--text-muted)] font-medium">No citations found</p>
-          <p className="text-sm text-[var(--text-subtle)] mt-1">Try a different search term</p>
-        </div>
+        <Card>
+          <div className="py-10 text-center text-sm text-[var(--text-muted)] flex flex-col items-center gap-2">
+            <BookOpen className="w-8 h-8 opacity-40" />
+            No citations match your search.
+          </div>
+        </Card>
       ) : (
         <div className="space-y-3">
-          {filtered.map((cite, i) => (
-            <motion.div
-              key={cite.citation_id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.06 }}
-            >
-              <CitationCard cite={cite} />
-            </motion.div>
+          {filtered.map(cite => (
+            <CitationCard key={cite.citation_id} cite={cite} />
           ))}
         </div>
       )}

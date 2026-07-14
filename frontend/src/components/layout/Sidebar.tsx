@@ -28,7 +28,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Analyze',   path: ROUTES.ANALYZE,   icon: Search,       badge: 'New' },
   { label: 'Documents', path: ROUTES.DOCUMENTS, icon: FolderOpen },
   { label: 'Reports',   path: ROUTES.REPORTS,   icon: ClipboardList },
-  { label: 'Citations', path: '/citations',      icon: BookOpen },
+  { label: 'Citations', path: ROUTES.CITATIONS_HOME, icon: BookOpen },
   { label: 'Admin',     path: ROUTES.ADMIN,     icon: Shield,      adminOnly: true },
   { label: 'Settings',  path: ROUTES.SETTINGS,  icon: Settings },
   { label: 'About',     path: ROUTES.ABOUT,      icon: Info },

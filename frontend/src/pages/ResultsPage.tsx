@@ -28,77 +28,6 @@ import { ROUTES } from '@/constants/app'
 import { cn } from '@/utils/cn'
 import type { RiskLevel } from '@/constants/app'
 
-// ── Demo payload (backend AnalyzeResponse shape) ──────────────
-const DEMO_RESULT: AnalyzeResponse = {
-  query: 'Marketing emails to EU users with 3-year retention — GDPR compliant?',
-  product_feature: 'Marketing emails to EU users with 3-year retention — GDPR compliant?',
-  citations: [
-    {
-      citation_id: 'C0',
-      jurisdiction: 'GDPR',
-      source_label: 'GDPR Art. 5(1)(e)',
-      heading: 'Storage limitation',
-      excerpt: 'Personal data shall be kept no longer than is necessary for the purposes for which the personal data are processed.',
-      similarity: 0.91,
-    },
-    {
-      citation_id: 'C1',
-      jurisdiction: 'GDPR',
-      source_label: 'GDPR Art. 7',
-      heading: 'Conditions for consent',
-      excerpt: 'Consent must be freely given, specific, informed and unambiguous.',
-      similarity: 0.87,
-    },
-  ],
-  risk_scores: [
-    {
-      chunk_id: 'demo-1',
-      jurisdiction: 'GDPR',
-      level: 'high',
-      score: 0.82,
-      factors: ['long retention', 'marketing processing'],
-    },
-    {
-      chunk_id: 'demo-2',
-      jurisdiction: 'GDPR',
-      level: 'medium',
-      score: 0.55,
-      factors: ['consent requirements'],
-    },
-  ],
-  risk_heatmap: [
-    {
-      citation_id: 'C0',
-      chunk_id: 'demo-1',
-      jurisdiction: 'GDPR',
-      risk_level: 'high',
-      risk_score: 0.82,
-      factors: ['long retention', 'marketing processing'],
-    },
-  ],
-  cross_jurisdiction: {
-    by_jurisdiction: {
-      GDPR: {
-        jurisdiction: 'GDPR',
-        stance: 'restricted',
-        confidence: 0.84,
-        top_citation_ids: ['C0', 'C1'],
-      },
-    },
-    divergence_summary: null,
-    pairs_flagged: [],
-  },
-  llm: {
-    answer_text:
-      'Retrieved passages indicate storage-limitation and consent constraints under GDPR for long-retention marketing [C0][C1]. This is not formal legal advice.',
-    citation_ids_used: ['C0', 'C1'],
-    refused_insufficient_citations: false,
-  },
-  compliance_score: 18,
-  risk_level: 'high',
-  meta: { index_total_vectors: 42, retrieval_min_score: 0.25, score_method: '100 - peak_risk*100' },
-}
-
 function ExtraEndpointsPanel({ result }: { result: AnalyzeResponse }) {
   const [tab, setTab] = useState<'legal_query' | 'risk_analysis'>('legal_query')
   const [loading, setLoading] = useState(false)
@@ -359,24 +288,57 @@ export function ResultsPage() {
   const navigate      = useNavigate()
   const [stored, setStored] = useState<StoredAnalysis | null>(null)
   const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState<string | null>(null)
 
   useEffect(() => {
-    const raw = sessionStorage.getItem('lexai-last-result')
-    if (raw) {
-      setStored(parseStored(raw) ?? {
-        id: 'demo',
-        created_at: new Date().toISOString(),
-        result: DEMO_RESULT,
-      })
-    } else {
-      setStored({
-        id: 'demo',
-        created_at: new Date().toISOString(),
-        result: DEMO_RESULT,
-      })
+    let cancelled = false
+
+    async function load() {
+      setLoading(true)
+      setLoadError(null)
+
+      // Prefer API when id looks like a persisted history id (numeric).
+      if (id && /^\d+$/.test(id)) {
+        try {
+          const detail = await complianceService.getAnalysis(id)
+          if (!cancelled) {
+            setStored(detail)
+            sessionStorage.setItem('lexai-last-result', JSON.stringify(detail))
+          }
+          return
+        } catch (err) {
+          // Fall through to session cache for same id
+          if (!cancelled) {
+            const raw = sessionStorage.getItem('lexai-last-result')
+            const cached = raw ? parseStored(raw) : null
+            if (cached && cached.id === id) {
+              setStored(cached)
+              return
+            }
+            setLoadError(err instanceof Error ? err.message : 'Analysis not found')
+            setStored(null)
+          }
+          return
+        } finally {
+          if (!cancelled) setLoading(false)
+        }
+      }
+
+      const raw = sessionStorage.getItem('lexai-last-result')
+      const cached = raw ? parseStored(raw) : null
+      if (cached && (!id || cached.id === id || id === 'session')) {
+        if (!cancelled) setStored(cached)
+      } else if (!cancelled) {
+        setStored(null)
+        setLoadError(
+          'No analysis found for this link. Run a new analysis from Analyze, or open a row from Reports.',
+        )
+      }
+      if (!cancelled) setLoading(false)
     }
-    const t = setTimeout(() => setLoading(false), 400)
-    return () => clearTimeout(t)
+
+    void load()
+    return () => { cancelled = true }
   }, [id])
 
   if (loading) {
@@ -396,7 +358,25 @@ export function ResultsPage() {
     )
   }
 
-  if (!stored) return null
+  if (loadError || !stored) {
+    return (
+      <div className="max-w-lg mx-auto py-16 text-center space-y-4">
+        <AlertTriangle className="w-10 h-10 text-amber-500 mx-auto" />
+        <h1 className="text-xl font-bold text-[var(--text)]">Analysis unavailable</h1>
+        <p className="text-sm text-[var(--text-muted)]">
+          {loadError ?? 'No analysis loaded.'}
+        </p>
+        <div className="flex justify-center gap-3">
+          <Button variant="outline" onClick={() => navigate(ROUTES.REPORTS)}>
+            View reports
+          </Button>
+          <Button onClick={() => navigate(ROUTES.ANALYZE)}>
+            Run analysis
+          </Button>
+        </div>
+      </div>
+    )
+  }
 
   const result = stored.result
   const displayScore =

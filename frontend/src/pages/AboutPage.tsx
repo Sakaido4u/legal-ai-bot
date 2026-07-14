@@ -5,12 +5,12 @@ import { Badge } from '@/components/ui/Badge'
 import { APP_NAME, APP_VERSION } from '@/constants/app'
 
 const FEATURES = [
-  { emoji: '⚖️', title: 'Compliance Analysis',   desc: 'AI-powered analysis against 15+ legal jurisdictions'  },
-  { emoji: '🔍', title: 'Risk Detection',          desc: 'Identify high, medium, and low risk areas'             },
-  { emoji: '📚', title: 'Smart Citations',         desc: 'Automatic legal citations with section references'     },
-  { emoji: '📊', title: 'Visual Reports',          desc: 'Interactive charts and compliance score gauges'        },
-  { emoji: '🌙', title: 'Dark Mode',               desc: 'Full dark and light mode support'                      },
-  { emoji: '📱', title: 'Responsive Design',       desc: 'Works perfectly on mobile, tablet, and desktop'       },
+  { emoji: '⚖️', title: 'Compliance Analysis',   desc: 'RAG over GDPR, DPDP, and CCPA sources with citation-bound answers' },
+  { emoji: '🔍', title: 'Risk Signals',           desc: 'Heuristic risk flags (lexicon-based) — not a trained legal model' },
+  { emoji: '📚', title: 'Grounded Citations',     desc: 'Answers must cite retrieved passages or refuse' },
+  { emoji: '📊', title: 'Visual Reports',          desc: 'Charts and compliance scores from your analysis history' },
+  { emoji: '🌙', title: 'Dark Mode',               desc: 'Full dark and light mode support' },
+  { emoji: '📱', title: 'Responsive Design',       desc: 'Works on mobile, tablet, and desktop' },
 ]
 
 const ENDPOINTS = [
@@ -20,17 +20,18 @@ const ENDPOINTS = [
 ]
 
 const TECH_STACK = [
-  { name: 'React 18',        role: 'UI framework'        },
+  { name: 'React 19',        role: 'UI framework'        },
   { name: 'TypeScript',      role: 'Type safety'         },
   { name: 'Vite',            role: 'Build tool'          },
   { name: 'Tailwind CSS',    role: 'Styling'             },
-  { name: 'React Router v6', role: 'Client-side routing' },
+  { name: 'React Router',    role: 'Client-side routing' },
   { name: 'Axios',           role: 'HTTP client'         },
   { name: 'React Hook Form', role: 'Form management'     },
   { name: 'Zod',             role: 'Schema validation'   },
   { name: 'Framer Motion',   role: 'Animations'          },
   { name: 'Recharts',        role: 'Data visualization'  },
   { name: 'FastAPI',         role: 'Backend REST API'    },
+  { name: 'FAISS + Ollama',  role: 'RAG retrieval + LLM' },
 ]
 
 export function AboutPage() {
@@ -63,16 +64,18 @@ export function AboutPage() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-            LexAI is an AI-powered legal research and compliance analysis system. It combines
-            a modern React frontend with a FastAPI backend to deliver instant compliance
-            analysis, risk detection, and smart legal citations across multiple international
-            jurisdictions.
+            LexAI is a college major project: a Retrieval-Augmented Generation (RAG) system
+            for cross-jurisdictional compliance research across GDPR, India’s DPDP Act, and
+            CCPA/CPRA-related sources. A React frontend talks to a FastAPI backend, which
+            retrieves passages from a FAISS index and generates citation-bound answers via
+            Ollama (with template/OpenAI fallbacks).
           </p>
           <p className="text-sm text-[var(--text-muted)] leading-relaxed mt-3">
-            The system analyzes legal queries using natural language processing and maps
-            them against applicable laws and regulations. It generates comprehensive reports
-            with confidence scores, risk assessments, and actionable recommendations — all
-            within seconds.
+            <strong className="text-[var(--text)]">Academic honesty / scope:</strong> risk
+            levels and the compliance score use documented heuristics
+            (lexicon factors; score = 100 − peak risk × 100), not a separately trained risk
+            model. Outputs are research assist tools — not legal advice — and must be reviewed
+            by a qualified person for any real decision.
           </p>
         </CardContent>
       </Card>
