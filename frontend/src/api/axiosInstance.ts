@@ -73,7 +73,7 @@ api.interceptors.response.use(
       window.location.href = '/login'
     }
 
-    // Preserve status/code so callers (e.g. demo-auth fallback) can branch.
+    // Preserve status/code so callers can branch on network vs HTTP errors.
     const message =
       normalizeApiDetail(error.response?.data?.detail) ??
       error.response?.data?.message ??

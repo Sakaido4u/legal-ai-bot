@@ -1,31 +1,30 @@
 // Auth service — login/register hit Postgres-backed JWT endpoints.
-// Falls back to local demo users only when the backend is unreachable.
+// No silent demo fallback: unreachable API surfaces a clear network error.
 
 import api from '@/api/axiosInstance'
 import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from '@/types/auth'
 
-const DEMO_USERS = [
-  { id: '1', name: 'Demo User',  email: 'demo@lexai.com',  password: 'Demo@1234' },
-  { id: '2', name: 'Admin User', email: 'admin@lexai.com', password: 'Admin@1234' },
-]
+function isNetworkError(err: unknown): boolean {
+  if (!err || typeof err !== 'object') return false
+  const e = err as {
+    code?: string
+    status?: number
+    message?: string
+    response?: unknown
+  }
+  if (e.code === 'ERR_NETWORK' || e.code === 'ECONNABORTED') return true
+  if (e.response == null && typeof e.message === 'string') {
+    return /network error|timeout|failed to fetch/i.test(e.message)
+  }
+  return false
+}
 
-function isNetworkish(err: unknown): boolean {
-  const status =
-    typeof err === 'object' && err && 'status' in err
-      ? (err as { status?: number }).status
-      : typeof err === 'object' && err && 'response' in err
-        ? (err as { response?: { status?: number } }).response?.status
-        : undefined
-  const code =
-    typeof err === 'object' && err && 'code' in err
-      ? (err as { code?: string }).code
-      : undefined
-  const message = err instanceof Error ? err.message : ''
-  return (
-    code === 'ERR_NETWORK' ||
-    status === 404 ||
-    /not found|network error/i.test(message)
-  )
+function networkError(): Error & { status?: number; code?: string } {
+  const error = new Error(
+    "Can't reach the server — check that the API is running and try again shortly.",
+  ) as Error & { status?: number; code?: string }
+  error.code = 'ERR_NETWORK'
+  return error
 }
 
 export const authService = {
@@ -34,9 +33,7 @@ export const authService = {
       const res = await api.post<LoginResponse>('/auth/login', credentials)
       return res.data
     } catch (err: unknown) {
-      if (isNetworkish(err)) {
-        return authService._demoLogin(credentials)
-      }
+      if (isNetworkError(err)) throw networkError()
       throw err
     }
   },
@@ -46,68 +43,34 @@ export const authService = {
       const res = await api.post<RegisterResponse>('/auth/register', data)
       return res.data
     } catch (err: unknown) {
-      if (isNetworkish(err)) {
-        return authService._demoRegister(data)
-      }
+      if (isNetworkError(err)) throw networkError()
       throw err
     }
   },
 
   async forgotPassword(email: string): Promise<{ message: string; reset_token: string | null }> {
-    const res = await api.post<{ message: string; reset_token: string | null }>(
-      '/auth/forgot-password',
-      { email },
-    )
-    return res.data
+    try {
+      const res = await api.post<{ message: string; reset_token: string | null }>(
+        '/auth/forgot-password',
+        { email },
+      )
+      return res.data
+    } catch (err: unknown) {
+      if (isNetworkError(err)) throw networkError()
+      throw err
+    }
   },
 
   async resetPassword(token: string, new_password: string): Promise<{ message: string }> {
-    const res = await api.post<{ message: string }>('/auth/reset-password', {
-      token,
-      new_password,
-    })
-    return res.data
-  },
-
-  _demoLogin(credentials: LoginRequest): LoginResponse {
-    const user = DEMO_USERS.find(
-      u =>
-        u.email.toLowerCase() === credentials.email.toLowerCase() &&
-        u.password === credentials.password,
-    )
-
-    if (!user) {
-      const error = new Error('Invalid email or password') as Error & {
-        response?: { status: number; data: { detail: string } }
-      }
-      error.response = {
-        status: 401,
-        data: { detail: 'Invalid email or password' },
-      }
-      throw error
-    }
-
-    return {
-      access_token: `demo-token-${user.id}-${Date.now()}`,
-      token_type: 'bearer',
-      user: {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-      },
-    }
-  },
-
-  _demoRegister(data: RegisterRequest): RegisterResponse {
-    const newUser = {
-      id: String(Date.now()),
-      name: data.name,
-      email: data.email,
-    }
-    return {
-      access_token: `demo-token-${newUser.id}`,
-      token_type: 'bearer',
-      user: newUser,
+    try {
+      const res = await api.post<{ message: string }>('/auth/reset-password', {
+        token,
+        new_password,
+      })
+      return res.data
+    } catch (err: unknown) {
+      if (isNetworkError(err)) throw networkError()
+      throw err
     }
   },
 }
