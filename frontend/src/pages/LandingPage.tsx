@@ -7,6 +7,8 @@ import {
 } from 'lucide-react'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { ROUTES } from '@/constants/app'
+import type { Variants } from 'framer-motion'
+import { cn } from '@/utils/cn'
 
 const FEATURES = [
   {
@@ -78,12 +80,12 @@ const STEPS = [
   },
 ]
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden:  { opacity: 0, y: 20 },
   visible: (i: number) => ({
     opacity:    1,
     y:          0,
-    transition: { delay: i * 0.08, duration: 0.4, ease: 'easeOut' },
+    transition: { delay: i * 0.08, duration: 0.4, ease: 'easeOut' as const },
   }),
 }
 
@@ -341,9 +343,4 @@ export function LandingPage() {
       </footer>
     </div>
   )
-}
-
-// ── Helper (used inside LandingPage only) ──────────────────────
-function cn(...classes: (string | false | undefined | null)[]): string {
-  return classes.filter(Boolean).join(' ')
 }
