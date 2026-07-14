@@ -75,3 +75,16 @@ export interface AnalysisHistory {
   risk_level: 'high' | 'medium' | 'low' | 'none'
   created_at: string
 }
+
+/** Mirrors backend DocumentUploadResponse (POST /documents/upload). */
+export interface DocumentUploadResponse {
+  id: number
+  filename: string
+  title: string | null
+  jurisdiction: string
+  source_type: string
+  sha256: string
+  upload_date: string | null
+  processing_status: string
+  error_message: string | null
+}

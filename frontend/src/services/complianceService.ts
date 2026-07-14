@@ -23,10 +23,19 @@ export const complianceService = {
     return res.data.data
   },
 
-  // GET /v1/compliance/jurisdictions
+  // GET /v1/compliance/jurisdictions → { jurisdictions: string[] }
   async getJurisdictions(): Promise<Jurisdiction[]> {
-    const res = await api.get<Jurisdiction[]>('/v1/compliance/jurisdictions')
-    return res.data
+    const res = await api.get<{ jurisdictions: string[] }>('/v1/compliance/jurisdictions')
+    const codes = res.data.jurisdictions ?? []
+    return codes.map(code => ({
+      code,
+      name: code,
+      country:
+        code === 'GDPR' ? 'European Union'
+        : code === 'DPDP' ? 'India'
+        : code === 'CCPA' ? 'United States'
+        : code,
+    }))
   },
 
   // GET /v1/compliance/history  (future endpoint)
@@ -59,9 +68,9 @@ export const MOCK_HISTORY: AnalysisHistory[] = [
   { id: '5', query: 'Patent infringement analysis',     jurisdiction: 'US', compliance_score: 73, risk_level: 'medium', created_at: '2025-06-01T11:00:00Z' },
 ]
 
+/** Fallback when /v1/compliance/jurisdictions is unreachable — must match backend Jurisdiction enum. */
 export const MOCK_JURISDICTIONS: Jurisdiction[] = [
-  { code: 'IN', name: 'India',          country: 'India' },
-  { code: 'US', name: 'United States',  country: 'United States' },
-  { code: 'EU', name: 'European Union', country: 'European Union' },
-  { code: 'UK', name: 'United Kingdom', country: 'United Kingdom' },
+  { code: 'GDPR', name: 'GDPR', country: 'European Union' },
+  { code: 'DPDP', name: 'DPDP', country: 'India' },
+  { code: 'CCPA', name: 'CCPA', country: 'United States' },
 ]
