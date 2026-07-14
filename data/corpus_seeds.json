@@ -1,62 +1,22 @@
 {
   "sources": [
     {
-      "type": "url",
+      "type": "pdf",
       "jurisdiction": "GDPR",
-      "label": "GDPR Art. 6 — Lawfulness of processing",
-      "url": "https://gdpr-info.eu/art-6-gdpr/"
+      "label": "Regulation (EU) 2016/679 (GDPR)",
+      "path": "documents/gdpr/gdpr_2016_679.pdf"
     },
     {
-      "type": "url",
-      "jurisdiction": "GDPR",
-      "label": "GDPR Art. 9 — Special categories of personal data",
-      "url": "https://gdpr-info.eu/art-9-gdpr/"
-    },
-    {
-      "type": "url",
-      "jurisdiction": "GDPR",
-      "label": "GDPR Art. 17 — Right to erasure",
-      "url": "https://gdpr-info.eu/art-17-gdpr/"
-    },
-    {
-      "type": "url",
-      "jurisdiction": "GDPR",
-      "label": "GDPR Art. 22 — Automated decision-making",
-      "url": "https://gdpr-info.eu/art-22-gdpr/"
-    },
-    {
-      "type": "text",
+      "type": "pdf",
       "jurisdiction": "DPDP",
-      "label": "DPDP Act 2023 — Section 7 Consent (excerpt)",
-      "heading": "Consent",
-      "text": "The consent given by the Data Principal shall be free, specific, informed, unconditional and unambiguous with a clear affirmative action, and shall signify an agreement to the processing of her personal data for the specified purpose and be limited to such personal data as is necessary for such specified purpose."
+      "label": "Digital Personal Data Protection Act, 2023",
+      "path": "documents/dpdp/dpdp_act_2023.pdf"
     },
     {
-      "type": "text",
-      "jurisdiction": "DPDP",
-      "label": "DPDP Act 2023 — Section 9 Children's data (excerpt)",
-      "heading": "Processing of personal data of children",
-      "text": "The Data Fiduciary shall, before processing any personal data of a child or a person with disability who has a lawful guardian, obtain verifiable consent of the parent of such child or the lawful guardian, as the case may be, in such manner as may be prescribed."
-    },
-    {
-      "type": "text",
-      "jurisdiction": "DPDP",
-      "label": "DPDP Act 2023 — Section 12 Right to erasure (excerpt)",
-      "heading": "Right to erasure",
-      "text": "The Data Principal shall have the right to correction of inaccurate or misleading personal data, completion of incomplete personal data, updating of personal data that is necessary for the purpose for which it was processed, and erasure of personal data which is no longer necessary for the purpose for which it was processed."
-    },
-    {
-      "type": "url",
+      "type": "html",
       "jurisdiction": "CCPA",
-      "label": "CCPA/CPRA — Right to delete (OAG summary)",
-      "url": "https://oag.ca.gov/privacy/ccpa"
-    },
-    {
-      "type": "text",
-      "jurisdiction": "CCPA",
-      "label": "CCPA — Sensitive personal information (excerpt)",
-      "heading": "Sensitive personal information",
-      "text": "Consumers have the right to limit the use and disclosure of sensitive personal information collected about them, including precise geolocation, racial or ethnic origin, religious beliefs, union membership, contents of mail, email and text messages, genetic data, and biometric information."
+      "label": "California CCPA/CPRA — OAG overview",
+      "path": "documents/ccpa/ccpa_oag_snapshot.html"
     }
   ]
 }

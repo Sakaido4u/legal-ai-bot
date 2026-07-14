@@ -1,0 +1,30 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "adi-new",
+    "docs/readme-and-license",
+    "main",
+    "origin",
+    "phase4/production-hardening",
+    "pipeline",
+    "polish/viva-ready-10"
+  ],
+  "parent": {
+    "adi-new": "main",
+    "docs/readme-and-license": "main",
+    "main": null,
+    "origin": "main",
+    "phase4/production-hardening": "main",
+    "pipeline": "main",
+    "polish/viva-ready-10": "main"
+  },
+  "order": [
+    "main",
+    "adi-new",
+    "docs/readme-and-license",
+    "origin",
+    "phase4/production-hardening",
+    "pipeline",
+    "polish/viva-ready-10"
+  ]
+}
