@@ -64,20 +64,33 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   response => response,
   (error: AxiosError<{ detail?: unknown; message?: string }>) => {
-    // Session expired → clear storage and redirect to login
-    if (error.response?.status === 401) {
+    // Session expired → clear storage and redirect to login.
+    // Do not redirect on /auth/* 401s (invalid credentials during login/register).
+    const requestUrl = error.config?.url ?? ''
+    const isAuthRoute = requestUrl.includes('/auth/')
+    if (error.response?.status === 401 && !isAuthRoute) {
       localStorage.removeItem(STORAGE_KEYS.AUTH)
       window.location.href = '/login'
     }
 
+    // Preserve status/code so callers (e.g. demo-auth fallback) can branch.
     const message =
       normalizeApiDetail(error.response?.data?.detail) ??
       error.response?.data?.message ??
       error.message ??
       'An unexpected error occurred'
 
-    return Promise.reject(new Error(typeof message === 'string' ? message : String(message)))
-  }
+    const wrapped = new Error(
+      typeof message === 'string' ? message : String(message),
+    ) as Error & {
+      status?: number
+      code?: string
+      response?: AxiosError['response']
+    }
+    wrapped.status = error.response?.status
+    wrapped.code = error.code
+    wrapped.response = error.response
+    return Promise.reject(wrapped)  }
 )
 
 export default api

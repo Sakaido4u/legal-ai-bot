@@ -14,13 +14,18 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card'
 import { Badge }     from '@/components/ui/Badge'
 import { RiskBadge } from '@/components/ui/Badge'
 import { Skeleton, SkeletonCard } from '@/components/ui/Skeleton'
+import { complianceService } from '@/services/complianceService'
 import type {
   AnalyzeResponse,
+  LegalQueryResponse,
+  RiskAnalysisResponse,
   RiskScore,
   StoredAnalysis,
 } from '@/types/api'
 import { formatDate, scoreToLabel } from '@/utils/formatters'
 import { ROUTES } from '@/constants/app'
+import { cn } from '@/utils/cn'
+import type { RiskLevel } from '@/constants/app'
 
 // ── Demo payload (backend AnalyzeResponse shape) ──────────────
 const DEMO_RESULT: AnalyzeResponse = {
@@ -88,15 +93,149 @@ const DEMO_RESULT: AnalyzeResponse = {
     citation_ids_used: ['C0', 'C1'],
     refused_insufficient_citations: false,
   },
-  meta: { index_total_vectors: 42, retrieval_min_score: 0.25 },
+  compliance_score: 18,
+  risk_level: 'high',
+  meta: { index_total_vectors: 42, retrieval_min_score: 0.25, score_method: '100 - peak_risk*100' },
 }
 
+function ExtraEndpointsPanel({ result }: { result: AnalyzeResponse }) {
+  const [tab, setTab] = useState<'legal_query' | 'risk_analysis'>('legal_query')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [legal, setLegal] = useState<LegalQueryResponse | null>(null)
+  const [risk, setRisk] = useState<RiskAnalysisResponse | null>(null)
+
+  const jurisdictions = Object.keys(result.cross_jurisdiction.by_jurisdiction)
+  const documentId =
+    typeof result.meta.document_id === 'number' ? result.meta.document_id : null
+
+  const run = async () => {
+    setLoading(true)
+    setError(null)
+    try {
+      if (tab === 'legal_query') {
+        const data = await complianceService.legalQuery({
+          question: result.query,
+          product_feature: result.product_feature,
+          jurisdictions: jurisdictions.length ? jurisdictions : ['GDPR'],
+          document_id: documentId,
+        })
+        setLegal(data)
+      } else {
+        const data = await complianceService.riskAnalysis({
+          query: result.query,
+          product_feature: result.product_feature,
+          jurisdictions: jurisdictions.length ? jurisdictions : ['GDPR'],
+          document_id: documentId,
+        })
+        setRisk(data)
+      }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Request failed')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Extra endpoints</CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+        <p className="text-xs text-[var(--text-muted)]">
+          Re-run the same query through <code className="font-mono">/legal_query</code> or{' '}
+          <code className="font-mono">/risk_analysis</code>
+          {documentId ? ` (scoped to doc #${documentId})` : ''}.
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          {(['legal_query', 'risk_analysis'] as const).map(t => (
+            <button
+              key={t}
+              type="button"
+              onClick={() => setTab(t)}
+              className={cn(
+                'px-3 py-1.5 rounded-lg text-xs font-semibold border transition-colors',
+                tab === t
+                  ? 'bg-brand-600 text-white border-brand-600'
+                  : 'border-[var(--border)] text-[var(--text-muted)] hover:bg-[var(--bg-raised)]',
+              )}
+            >
+              {t === 'legal_query' ? 'Legal query' : 'Risk analysis'}
+            </button>
+          ))}
+          <Button
+            type="button"
+            size="sm"
+            onClick={() => void run()}
+            isLoading={loading}
+          >
+            {loading ? 'Calling…' : 'Run endpoint'}
+          </Button>
+        </div>
+
+        {error && (
+          <p className="text-xs text-red-500 flex items-start gap-1.5">
+            <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+            {error}
+          </p>
+        )}
+
+        {tab === 'legal_query' && legal && (
+          <div className="space-y-2 rounded-xl border border-[var(--border)] p-4 bg-[var(--bg-raised)]">
+            <div className="flex items-center gap-2 flex-wrap">
+              <Badge variant="outline">{legal.response_time}s</Badge>
+              {legal.refused_insufficient_citations && (
+                <Badge variant="warning">Insufficient citations</Badge>
+              )}
+            </div>
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed whitespace-pre-wrap">
+              {legal.answer || '(empty answer)'}
+            </p>
+            <p className="text-xs text-[var(--text-subtle)]">
+              Citations: {legal.citations.length} · Risk rows: {legal.risk_scores.length}
+            </p>
+          </div>
+        )}
+
+        {tab === 'risk_analysis' && risk && (
+          <div className="space-y-3 rounded-xl border border-[var(--border)] p-4 bg-[var(--bg-raised)]">
+            <div className="flex items-center gap-2 flex-wrap">
+              <RiskBadge
+                level={
+                  (['high', 'medium', 'low'].includes(risk.overall_risk_level)
+                    ? risk.overall_risk_level
+                    : 'medium') as RiskLevel
+                }
+              />
+              <Badge variant="outline">
+                score {Math.round(risk.overall_risk_score * 100)}%
+              </Badge>
+              <Badge variant="outline">{risk.response_time}s</Badge>
+            </div>
+            <ul className="space-y-1.5">
+              {risk.risk_scores.slice(0, 5).map((rs, i) => (
+                <li key={`${rs.chunk_id}-${i}`} className="text-xs text-[var(--text-muted)]">
+                  <span className="font-semibold text-[var(--text)]">{rs.jurisdiction}</span>
+                  {' · '}{rs.level}{' · '}{Math.round(rs.score * 100)}%
+                  {rs.factors.length ? ` — ${rs.factors.join(', ')}` : ''}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}
+
+/** Invert peak risk → 0–100 display score (higher = lower peak risk). */
 function maxRiskScore(scores: RiskScore[]): number {
   if (!scores.length) return 0
   return Math.max(...scores.map(s => s.score))
 }
 
-/** Invert peak risk → 0–100 display score (higher = lower peak risk). */
 function riskToComplianceDisplay(scores: RiskScore[]): number {
   return Math.round((1 - maxRiskScore(scores)) * 100)
 }
@@ -144,7 +283,7 @@ function ScoreGauge({ score }: { score: number }) {
         {label}
       </span>
       <p className="text-[0.65rem] text-[var(--text-subtle)] mt-2 text-center max-w-[12rem]">
-        Derived as 100 − peak retrieval risk (not a backend compliance_score field)
+        Backend compliance_score (100 − peak risk × 100)
       </p>
     </div>
   )
@@ -259,7 +398,10 @@ export function ResultsPage() {
   if (!stored) return null
 
   const result = stored.result
-  const displayScore = riskToComplianceDisplay(result.risk_scores)
+  const displayScore =
+    typeof result.compliance_score === 'number'
+      ? result.compliance_score
+      : riskToComplianceDisplay(result.risk_scores)
   const confidence = avgConfidence(result)
   const highRisk = result.risk_scores.filter(r => r.level === 'high').length
   const medRisk = result.risk_scores.filter(r => r.level === 'medium').length
@@ -317,6 +459,14 @@ export function ResultsPage() {
         {typeof result.meta.index_total_vectors === 'number' && (
           <span className="flex items-center gap-1.5">
             Index vectors: {result.meta.index_total_vectors}
+          </span>
+        )}
+        {result.meta.document_scoped && (
+          <span className="flex items-center gap-1.5">
+            Scoped to doc #{String(result.meta.document_id)}
+            {typeof result.meta.passages_found === 'number'
+              ? ` · ${result.meta.passages_found} passages`
+              : ''}
           </span>
         )}
       </div>
@@ -529,6 +679,8 @@ export function ResultsPage() {
           </div>
         </CardContent>
       </Card>
+
+      <ExtraEndpointsPanel result={result} />
 
       <div className="flex flex-col sm:flex-row items-center gap-3 pt-2">
         <Link to={ROUTES.ANALYZE} className="w-full sm:w-auto">

@@ -5,6 +5,10 @@ import type {
   Jurisdiction,
   HealthResponse,
   AnalysisHistory,
+  LegalQueryRequest,
+  LegalQueryResponse,
+  RiskAnalysisRequest,
+  RiskAnalysisResponse,
 } from '@/types/api'
 
 // ── Compliance Service ────────────────────────────────────────
@@ -24,6 +28,22 @@ export const complianceService = {
     return res.data
   },
 
+  // POST /legal_query
+  async legalQuery(request: LegalQueryRequest): Promise<LegalQueryResponse> {
+    const res = await api.post<LegalQueryResponse>('/legal_query', request, {
+      timeout: 180_000,
+    })
+    return res.data
+  },
+
+  // POST /risk_analysis
+  async riskAnalysis(request: RiskAnalysisRequest): Promise<RiskAnalysisResponse> {
+    const res = await api.post<RiskAnalysisResponse>('/risk_analysis', request, {
+      timeout: 180_000,
+    })
+    return res.data
+  },
+
   // GET /v1/compliance/jurisdictions → { jurisdictions: string[] }
   async getJurisdictions(): Promise<Jurisdiction[]> {
     const res = await api.get<{ jurisdictions: string[] }>('/v1/compliance/jurisdictions')
@@ -39,15 +59,10 @@ export const complianceService = {
     }))
   },
 
-  // GET /v1/compliance/history  (future endpoint)
+  // GET /v1/compliance/history
   async getHistory(): Promise<AnalysisHistory[]> {
-    try {
-      const res = await api.get<AnalysisHistory[]>('/v1/compliance/history')
-      return res.data
-    } catch {
-      // Return mock data if endpoint not yet implemented
-      return MOCK_HISTORY
-    }
+    const res = await api.get<AnalysisHistory[]>('/v1/compliance/history')
+    return res.data
   },
 }
 

@@ -20,11 +20,42 @@ export function validatePdfFile(file: File): string | null {
   return null
 }
 
+export interface DocumentListResponse {
+  documents: DocumentUploadResponse[]
+  total: number
+}
+
+export interface DocumentSectionChunk {
+  id: number
+  chunk_index: number
+  text: string
+  word_count: number
+  char_count: number
+  vector_reference: string
+}
+
+export interface DocumentSection {
+  id: number
+  section_id: number
+  heading: string | null
+  numeric_id: string | null
+  depth: number
+  parent_id: number | null
+  chunks: DocumentSectionChunk[]
+}
+
+export interface DocumentDetailResponse extends DocumentUploadResponse {
+  source_url?: string | null
+  sections?: DocumentSection[]
+}
+
+export interface DeleteDocumentResponse {
+  id: number
+  deleted: boolean
+  message: string
+}
+
 export const documentService = {
-  /**
-   * POST /documents/upload
-   * Form fields: file (UploadFile), jurisdiction (required), title (optional)
-   */
   async upload(
     file: File,
     jurisdiction: string,
@@ -45,12 +76,30 @@ export const documentService = {
       formData.append('title', title.trim())
     }
 
-    // Upload + PDF parse + embed can exceed the default 30s timeout.
     const res = await api.post<DocumentUploadResponse>(
       '/documents/upload',
       formData,
       { timeout: 180_000 },
     )
+    return res.data
+  },
+
+  async list(skip = 0, limit = 100): Promise<DocumentListResponse> {
+    const res = await api.get<DocumentListResponse>('/documents', {
+      params: { skip, limit },
+    })
+    return res.data
+  },
+
+  async get(id: number): Promise<DocumentDetailResponse> {
+    const res = await api.get<DocumentDetailResponse>(`/documents/${id}`)
+    return res.data
+  },
+
+  async remove(id: number): Promise<DeleteDocumentResponse> {
+    const res = await api.delete<DeleteDocumentResponse>(`/documents/${id}`, {
+      timeout: 120_000,
+    })
     return res.data
   },
 }

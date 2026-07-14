@@ -1,43 +1,104 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { Link } from 'react-router-dom'
-import { Mail, ArrowLeft, CheckCircle } from 'lucide-react'
+import { Mail, ArrowLeft, CheckCircle, KeyRound } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Input }  from '@/components/ui/Input'
 import { ROUTES } from '@/constants/app'
+import { authService } from '@/services/authService'
 import toast      from 'react-hot-toast'
 
-const schema = z.object({
+const emailSchema = z.object({
   email: z.string().email('Enter a valid email address'),
 })
-type FormData = z.infer<typeof schema>
+type EmailForm = z.infer<typeof emailSchema>
+
+const resetSchema = z.object({
+  token: z.string().min(10, 'Paste the reset token'),
+  new_password: z.string().min(6, 'Password must be at least 6 characters'),
+})
+type ResetForm = z.infer<typeof resetSchema>
 
 export function ForgotPage() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
-  } = useForm<FormData>({ resolver: zodResolver(schema) })
+  const [step, setStep] = useState<'request' | 'reset' | 'done'>('request')
+  const [devToken, setDevToken] = useState<string | null>(null)
 
-  const onSubmit = async (_data: FormData) => {
-    await new Promise(r => setTimeout(r, 800))
-    toast.success('Reset link sent!')
+  const emailForm = useForm<EmailForm>({ resolver: zodResolver(emailSchema) })
+  const resetForm = useForm<ResetForm>({ resolver: zodResolver(resetSchema) })
+
+  const onRequest = async (data: EmailForm) => {
+    try {
+      const res = await authService.forgotPassword(data.email)
+      if (res.reset_token) {
+        setDevToken(res.reset_token)
+        resetForm.setValue('token', res.reset_token)
+        toast.success('Reset token issued (dev mode)')
+      } else {
+        toast.success(res.message)
+      }
+      setStep('reset')
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Request failed')
+    }
   }
 
-  if (isSubmitSuccessful) {
+  const onReset = async (data: ResetForm) => {
+    try {
+      await authService.resetPassword(data.token, data.new_password)
+      toast.success('Password updated')
+      setStep('done')
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Reset failed')
+    }
+  }
+
+  if (step === 'done') {
     return (
       <div className="text-center space-y-4">
         <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/20 flex items-center justify-center mx-auto">
           <CheckCircle className="w-7 h-7 text-green-600" />
         </div>
-        <h1 className="text-xl font-bold text-[var(--text)]">Check your email</h1>
+        <h1 className="text-xl font-bold text-[var(--text)]">Password updated</h1>
         <p className="text-sm text-[var(--text-muted)]">
-          If that email exists in our system, you'll receive a password reset link shortly.
+          You can log in with your new password.
         </p>
         <Link to={ROUTES.LOGIN}>
           <Button variant="outline" className="w-full">Back to Login</Button>
         </Link>
+      </div>
+    )
+  }
+
+  if (step === 'reset') {
+    return (
+      <div className="space-y-6">
+        <div className="space-y-1">
+          <h1 className="text-2xl font-bold text-[var(--text)]">Set a new password</h1>
+          <p className="text-sm text-[var(--text-muted)]">
+            {devToken
+              ? 'Dev mode: token was returned by the API (no email provider).'
+              : 'Paste the reset token from your email, then choose a new password.'}
+          </p>
+        </div>
+        <form onSubmit={resetForm.handleSubmit(onReset)} noValidate className="space-y-4">
+          <Input
+            label="Reset token"
+            error={resetForm.formState.errors.token?.message}
+            leftElement={<KeyRound className="w-4 h-4" />}
+            {...resetForm.register('token')}
+          />
+          <Input
+            label="New password"
+            type="password"
+            error={resetForm.formState.errors.new_password?.message}
+            {...resetForm.register('new_password')}
+          />
+          <Button type="submit" className="w-full" isLoading={resetForm.formState.isSubmitting}>
+            Update password
+          </Button>
+        </form>
       </div>
     )
   }
@@ -53,20 +114,20 @@ export function ForgotPage() {
         </Link>
         <h1 className="text-2xl font-bold text-[var(--text)]">Reset your password</h1>
         <p className="text-sm text-[var(--text-muted)]">
-          Enter your email and we'll send you a reset link.
+          Enter your email and we&apos;ll issue a reset token.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
+      <form onSubmit={emailForm.handleSubmit(onRequest)} noValidate className="space-y-4">
         <Input
           label="Email address"
           type="email"
           placeholder="you@example.com"
-          error={errors.email?.message}
+          error={emailForm.formState.errors.email?.message}
           leftElement={<Mail className="w-4 h-4" />}
-          {...register('email')}
+          {...emailForm.register('email')}
         />
-        <Button type="submit" className="w-full" isLoading={isSubmitting}>
+        <Button type="submit" className="w-full" isLoading={emailForm.formState.isSubmitting}>
           Send reset link
         </Button>
       </form>

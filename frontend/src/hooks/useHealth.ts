@@ -17,7 +17,8 @@ export function useHealth(autoCheck = false) {
     try {
       const data = await healthService.check()
       setDetails(data)
-      setStatus(data.status === 'healthy' ? 'healthy' : 'degraded')
+      const ok = data.status === 'healthy' || data.status === 'ok'
+      setStatus(ok ? 'healthy' : data.status === 'starting' ? 'degraded' : 'degraded')
       setLastCheck(new Date())
     } catch {
       setStatus('unreachable')

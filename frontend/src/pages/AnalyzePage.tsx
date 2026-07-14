@@ -58,6 +58,21 @@ export function AnalyzePage() {
       .catch(() => setJurisdictions(MOCK_JURISDICTIONS))
   }, [])
 
+  // Restore last successful upload so Analyze can pass document_id without re-upload
+  useEffect(() => {
+    const raw = sessionStorage.getItem('lexai-last-document')
+    if (!raw) return
+    try {
+      const doc = JSON.parse(raw) as DocumentUploadResponse
+      if (doc?.id) {
+        setUploadResult(doc)
+        setUploadStatus('success')
+      }
+    } catch {
+      // ignore corrupt session payload
+    }
+  }, [])
+
   const {
     register,
     handleSubmit,
@@ -77,6 +92,7 @@ export function AnalyzePage() {
     setUploadStatus('idle')
     setUploadError(null)
     setUploadResult(null)
+    sessionStorage.removeItem('lexai-last-document')
   }, [])
 
   const selectFile = useCallback((file: File | undefined) => {
@@ -132,6 +148,8 @@ export function AnalyzePage() {
       // Backend requires product_feature; UI uses the legal query as the feature under review.
       product_feature: data.query.slice(0, 2000),
       jurisdictions: [data.jurisdiction],
+      // Scope retrieval to the uploaded PDF when present (optional).
+      document_id: uploadResult?.id ?? null,
     })
     if (result) {
       const stored = {
@@ -325,7 +343,7 @@ export function AnalyzePage() {
               ),
             )}
           >
-            {uploadedFile ? (
+            {uploadedFile || uploadResult ? (
               <div className="w-full max-w-md space-y-3">
                 <div className="flex items-center gap-4">
                   <div className={cn(
@@ -340,11 +358,13 @@ export function AnalyzePage() {
                   </div>
                   <div className="flex-1 text-left min-w-0">
                     <p className="text-sm font-medium text-[var(--text)] truncate">
-                      {uploadedFile.name}
+                      {uploadedFile?.name ?? uploadResult?.filename ?? 'Uploaded PDF'}
                     </p>
                     <p className="text-xs text-[var(--text-muted)] mt-0.5">
-                      {(uploadedFile.size / 1024).toFixed(1)} KB · PDF
-                      {uploadStatus === 'success' && uploadResult
+                      {uploadedFile
+                        ? `${(uploadedFile.size / 1024).toFixed(1)} KB · PDF`
+                        : 'PDF'}
+                      {uploadResult
                         ? ` · Doc #${uploadResult.id} · ${uploadResult.processing_status}`
                         : null}
                     </p>
@@ -360,7 +380,7 @@ export function AnalyzePage() {
                   </button>
                 </div>
 
-                {uploadStatus !== 'success' && (
+                {uploadedFile && uploadStatus !== 'success' && (
                   <Button
                     type="button"
                     size="sm"
@@ -424,11 +444,8 @@ export function AnalyzePage() {
             <p className="flex items-start gap-1.5 px-4 pb-4 text-xs text-emerald-700 dark:text-emerald-400">
               <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5" />
               <span>
-                Uploaded successfully — id {uploadResult.id}, status{' '}
-                {uploadResult.processing_status}
-                {uploadResult.error_message
-                  ? ` (${uploadResult.error_message})`
-                  : ''}.
+                Linked to analysis — doc #{uploadResult.id} ({uploadResult.processing_status}).
+                Run analysis to scope retrieval to this PDF.
               </span>
             </p>
           )}
@@ -457,7 +474,11 @@ export function AnalyzePage() {
           isLoading={isLoading}
           leftIcon={!isLoading ? <Scale className="w-5 h-5" /> : undefined}
         >
-          {isLoading ? 'Analyzing your query…' : 'Run Compliance Analysis'}
+          {isLoading ? 'Analyzing your query…' : (
+            uploadResult?.id
+              ? `Run Analysis (doc #${uploadResult.id})`
+              : 'Run Compliance Analysis'
+          )}
         </Button>
       </form>
 

@@ -74,6 +74,8 @@ export interface AnalyzeRequest {
   product_feature: string
   jurisdictions: string[]
   top_k?: number | null
+  /** Optional uploaded document to scope retrieval / ground the answer. */
+  document_id?: number | null
 }
 
 /**
@@ -88,9 +90,16 @@ export interface AnalyzeResponse {
   risk_heatmap: RiskHeatmapRow[]
   cross_jurisdiction: CrossJurisdictionResult
   llm: LLMComplianceAnswer
+  /** Backend summary score: 100 − peak risk×100 (formalized Phase 3.3). */
+  compliance_score: number
+  risk_level: RiskLevel | string
   meta: {
     index_total_vectors?: number
     retrieval_min_score?: number
+    document_id?: number | null
+    document_scoped?: boolean
+    passages_found?: number
+    score_method?: string
     [key: string]: unknown
   }
 }
@@ -103,9 +112,13 @@ export interface StoredAnalysis {
 }
 
 export interface HealthResponse {
-  status: 'healthy' | 'degraded' | 'unhealthy'
-  version: string
-  uptime_seconds: number
+  status: 'ok' | 'healthy' | 'degraded' | 'unhealthy' | 'starting'
+  version?: string
+  uptime_seconds?: number
+  index_vectors?: number
+  embedding_model?: string | null
+  llm_provider?: string
+  llm_model?: string
 }
 
 export interface ApiResponse<T> {
@@ -135,4 +148,46 @@ export interface DocumentUploadResponse {
   upload_date: string | null
   processing_status: string
   error_message: string | null
+}
+
+/** POST /legal_query */
+export interface LegalQueryRequest {
+  question: string
+  product_feature?: string
+  jurisdictions: string[]
+  document_id?: number | null
+  top_k?: number | null
+}
+
+export interface LegalQueryResponse {
+  question: string
+  answer: string
+  citations: Citation[]
+  risk_scores: RiskScore[]
+  cross_jurisdiction: CrossJurisdictionResult | null
+  refused_insufficient_citations: boolean
+  citation_ids_used: string[]
+  response_time: number
+  meta: Record<string, unknown>
+}
+
+/** POST /risk_analysis */
+export interface RiskAnalysisRequest {
+  query: string
+  product_feature?: string
+  jurisdictions: string[]
+  document_id?: number | null
+  top_k?: number | null
+}
+
+export interface RiskAnalysisResponse {
+  query: string
+  product_feature: string
+  overall_risk_level: string
+  overall_risk_score: number
+  risk_scores: RiskScore[]
+  risk_heatmap: RiskHeatmapRow[]
+  citations: Citation[]
+  response_time: number
+  meta: Record<string, unknown>
 }

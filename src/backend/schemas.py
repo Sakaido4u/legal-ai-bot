@@ -27,6 +27,8 @@ class ComplianceAnalyzeRequest(BaseModel):
         ]
     )
     top_k: int | None = Field(default=None, ge=1, le=24)
+    # Optional — when set, retrieval is scoped to that uploaded document's chunks.
+    document_id: int | None = Field(default=None, ge=1)
 
 
 class RiskHeatmapRow(BaseModel):
@@ -48,7 +50,48 @@ class ComplianceAnalyzeResponse(BaseModel):
     risk_heatmap: list[RiskHeatmapRow]
     cross_jurisdiction: CrossJurisdictionResult
     llm: LLMComplianceAnswer
+    # Formalized summary score (derived from peak risk_scores — see analysis_summary).
+    compliance_score: int
+    risk_level: str
     meta: dict[str, Any] = Field(default_factory=dict)
+
+
+class AuthLoginRequest(BaseModel):
+    email: str
+    password: str
+
+
+class AuthRegisterRequest(BaseModel):
+    name: str = Field(..., min_length=1, max_length=200)
+    email: str
+    password: str = Field(..., min_length=6, max_length=200)
+
+
+class AuthUserOut(BaseModel):
+    id: str
+    name: str
+    email: str
+
+
+class AuthTokenResponse(BaseModel):
+    access_token: str
+    token_type: str = "bearer"
+    user: AuthUserOut
+
+
+class ForgotPasswordRequest(BaseModel):
+    email: str
+
+
+class ForgotPasswordResponse(BaseModel):
+    message: str
+    # Dev convenience only — never expose reset tokens in production email flows.
+    reset_token: str | None = None
+
+
+class ResetPasswordRequest(BaseModel):
+    token: str
+    new_password: str = Field(..., min_length=6, max_length=200)
 
 
 class DocumentUploadResponse(BaseModel):
@@ -140,3 +183,14 @@ class DeleteResponse(BaseModel):
     id: int
     deleted: bool
     message: str
+
+
+class AnalysisHistoryItem(BaseModel):
+    """Shape expected by the frontend Reports / Dashboard pages."""
+
+    id: str
+    query: str
+    jurisdiction: str
+    compliance_score: int
+    risk_level: str
+    created_at: str

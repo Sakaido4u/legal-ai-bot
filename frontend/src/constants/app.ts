@@ -18,6 +18,7 @@ export const ROUTES = {
   RESULTS:   '/results/:id',
   CITATIONS: '/citations/:id',
   REPORTS:   '/reports',
+  DOCUMENTS: '/documents',
   SETTINGS:  '/settings',
   ABOUT:     '/about',
   NOT_FOUND: '*',

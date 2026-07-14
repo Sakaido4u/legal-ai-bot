@@ -5,7 +5,16 @@ from datetime import datetime
 from sqlalchemy import select
 from sqlalchemy.orm import Session, joinedload
 
-from .models import AnalysisLog, Chunk, Document, ProcessingStatus, Section
+from .models import (
+    AnalysisLog,
+    Chunk,
+    ComplianceAnalysisRecord,
+    Document,
+    PasswordResetToken,
+    ProcessingStatus,
+    Section,
+    User,
+)
 
 
 def get_document(db: Session, document_id: int) -> Document | None:
@@ -137,6 +146,28 @@ def get_chunk_vector_references_for_document(db: Session, document_id: int) -> s
     return set(db.scalars(stmt).all())
 
 
+def get_document_text_excerpt(db: Session, document_id: int, *, max_chars: int = 2000) -> str:
+    """Concatenate chunk text from an uploaded document (for grounding product_feature)."""
+    stmt = (
+        select(Chunk.text)
+        .join(Section, Chunk.section_id == Section.id)
+        .where(Section.document_id == document_id)
+        .order_by(Section.id.asc(), Chunk.chunk_index.asc())
+    )
+    parts: list[str] = []
+    total = 0
+    for text in db.scalars(stmt).all():
+        if total >= max_chars:
+            break
+        piece = text.strip()
+        if not piece:
+            continue
+        remain = max_chars - total
+        parts.append(piece[:remain])
+        total += len(parts[-1])
+    return "\n\n".join(parts)
+
+
 def create_analysis_log(
     db: Session,
     *,
@@ -155,3 +186,95 @@ def create_analysis_log(
     db.add(log)
     db.flush()
     return log
+
+
+def create_compliance_analysis(
+    db: Session,
+    *,
+    query: str,
+    jurisdiction: str,
+    compliance_score: int,
+    risk_level: str,
+) -> ComplianceAnalysisRecord:
+    row = ComplianceAnalysisRecord(
+        query=query,
+        jurisdiction=jurisdiction,
+        compliance_score=compliance_score,
+        risk_level=risk_level,
+    )
+    db.add(row)
+    db.flush()
+    return row
+
+
+def list_compliance_analyses(
+    db: Session,
+    *,
+    skip: int = 0,
+    limit: int = 100,
+) -> list[ComplianceAnalysisRecord]:
+    stmt = (
+        select(ComplianceAnalysisRecord)
+        .order_by(ComplianceAnalysisRecord.created_at.desc())
+        .offset(skip)
+        .limit(limit)
+    )
+    return list(db.scalars(stmt).all())
+
+
+# ── Users / auth ────────────────────────────────────────────────
+
+def get_user_by_id(db: Session, user_id: int) -> User | None:
+    return db.get(User, user_id)
+
+
+def get_user_by_email(db: Session, email: str) -> User | None:
+    return db.scalars(select(User).where(User.email == email.lower())).first()
+
+
+def create_user(
+    db: Session,
+    *,
+    email: str,
+    name: str,
+    hashed_password: str,
+) -> User:
+    user = User(
+        email=email.strip().lower(),
+        name=name.strip(),
+        hashed_password=hashed_password,
+    )
+    db.add(user)
+    db.flush()
+    return user
+
+
+def create_password_reset_token(
+    db: Session,
+    *,
+    user_id: int,
+    token: str,
+    expires_at: datetime,
+) -> PasswordResetToken:
+    row = PasswordResetToken(user_id=user_id, token=token, expires_at=expires_at)
+    db.add(row)
+    db.flush()
+    return row
+
+
+def get_password_reset_token(db: Session, token: str) -> PasswordResetToken | None:
+    return db.scalars(
+        select(PasswordResetToken).where(PasswordResetToken.token == token)
+    ).first()
+
+
+def seed_demo_users(db: Session, hash_fn) -> None:
+    """Create demo accounts if missing (idempotent)."""
+    demos = [
+        ("demo@lexai.com", "Demo User", "Demo@1234"),
+        ("admin@lexai.com", "Admin User", "Admin@1234"),
+    ]
+    for email, name, password in demos:
+        if get_user_by_email(db, email) is None:
+            create_user(db, email=email, name=name, hashed_password=hash_fn(password))
+    db.commit()
