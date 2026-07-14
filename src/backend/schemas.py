@@ -71,6 +71,7 @@ class AuthUserOut(BaseModel):
     id: str
     name: str
     email: str
+    is_admin: bool = False
 
 
 class AuthTokenResponse(BaseModel):
@@ -85,13 +86,27 @@ class ForgotPasswordRequest(BaseModel):
 
 class ForgotPasswordResponse(BaseModel):
     message: str
-    # Dev convenience only — never expose reset tokens in production email flows.
+    # Dev convenience only — never expose reset tokens when COMPLIANCE_APP_ENV=production.
     reset_token: str | None = None
 
 
 class ResetPasswordRequest(BaseModel):
     token: str
     new_password: str = Field(..., min_length=6, max_length=200)
+
+
+class AdminUserOut(BaseModel):
+    id: str
+    name: str
+    email: str
+    is_admin: bool
+    is_active: bool
+    created_at: str
+
+
+class AdminUserListResponse(BaseModel):
+    users: list[AdminUserOut]
+    total: int
 
 
 class DocumentUploadResponse(BaseModel):

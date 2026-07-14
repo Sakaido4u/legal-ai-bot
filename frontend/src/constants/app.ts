@@ -19,6 +19,7 @@ export const ROUTES = {
   CITATIONS: '/citations/:id',
   REPORTS:   '/reports',
   DOCUMENTS: '/documents',
+  ADMIN:     '/admin',
   SETTINGS:  '/settings',
   ABOUT:     '/about',
   NOT_FOUND: '*',

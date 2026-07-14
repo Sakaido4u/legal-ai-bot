@@ -238,15 +238,36 @@ def create_user(
     email: str,
     name: str,
     hashed_password: str,
+    is_admin: bool = False,
+    is_active: bool = True,
 ) -> User:
     user = User(
         email=email.strip().lower(),
         name=name.strip(),
         hashed_password=hashed_password,
+        is_admin=is_admin,
+        is_active=is_active,
     )
     db.add(user)
     db.flush()
     return user
+
+
+def list_users(db: Session, *, limit: int = 200) -> list[User]:
+    stmt = select(User).order_by(User.created_at.desc()).limit(limit)
+    return list(db.scalars(stmt).all())
+
+
+def set_user_active(db: Session, user: User, *, is_active: bool) -> User:
+    user.is_active = is_active
+    db.add(user)
+    db.flush()
+    return user
+
+
+def delete_user(db: Session, user: User) -> None:
+    db.delete(user)
+    db.flush()
 
 
 def create_password_reset_token(
@@ -271,10 +292,20 @@ def get_password_reset_token(db: Session, token: str) -> PasswordResetToken | No
 def seed_demo_users(db: Session, hash_fn) -> None:
     """Create demo accounts if missing (idempotent)."""
     demos = [
-        ("demo@lexai.com", "Demo User", "Demo@1234"),
-        ("admin@lexai.com", "Admin User", "Admin@1234"),
+        ("demo@lexai.com", "Demo User", "Demo@1234", False),
+        ("admin@lexai.com", "Admin User", "Admin@1234", True),
     ]
-    for email, name, password in demos:
-        if get_user_by_email(db, email) is None:
-            create_user(db, email=email, name=name, hashed_password=hash_fn(password))
+    for email, name, password, is_admin in demos:
+        existing = get_user_by_email(db, email)
+        if existing is None:
+            create_user(
+                db,
+                email=email,
+                name=name,
+                hashed_password=hash_fn(password),
+                is_admin=is_admin,
+            )
+        elif is_admin and not existing.is_admin:
+            existing.is_admin = True
+            db.add(existing)
     db.commit()

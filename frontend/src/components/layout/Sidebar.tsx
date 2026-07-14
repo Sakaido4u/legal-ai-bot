@@ -11,13 +11,16 @@ import {
   ChevronLeft,
   Scale,
   FolderOpen,
+  Shield,
 } from 'lucide-react'
+import { useAuth } from '@/context/AuthContext'
 
 interface NavItem {
   label: string
   path: string
   icon: React.ElementType
   badge?: string
+  adminOnly?: boolean
 }
 
 const NAV_ITEMS: NavItem[] = [
@@ -26,6 +29,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Documents', path: ROUTES.DOCUMENTS, icon: FolderOpen },
   { label: 'Reports',   path: ROUTES.REPORTS,   icon: ClipboardList },
   { label: 'Citations', path: '/citations',      icon: BookOpen },
+  { label: 'Admin',     path: ROUTES.ADMIN,     icon: Shield,      adminOnly: true },
   { label: 'Settings',  path: ROUTES.SETTINGS,  icon: Settings },
   { label: 'About',     path: ROUTES.ABOUT,      icon: Info },
 ]
@@ -37,6 +41,8 @@ interface SidebarProps {
 
 export function Sidebar({ collapsed, onToggle }: SidebarProps) {
   const { pathname } = useLocation()
+  const { user } = useAuth()
+  const items = NAV_ITEMS.filter(item => !item.adminOnly || user?.is_admin)
 
   return (
     <aside
@@ -64,7 +70,7 @@ export function Sidebar({ collapsed, onToggle }: SidebarProps) {
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
-        {NAV_ITEMS.map(item => {
+        {items.map(item => {
           const Icon = item.icon
           const isActive =
             pathname === item.path ||

@@ -4,6 +4,7 @@ export interface AuthUser {
   id: string
   name: string
   email: string
+  is_admin?: boolean
   avatar?: string
 }
 
@@ -28,4 +29,13 @@ export interface RegisterResponse {
   access_token: string
   token_type: string
   user: AuthUser
+}
+
+export interface AdminUser {
+  id: string
+  name: string
+  email: string
+  is_admin: boolean
+  is_active: boolean
+  created_at: string
 }
