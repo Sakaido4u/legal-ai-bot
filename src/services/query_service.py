@@ -8,8 +8,8 @@ from sqlalchemy.orm import Session
 from backend.rag_service import RAGEngine
 from database import crud
 from ml.cross_jurisdiction import compare_cross_jurisdiction
-from ml.llm_backend import generate_with_llm
-from ml.llm_citations import passages_to_citations, validate_citation_coverage
+from ml.llm_backend import generate_with_llm, resolve_llm_provider
+from ml.llm_citations import passages_to_citations, validate_citation_answer
 from ml.risk_scorer import score_passage
 from ml.schemas import Jurisdiction, LLMComplianceAnswer, RetrievedPassage
 
@@ -67,19 +67,24 @@ def run_legal_query(
     citations = passages_to_citations(passages)
     risk_scores = [score_passage(p) for p in passages]
     cross = compare_cross_jurisdiction(passages, jurisdictions=jurisdictions)
+    llm_provider = resolve_llm_provider(
+        engine.settings.llm_provider,
+        ollama_base_url=engine.settings.ollama_base_url,
+        llm_model=engine.settings.llm_model,
+    )
     llm: LLMComplianceAnswer = generate_with_llm(
         query=question,
         product_feature=product_feature,
         citations=citations,
-        provider=engine.settings.llm_provider,  # type: ignore[arg-type]
+        provider=llm_provider,
         model=engine.settings.llm_model,
         api_key=engine.settings.llm_api_key,
         openai_base_url=engine.settings.openai_base_url,
         ollama_base_url=engine.settings.ollama_base_url,
         timeout=engine.settings.llm_timeout_seconds,
     )
-    if llm.answer_text and not validate_citation_coverage(
-        llm.answer_text, [c.citation_id for c in citations]
+    if llm.answer_text and not validate_citation_answer(
+        llm.answer_text, [c.citation_id for c in citations], require_per_sentence=True
     ):
         llm = LLMComplianceAnswer(
             answer_text="",
