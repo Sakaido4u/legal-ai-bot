@@ -8,50 +8,98 @@ export interface Jurisdiction {
   description?: string
 }
 
+/** Backend Jurisdiction enum values used by analyze / upload. */
+export type JurisdictionCode = 'GDPR' | 'DPDP' | 'CCPA'
+
+export type RiskLevel = 'low' | 'medium' | 'high'
+export type ComplianceStance = 'allowed' | 'restricted' | 'prohibited' | 'unclear'
+
+/** Mirrors ml.schemas.Citation */
 export interface Citation {
-  id: string
-  title: string
-  section: string
+  citation_id: string
+  jurisdiction: JurisdictionCode | string
+  source_label: string
+  heading: string | null
   excerpt: string
-  source: string
-  url?: string
-  relevance_score: number
+  similarity: number
 }
 
-export interface RiskItem {
-  id: string
-  category: string
-  description: string
-  level: 'high' | 'medium' | 'low' | 'none'
-  affected_sections: string[]
-  recommendation: string
+/** Mirrors ml.schemas.RiskScore */
+export interface RiskScore {
+  chunk_id: string
+  jurisdiction: JurisdictionCode | string
+  level: RiskLevel
+  score: number
+  factors: string[]
 }
 
-export interface ComplianceResult {
-  id: string
-  query: string
+/** Mirrors backend RiskHeatmapRow */
+export interface RiskHeatmapRow {
+  citation_id: string
+  chunk_id: string
   jurisdiction: string
-  created_at: string
-  compliance_score: number        // 0–100
-  confidence_score: number        // 0–1
-  summary: string
-  applicable_laws: string[]
-  citations: Citation[]
-  risk_items: RiskItem[]
-  recommendations: string[]
-  processing_time_ms: number
+  risk_level: string
+  risk_score: number
+  factors: string[]
 }
 
+/** Mirrors ml.schemas.JurisdictionComparison */
+export interface JurisdictionComparison {
+  jurisdiction: JurisdictionCode | string
+  stance: ComplianceStance
+  confidence: number
+  top_citation_ids: string[]
+}
+
+/** Mirrors ml.schemas.CrossJurisdictionResult */
+export interface CrossJurisdictionResult {
+  by_jurisdiction: Record<string, JurisdictionComparison>
+  divergence_summary: string | null
+  pairs_flagged: Array<Record<string, string>>
+}
+
+/** Mirrors ml.schemas.LLMComplianceAnswer */
+export interface LLMComplianceAnswer {
+  answer_text: string
+  citation_ids_used: string[]
+  refused_insufficient_citations: boolean
+}
+
+/**
+ * POST /v1/compliance/analyze — request body
+ * (ComplianceAnalyzeRequest)
+ */
 export interface AnalyzeRequest {
   query: string
-  jurisdiction: string
-  document_text?: string
+  product_feature: string
+  jurisdictions: string[]
+  top_k?: number | null
 }
 
+/**
+ * POST /v1/compliance/analyze — response body
+ * (ComplianceAnalyzeResponse). Returned directly — no { success, data } wrapper.
+ */
 export interface AnalyzeResponse {
-  success: boolean
-  data: ComplianceResult
-  message?: string
+  query: string
+  product_feature: string
+  citations: Citation[]
+  risk_scores: RiskScore[]
+  risk_heatmap: RiskHeatmapRow[]
+  cross_jurisdiction: CrossJurisdictionResult
+  llm: LLMComplianceAnswer
+  meta: {
+    index_total_vectors?: number
+    retrieval_min_score?: number
+    [key: string]: unknown
+  }
+}
+
+/** Client-only wrapper for sessionStorage / results routing. */
+export interface StoredAnalysis {
+  id: string
+  created_at: string
+  result: AnalyzeResponse
 }
 
 export interface HealthResponse {

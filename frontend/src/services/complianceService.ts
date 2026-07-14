@@ -2,7 +2,6 @@ import api from '@/api/axiosInstance'
 import type {
   AnalyzeRequest,
   AnalyzeResponse,
-  ComplianceResult,
   Jurisdiction,
   HealthResponse,
   AnalysisHistory,
@@ -15,12 +14,14 @@ import type {
 export const complianceService = {
 
   // POST /v1/compliance/analyze
-  async analyze(request: AnalyzeRequest): Promise<ComplianceResult> {
-    const res = await api.post<AnalyzeResponse>('/v1/compliance/analyze', request)
-    if (!res.data.success) {
-      throw new Error(res.data.message ?? 'Analysis failed')
-    }
-    return res.data.data
+  async analyze(request: AnalyzeRequest): Promise<AnalyzeResponse> {
+    // Analysis + LLM can exceed the default 30s timeout.
+    const res = await api.post<AnalyzeResponse>(
+      '/v1/compliance/analyze',
+      request,
+      { timeout: 180_000 },
+    )
+    return res.data
   },
 
   // GET /v1/compliance/jurisdictions → { jurisdictions: string[] }

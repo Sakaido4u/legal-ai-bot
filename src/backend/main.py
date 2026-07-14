@@ -7,7 +7,6 @@ from typing import Annotated
 
 from fastapi import Depends, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
 
 from database.session import init_db
 from ml.ollama_health import check_ollama_llm
@@ -18,6 +17,7 @@ from .deps import get_engine, set_engine
 from .middleware import RequestLoggingMiddleware
 from .rag_service import RAGEngine, build_engine, run_compliance_analysis
 from .routes import router
+from .schemas import ComplianceAnalyzeRequest, ComplianceAnalyzeResponse
 
 logging.basicConfig(
     level=logging.INFO,
@@ -63,15 +63,6 @@ app.add_middleware(
 app.include_router(router)
 
 
-class AnalyzeRequest(BaseModel):
-    query: str = Field(..., min_length=3, max_length=4000)
-    product_feature: str = Field(..., min_length=2, max_length=2000)
-    jurisdictions: list[str] = Field(
-        default_factory=lambda: [Jurisdiction.GDPR.value, Jurisdiction.DPDP.value, Jurisdiction.CCPA.value]
-    )
-    top_k: int | None = Field(default=None, ge=1, le=24)
-
-
 @app.get("/")
 async def root():
     return {
@@ -112,9 +103,9 @@ async def health():
     return payload
 
 
-@app.post("/v1/compliance/analyze")
+@app.post("/v1/compliance/analyze", response_model=ComplianceAnalyzeResponse)
 async def compliance_analyze(
-    body: AnalyzeRequest,
+    body: ComplianceAnalyzeRequest,
     engine: Annotated[RAGEngine, Depends(get_engine)],
 ):
     try:

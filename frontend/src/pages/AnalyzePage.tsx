@@ -128,13 +128,19 @@ export function AnalyzePage() {
   // ── Submit ───────────────────────────────────────────────────
   const onSubmit = async (data: AnalyzeFormData) => {
     const result = await analyze({
-      query:        data.query,
-      jurisdiction: data.jurisdiction,
+      query: data.query,
+      // Backend requires product_feature; UI uses the legal query as the feature under review.
+      product_feature: data.query.slice(0, 2000),
+      jurisdictions: [data.jurisdiction],
     })
     if (result) {
-      // Store result so ResultsPage can read it
-      sessionStorage.setItem('lexai-last-result', JSON.stringify(result))
-      navigate(`/results/${result.id}`)
+      const stored = {
+        id: crypto.randomUUID(),
+        created_at: new Date().toISOString(),
+        result,
+      }
+      sessionStorage.setItem('lexai-last-result', JSON.stringify(stored))
+      navigate(`/results/${stored.id}`)
     }
   }
 
