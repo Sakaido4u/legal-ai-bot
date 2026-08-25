@@ -29,7 +29,8 @@ export function scoreToColor(score: number): string {
 }
 
 // Format compliance score → label
-export function scoreToLabel(score: number): string {
+export function scoreToLabel(score: number, riskLevel?: string): string {
+  if (riskLevel === 'inconclusive') return 'Insufficient evidence'
   if (score >= 80) return 'Compliant'
   if (score >= 60) return 'Partial'
   return 'Non-Compliant'
