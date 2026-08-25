@@ -4,6 +4,14 @@ import logging
 from functools import lru_cache
 
 import numpy as np
+
+# On Windows + some torch builds, importing sentence_transformers before faiss
+# can segfault. Import faiss first when available.
+try:
+    import faiss  # noqa: F401
+except Exception:
+    pass
+
 from sentence_transformers import SentenceTransformer
 
 logger = logging.getLogger(__name__)

@@ -191,6 +191,7 @@ def generate_with_llm(
     ollama_base_url: str = "http://127.0.0.1:11434",
     timeout: float = 60.0,
     max_reprompts: int = _MAX_REPROMPTS,
+    fallback_to_template_on_refuse: bool = False,
 ) -> LLMComplianceAnswer:
     if not citations:
         return LLMComplianceAnswer(
@@ -229,6 +230,9 @@ def generate_with_llm(
             return _template_answer(query=query, product_feature=product_feature, citations=citations)
 
         if raw.upper().startswith("REFUSE") or not raw.strip():
+            if fallback_to_template_on_refuse:
+                logger.info("LLM refused with grounded citations present; using template summary")
+                return _template_answer(query=query, product_feature=product_feature, citations=citations)
             return LLMComplianceAnswer(
                 answer_text="",
                 citation_ids_used=[],
@@ -245,6 +249,10 @@ def generate_with_llm(
 
         logger.warning("Citation validation failed (attempt %d); %s", attempt + 1, raw[:120])
         strict = True
+
+    if fallback_to_template_on_refuse:
+        logger.info("Citation validation exhausted with grounded citations; using template summary")
+        return _template_answer(query=query, product_feature=product_feature, citations=citations)
 
     return LLMComplianceAnswer(
         answer_text="",

@@ -4,6 +4,7 @@ import re
 from typing import Iterable
 
 from .schemas import Citation, LLMComplianceAnswer, RetrievedPassage
+from .chunking import trim_orphaned_edges
 
 
 _CIT_REF = re.compile(r"\[((?:C)\d+)\]")
@@ -15,9 +16,12 @@ def passages_to_citations(passages: list[RetrievedPassage], citation_prefix: str
     out: list[Citation] = []
     for i, p in enumerate(passages):
         cid = f"{citation_prefix}{i}"
-        excerpt = p.text.strip()
+        excerpt = trim_orphaned_edges(p.text.strip())
         if len(excerpt) > 1200:
-            excerpt = excerpt[:1197] + "..."
+            # Prefer cutting at a sentence boundary near the limit.
+            cut = excerpt[:1200]
+            last = max(cut.rfind(". "), cut.rfind("? "), cut.rfind("! "))
+            excerpt = (cut[: last + 1] if last >= 400 else cut[:1197]) + ("..." if last < 400 else "")
         out.append(
             Citation(
                 citation_id=cid,

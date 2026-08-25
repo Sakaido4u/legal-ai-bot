@@ -176,10 +176,11 @@ function avgConfidence(result: AnalyzeResponse): number {
   return values.reduce((a, b) => a + b, 0) / values.length
 }
 
-function ScoreGauge({ score }: { score: number }) {
-  const color = score >= 80 ? '#22C55E' : score >= 60 ? '#F59E0B' : '#EF4444'
-  const label = scoreToLabel(score)
-  const data  = [{ value: score, fill: color }]
+function ScoreGauge({ score, riskLevel }: { score: number; riskLevel?: string }) {
+  const inconclusive = riskLevel === 'inconclusive'
+  const color = inconclusive ? '#64748B' : score >= 80 ? '#22C55E' : score >= 60 ? '#F59E0B' : '#EF4444'
+  const label = scoreToLabel(score, riskLevel)
+  const data  = [{ value: inconclusive ? 0 : score, fill: color }]
 
   return (
     <div className="flex flex-col items-center py-4">
@@ -201,9 +202,11 @@ function ScoreGauge({ score }: { score: number }) {
         </ResponsiveContainer>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="text-4xl font-black" style={{ color }}>
-            {score}
+            {inconclusive ? '—' : score}
           </span>
-          <span className="text-xs text-[var(--text-muted)] mt-0.5">/ 100</span>
+          {!inconclusive && (
+            <span className="text-xs text-[var(--text-muted)] mt-0.5">/ 100</span>
+          )}
         </div>
       </div>
       <span
@@ -213,7 +216,9 @@ function ScoreGauge({ score }: { score: number }) {
         {label}
       </span>
       <p className="text-[0.65rem] text-[var(--text-subtle)] mt-2 text-center max-w-[12rem]">
-        Backend compliance_score (100 − peak risk × 100)
+        {inconclusive
+          ? 'No reliable score — retrieval evidence was insufficient'
+          : 'Backend compliance_score (100 − peak risk × 100)'}
       </p>
     </div>
   )
@@ -379,15 +384,20 @@ export function ResultsPage() {
   }
 
   const result = stored.result
+  const inconclusive =
+    result.risk_level === 'inconclusive' || result.meta?.evidence_sufficient === false
+  const lowConfidence = Boolean(result.meta?.low_confidence)
   const displayScore =
-    typeof result.compliance_score === 'number'
-      ? result.compliance_score
-      : riskToComplianceDisplay(result.risk_scores)
+    inconclusive
+      ? 0
+      : typeof result.compliance_score === 'number'
+        ? result.compliance_score
+        : riskToComplianceDisplay(result.risk_scores)
   const confidence = avgConfidence(result)
   const highRisk = result.risk_scores.filter(r => r.level === 'high').length
   const medRisk = result.risk_scores.filter(r => r.level === 'medium').length
   const jurisdictions = Object.keys(result.cross_jurisdiction.by_jurisdiction)
-  const summary = result.llm.refused_insufficient_citations
+  const summary = inconclusive || result.llm.refused_insufficient_citations
     ? 'Insufficient grounded citations to produce an answer. Upload / ingest corpus content and try again.'
     : (result.llm.answer_text || 'No LLM summary returned.')
   const factors = [...new Set(result.risk_scores.flatMap(r => r.factors))]
@@ -429,6 +439,19 @@ export function ResultsPage() {
         </div>
       </div>
 
+      {lowConfidence && !inconclusive && (
+        <div className="flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800 dark:border-amber-900/40 dark:bg-amber-900/20 dark:text-amber-200">
+          <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+          <p>
+            Low retrieval confidence
+            {typeof result.meta?.max_similarity === 'number'
+              ? ` (best match ${Math.round(Number(result.meta.max_similarity) * 100)}%)`
+              : ''}
+            . Treat the verdict as provisional and verify against the full statute.
+          </p>
+        </div>
+      )}
+
       <div className="flex flex-wrap items-center gap-4 text-xs text-[var(--text-muted)]">
         <span className="flex items-center gap-1.5">
           <Clock className="w-3.5 h-3.5" />
@@ -458,7 +481,7 @@ export function ResultsPage() {
           <p className="text-sm font-semibold text-[var(--text-muted)] mb-2 self-start">
             Risk-adjusted score
           </p>
-          <ScoreGauge score={displayScore} />
+          <ScoreGauge score={displayScore} riskLevel={inconclusive ? 'inconclusive' : result.risk_level} />
           <div className="w-full pt-4 mt-2 border-t border-[var(--border)]">
             <RiskChart riskScores={result.risk_scores} />
           </div>
@@ -649,8 +672,9 @@ export function ResultsPage() {
                       {cite.heading ?? cite.citation_id} · {cite.jurisdiction}
                     </p>
                   </div>
-                  <Badge variant="default">
+                  <Badge variant={cite.similarity < 0.5 ? 'outline' : 'default'}>
                     {Math.round(cite.similarity * 100)}% match
+                    {cite.similarity < 0.5 ? ' · low' : ''}
                   </Badge>
                 </div>
                 <blockquote className="text-sm text-[var(--text-muted)] italic border-l-2 border-brand-400 pl-3 leading-relaxed">

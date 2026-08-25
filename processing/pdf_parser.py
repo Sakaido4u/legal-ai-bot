@@ -37,6 +37,34 @@ FIGURE_PATTERN = re.compile(
 
 # Semantic completeness - ends without proper punctuation.
 INCOMPLETE_SENTENCE_PATTERN = re.compile(r"[^.!?:;)\]]\s*$")
+_SENTENCE_BREAK = re.compile(r"[.!?][\"')\]]*\s+")
+
+
+def snap_back_to_sentence(text: str, pos: int, *, window: int = 240) -> int:
+    """Move a cut position back to the nearest prior sentence boundary when possible."""
+    if pos <= 0 or pos >= len(text):
+        return pos
+    start = max(0, pos - window)
+    region = text[start:pos]
+    breaks = list(_SENTENCE_BREAK.finditer(region))
+    if not breaks:
+        # Fall back to last whitespace to avoid mid-word cuts.
+        sp = region.rfind(" ")
+        return start + sp + 1 if sp >= 0 else pos
+    return start + breaks[-1].end()
+
+
+def snap_forward_to_sentence(text: str, pos: int, *, window: int = 240) -> int:
+    """Move a cut position forward to the next sentence start when possible."""
+    if pos <= 0 or pos >= len(text):
+        return pos
+    end = min(len(text), pos + window)
+    region = text[pos:end]
+    m = _SENTENCE_BREAK.search(region)
+    if m:
+        return pos + m.end()
+    sp = region.find(" ")
+    return pos + sp + 1 if sp >= 0 else pos
 
 
 @dataclass
@@ -142,6 +170,9 @@ def extract_legal_sections(file_path: str | Path) -> list[LegalSection]:
                 # Last page has no next page to hand remaining text off to.
                 end = len(chunk) if is_last_page else cutoff
 
+            if not is_last_page and end == cutoff:
+                end = snap_back_to_sentence(chunk, end)
+
             if end <= start:
                 continue
 
@@ -175,7 +206,12 @@ def extract_legal_sections(file_path: str | Path) -> list[LegalSection]:
             )
             section_id += 1
 
-        tail = page_text[-OVERLAP:] if not is_last_page else ""
+        if is_last_page:
+            tail = ""
+        else:
+            # Carry text from a sentence boundary so the next page does not start mid-word.
+            carry_at = snap_back_to_sentence(page_text, max(0, len(page_text) - OVERLAP))
+            tail = page_text[carry_at:]
 
     incomplete = [s for s in sections if not s.semantic_complete]
     if incomplete:

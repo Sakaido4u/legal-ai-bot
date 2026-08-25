@@ -14,8 +14,8 @@ LOG_PATH             = BASE_DIR / "logs"
 # CHUNKING
 # ─────────────────────────────────────────────────────────────
 
-CHUNK_SIZE    = 500
-CHUNK_OVERLAP = 100
+CHUNK_SIZE    = 900
+CHUNK_OVERLAP = 120
 
 # ─────────────────────────────────────────────────────────────
 # WEB SCRAPER
