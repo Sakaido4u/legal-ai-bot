@@ -6,6 +6,7 @@ from pathlib import Path
 from ml.cross_jurisdiction import compare_cross_jurisdiction
 from ml.demo_corpus import demo_chunks
 from ml.embeddings import EmbeddingBackend
+from ml.evidence import assess_evidence
 from ml.llm_backend import generate_with_llm, resolve_llm_provider
 from ml.llm_citations import passages_to_citations, validate_citation_answer
 from ml.retriever import HighPrecisionRetriever
@@ -25,6 +26,45 @@ def _filter_passages_by_document(
     if not allowed_refs:
         return []
     return [p for p in passages if any(ref.endswith(p.chunk_id) for ref in allowed_refs)]
+
+
+def _insufficient_payload(
+    *,
+    query: str,
+    product_feature: str,
+    engine: "RAGEngine",
+    document_id: int | None,
+    allowed_chunk_refs: set[str] | None,
+    assessment_meta: dict,
+) -> dict:
+    """Fallback report when evidence is not strong enough to score or summarize."""
+    empty_cross = compare_cross_jurisdiction([], jurisdictions=[])
+    return {
+        "query": query,
+        "product_feature": product_feature,
+        "citations": [],
+        "risk_scores": [],
+        "risk_heatmap": [],
+        "cross_jurisdiction": empty_cross.model_dump(mode="json"),
+        "llm": LLMComplianceAnswer(
+            answer_text="",
+            citation_ids_used=[],
+            refused_insufficient_citations=True,
+        ).model_dump(mode="json"),
+        "compliance_score": 0,
+        "risk_level": "inconclusive",
+        "meta": {
+            "index_total_vectors": engine.store.ntotal(),
+            "retrieval_min_score": engine.settings.min_retrieval_score,
+            "document_id": document_id,
+            "document_scoped": allowed_chunk_refs is not None,
+            "passages_found": 0,
+            "score_method": "evidence_insufficient",
+            "evidence_sufficient": False,
+            "low_confidence": False,
+            **assessment_meta,
+        },
+    }
 
 
 @dataclass
@@ -78,6 +118,11 @@ def run_compliance_analysis(
     When ``allowed_chunk_refs`` is provided (from an uploaded ``document_id``),
     passages are filtered to that document's indexed chunks so the answer is
     grounded in the uploaded PDF — same pattern as ``/legal_query``.
+
+    Citation sufficiency and risk scoring share one evidence assessment: if
+    retrieval is insufficient, both the summary and the risk verdict fall back
+    together. If retrieval is sufficient but the LLM refuses / fails citation
+    validation, a template summary is used instead of an "insufficient" message.
     """
     k = top_k or engine.settings.retrieval_top_k
     # Pull a wider candidate set when scoping to a document, then filter.
@@ -91,6 +136,25 @@ def run_compliance_analysis(
     if allowed_chunk_refs is not None:
         passages = _filter_passages_by_document(passages, allowed_chunk_refs)[:k]
 
+    evidence = assess_evidence(
+        passages,
+        min_score=engine.settings.min_retrieval_score,
+        confidence_floor=engine.settings.retrieval_confidence_floor,
+    )
+    if not evidence.sufficient:
+        return _insufficient_payload(
+            query=query,
+            product_feature=product_feature,
+            engine=engine,
+            document_id=document_id,
+            allowed_chunk_refs=allowed_chunk_refs,
+            assessment_meta={
+                "passages_found": evidence.passage_count,
+                "max_similarity": round(evidence.max_similarity, 4),
+            },
+        )
+
+    passages = evidence.passages
     citations: list[Citation] = passages_to_citations(passages)
     risk_scores = [score_passage(p) for p in passages]
     cross = compare_cross_jurisdiction(passages, jurisdictions=jurisdictions)
@@ -109,14 +173,18 @@ def run_compliance_analysis(
         openai_base_url=engine.settings.openai_base_url,
         ollama_base_url=engine.settings.ollama_base_url,
         timeout=engine.settings.llm_timeout_seconds,
+        # Grounded citations exist → never surface "insufficient"; use template.
+        fallback_to_template_on_refuse=True,
     )
     if llm.answer_text and not validate_citation_answer(
         llm.answer_text, [c.citation_id for c in citations], require_per_sentence=True
     ):
-        llm = LLMComplianceAnswer(
-            answer_text="",
-            citation_ids_used=[],
-            refused_insufficient_citations=True,
+        # Validation failed after provider success — still have evidence; template.
+        llm = generate_with_llm(
+            query=query,
+            product_feature=product_feature,
+            citations=citations,
+            provider="template",
         )
 
     heatmap_rows: list[dict] = []
@@ -153,5 +221,9 @@ def run_compliance_analysis(
             "document_scoped": allowed_chunk_refs is not None,
             "passages_found": len(passages),
             "score_method": "100 - peak_risk*100",
+            "evidence_sufficient": True,
+            "low_confidence": evidence.low_confidence,
+            "max_similarity": round(evidence.max_similarity, 4),
+            "confidence_floor": engine.settings.retrieval_confidence_floor,
         },
     }

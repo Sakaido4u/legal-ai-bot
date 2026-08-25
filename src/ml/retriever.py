@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import logging
+import re
 from typing import Sequence
 
 import numpy as np
 
 from .embeddings import EmbeddingBackend
+from .legal_chunking import article_key_from_text
+from .query_expand import decompose_query
 from .schemas import Jurisdiction, RetrievedPassage
 from .vector_store import ComplianceVectorStore
 
@@ -52,11 +55,56 @@ def _mmr_select(
     return [candidates[i] for i in selected]
 
 
+def _dedupe_by_article(
+    passages: list[RetrievedPassage],
+    *,
+    near_dup_sim: float = 0.92,
+) -> list[RetrievedPassage]:
+    """
+    Keep the strongest hit per Article/Section key; also drop near-duplicate text
+    chunks that lack an article key but are almost identical embeddings-wise
+    (handled later by MMR — here we only key-dedupe + exact/near text).
+    """
+    best_by_key: dict[str, RetrievedPassage] = {}
+    no_key: list[RetrievedPassage] = []
+    for p in passages:
+        key = article_key_from_text(p.heading, p.source_label, p.text[:240])
+        if key:
+            art_key = f"{p.jurisdiction.value}:{key}"
+            prev = best_by_key.get(art_key)
+            if prev is None or p.similarity > prev.similarity:
+                best_by_key[art_key] = p
+        else:
+            no_key.append(p)
+
+    # Light text-prefix dedupe for keyless passages.
+    kept_no_key: list[RetrievedPassage] = []
+    seen_prefixes: list[str] = []
+    for p in sorted(no_key, key=lambda x: x.similarity, reverse=True):
+        prefix = re.sub(r"\s+", " ", p.text[:160].lower())
+        if any(_token_overlap(prefix, s) >= near_dup_sim for s in seen_prefixes):
+            continue
+        seen_prefixes.append(prefix)
+        kept_no_key.append(p)
+
+    merged = list(best_by_key.values()) + kept_no_key
+    merged.sort(key=lambda p: p.similarity, reverse=True)
+    return merged
+
+
+def _token_overlap(a: str, b: str) -> float:
+    ta, tb = set(a.split()), set(b.split())
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / max(1, len(ta | tb))
+
+
 class HighPrecisionRetriever:
     """
     Retrieval tuned for compliance work:
+    - multi-aspect query expansion for compound legal questions
     - per-jurisdiction FAISS search with a similarity floor
-    - optional MMR rerank on the pooled shortlist
+    - article-level dedupe then optional MMR rerank
     """
 
     def __init__(
@@ -65,8 +113,8 @@ class HighPrecisionRetriever:
         embedder: EmbeddingBackend,
         *,
         min_score: float = 0.22,
-        pool_multipler: int = 3,
-        mmr_lambda: float = 0.65,
+        pool_multipler: int = 4,
+        mmr_lambda: float = 0.55,
     ) -> None:
         self.store = store
         self.embedder = embedder
@@ -79,24 +127,40 @@ class HighPrecisionRetriever:
         query: str,
         jurisdictions: Sequence[Jurisdiction],
         *,
-        top_k: int = 6,
+        top_k: int = 8,
         use_mmr: bool = True,
     ) -> list[RetrievedPassage]:
-        qv = self.embedder.encode([query])[0]
+        subqueries = decompose_query(query)
         pool_k = max(top_k * self.pool_multipler, top_k)
-        pool = self.store.search(
-            qv,
-            jurisdictions=list(jurisdictions),
-            top_k=pool_k,
-            min_score=self.min_score,
-        )
+        by_chunk: dict[str, RetrievedPassage] = {}
+
+        for sq in subqueries:
+            qv = self.embedder.encode([sq])[0]
+            hits = self.store.search(
+                qv,
+                jurisdictions=list(jurisdictions),
+                top_k=pool_k,
+                min_score=self.min_score,
+            )
+            for h in hits:
+                prev = by_chunk.get(h.chunk_id)
+                if prev is None or h.similarity > prev.similarity:
+                    by_chunk[h.chunk_id] = h
+
+        pool = sorted(by_chunk.values(), key=lambda p: p.similarity, reverse=True)
         if not pool:
             logger.info("Retriever: zero hits above min_score=%s", self.min_score)
             return []
 
-        if not use_mmr or len(pool) <= top_k:
+        pool = _dedupe_by_article(pool)
+        if len(pool) <= top_k:
             return pool[:top_k]
 
+        if not use_mmr:
+            return pool[:top_k]
+
+        # MMR against the primary (full) query embedding for final diversity.
+        qv = self.embedder.encode([query])[0]
         texts = [p.text for p in pool]
         cand_embs = self.embedder.encode(texts)
         return _mmr_select(qv, pool, cand_embs, top_n=top_k, lambda_mult=self.mmr_lambda)

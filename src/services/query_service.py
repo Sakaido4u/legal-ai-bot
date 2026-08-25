@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session
 
 from database import crud
 from ml.cross_jurisdiction import compare_cross_jurisdiction
+from ml.evidence import assess_evidence
 from ml.llm_backend import generate_with_llm, resolve_llm_provider
 from ml.llm_citations import passages_to_citations, validate_citation_answer
 from ml.risk_scorer import score_passage
@@ -50,7 +51,12 @@ def run_legal_query(
     passages = engine.retriever.retrieve(question, jurisdictions, top_k=k, use_mmr=True)
     passages = _filter_passages_by_document(passages, allowed_refs)
 
-    if not passages:
+    evidence = assess_evidence(
+        passages,
+        min_score=engine.settings.min_retrieval_score,
+        confidence_floor=engine.settings.retrieval_confidence_floor,
+    )
+    if not evidence.sufficient:
         elapsed = time.perf_counter() - start
         crud.create_analysis_log(
             db,
@@ -65,9 +71,15 @@ def run_legal_query(
             "citations": [],
             "refused_insufficient_citations": True,
             "response_time": round(elapsed, 4),
-            "meta": {"document_id": document_id, "passages_found": 0},
+            "meta": {
+                "document_id": document_id,
+                "passages_found": 0,
+                "evidence_sufficient": False,
+                "low_confidence": False,
+            },
         }
 
+    passages = evidence.passages
     citations = passages_to_citations(passages)
     risk_scores = [score_passage(p) for p in passages]
     cross = compare_cross_jurisdiction(passages, jurisdictions=jurisdictions)
@@ -86,14 +98,16 @@ def run_legal_query(
         openai_base_url=engine.settings.openai_base_url,
         ollama_base_url=engine.settings.ollama_base_url,
         timeout=engine.settings.llm_timeout_seconds,
+        fallback_to_template_on_refuse=True,
     )
     if llm.answer_text and not validate_citation_answer(
         llm.answer_text, [c.citation_id for c in citations], require_per_sentence=True
     ):
-        llm = LLMComplianceAnswer(
-            answer_text="",
-            citation_ids_used=[],
-            refused_insufficient_citations=True,
+        llm = generate_with_llm(
+            query=question,
+            product_feature=product_feature,
+            citations=citations,
+            provider="template",
         )
 
     elapsed = time.perf_counter() - start
@@ -118,5 +132,8 @@ def run_legal_query(
             "document_id": document_id,
             "passages_found": len(passages),
             "index_total_vectors": engine.store.ntotal(),
+            "evidence_sufficient": True,
+            "low_confidence": evidence.low_confidence,
+            "max_similarity": round(evidence.max_similarity, 4),
         },
     }

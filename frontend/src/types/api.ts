@@ -100,6 +100,10 @@ export interface AnalyzeResponse {
     document_scoped?: boolean
     passages_found?: number
     score_method?: string
+    evidence_sufficient?: boolean
+    low_confidence?: boolean
+    max_similarity?: number
+    confidence_floor?: number
     [key: string]: unknown
   }
 }
