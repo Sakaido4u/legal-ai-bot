@@ -1,0 +1,286 @@
+{
+  "n_chunks": 712,
+  "level_distribution": {
+    "low": {
+      "count": 587,
+      "share": 0.824438202247191
+    },
+    "medium": {
+      "count": 62,
+      "share": 0.08707865168539326
+    },
+    "high": {
+      "count": 63,
+      "share": 0.08848314606741572
+    }
+  },
+  "level_by_jurisdiction": {
+    "GDPR": {
+      "low": 501,
+      "medium": 52,
+      "high": 47
+    },
+    "DPDP": {
+      "low": 82,
+      "medium": 7,
+      "high": 16
+    },
+    "CCPA": {
+      "low": 4,
+      "medium": 3
+    }
+  },
+  "factor_fire_rate": {
+    "prohibit": 0.10252808988764045,
+    "prohibit_strict_terms": 0.0898876404494382,
+    "prohibit_via_without_consent_only": 0.012640449438202247,
+    "penalty": 0.0997191011235955,
+    "obligation": 0.42134831460674155,
+    "sensitive": 0.05196629213483146
+  },
+  "zero_factor_share(compliance_score=100)": 0.4508426966292135,
+  "high_level_share_relying_on_without_consent_regex": 0.06349206349206349,
+  "factor_combinations": [
+    {
+      "factors": [],
+      "level": "low",
+      "count": 321
+    },
+    {
+      "factors": [
+        "EU / GDPR prescriptive context",
+        "Strict obligation language"
+      ],
+      "level": "low",
+      "count": 165
+    },
+    {
+      "factors": [
+        "Strict obligation language"
+      ],
+      "level": "low",
+      "count": 53
+    },
+    {
+      "factors": [
+        "Penalty or enforcement language"
+      ],
+      "level": "low",
+      "count": 48
+    },
+    {
+      "factors": [
+        "EU / GDPR prescriptive context",
+        "Prohibition or hard-limit language",
+        "Strict obligation language"
+      ],
+      "level": "high",
+      "count": 35
+    },
+    {
+      "factors": [
+        "Sensitive / special-category data language"
+      ],
+      "level": "medium",
+      "count": 26
+    },
+    {
+      "factors": [
+        "Prohibition or hard-limit language",
+        "Strict obligation language"
+      ],
+      "level": "high",
+      "count": 16
+    },
+    {
+      "factors": [
+        "Prohibition or hard-limit language"
+      ],
+      "level": "medium",
+      "count": 14
+    },
+    {
+      "factors": [
+        "EU / GDPR prescriptive context",
+        "Penalty or enforcement language",
+        "Strict obligation language"
+      ],
+      "level": "medium",
+      "count": 13
+    },
+    {
+      "factors": [
+        "Penalty or enforcement language",
+        "Strict obligation language"
+      ],
+      "level": "medium",
+      "count": 7
+    },
+    {
+      "factors": [
+        "EU / GDPR prescriptive context",
+        "Sensitive / special-category data language",
+        "Strict obligation language"
+      ],
+      "level": "high",
+      "count": 4
+    },
+    {
+      "factors": [
+        "Prohibition or hard-limit language",
+        "Sensitive / special-category data language"
+      ],
+      "level": "high",
+      "count": 3
+    },
+    {
+      "factors": [
+        "EU / GDPR prescriptive context",
+        "Penalty or enforcement language",
+        "Prohibition or hard-limit language",
+        "Strict obligation language"
+      ],
+      "level": "high",
+      "count": 3
+    },
+    {
+      "factors": [
+        "EU / GDPR prescriptive context",
+        "Prohibition or hard-limit language",
+        "Sensitive / special-category data language",
+        "Strict obligation language"
+      ],
+      "level": "high",
+      "count": 2
+    },
+    {
+      "factors": [
+        "Sensitive / special-category data language",
+        "Strict obligation language"
+      ],
+      "level": "medium",
+      "count": 2
+    }
+  ],
+  "examples_by_unit": {
+    "Article 9": [
+      {
+        "level": "high",
+        "score": 0.97,
+        "factors": [
+          "EU / GDPR prescriptive context",
+          "Prohibition or hard-limit language",
+          "Sensitive / special-category data language",
+          "Strict obligation language"
+        ]
+      },
+      {
+        "level": "medium",
+        "score": 0.42,
+        "factors": [
+          "Prohibition or hard-limit language"
+        ]
+      },
+      {
+        "level": "medium",
+        "score": 0.42,
+        "factors": [
+          "Prohibition or hard-limit language"
+        ]
+      },
+      {
+        "level": "low",
+        "score": 0.27,
+        "factors": [
+          "EU / GDPR prescriptive context",
+          "Strict obligation language"
+        ]
+      },
+      {
+        "level": "low",
+        "score": 0.27,
+        "factors": [
+          "EU / GDPR prescriptive context",
+          "Strict obligation language"
+        ]
+      },
+      {
+        "level": "low",
+        "score": 0.27,
+        "factors": [
+          "EU / GDPR prescriptive context",
+          "Strict obligation language"
+        ]
+      },
+      {
+        "level": "low",
+        "score": 0.27,
+        "factors": [
+          "EU / GDPR prescriptive context",
+          "Strict obligation language"
+        ]
+      },
+      {
+        "level": "medium",
+        "score": 0.28,
+        "factors": [
+          "Sensitive / special-category data language"
+        ]
+      }
+    ],
+    "Article 22": [
+      {
+        "level": "high",
+        "score": 0.69,
+        "factors": [
+          "EU / GDPR prescriptive context",
+          "Prohibition or hard-limit language",
+          "Strict obligation language"
+        ]
+      },
+      {
+        "level": "low",
+        "score": 0.0,
+        "factors": []
+      }
+    ],
+    "Article 44": [
+      {
+        "level": "low",
+        "score": 0.27,
+        "factors": [
+          "EU / GDPR prescriptive context",
+          "Strict obligation language"
+        ]
+      }
+    ],
+    "Section 9": [
+      {
+        "level": "high",
+        "score": 0.64,
+        "factors": [
+          "Prohibition or hard-limit language",
+          "Strict obligation language"
+        ]
+      },
+      {
+        "level": "high",
+        "score": 0.64,
+        "factors": [
+          "Prohibition or hard-limit language",
+          "Strict obligation language"
+        ]
+      }
+    ],
+    "Section 16": [
+      {
+        "level": "high",
+        "score": 0.64,
+        "factors": [
+          "Prohibition or hard-limit language",
+          "Strict obligation language"
+        ]
+      }
+    ]
+  }
+}

@@ -18,7 +18,9 @@ class Settings(BaseSettings):
     index_dir: str | None = "vector_store/regulatory"
     use_demo_index: bool = False
     min_retrieval_score: float = 0.22
-    retrieval_top_k: int = 6
+    retrieval_top_k: int = 8
+    # Below this max similarity, answers are still produced but flagged low-confidence.
+    retrieval_confidence_floor: float = 0.50
     cors_origins: str = (
         "http://localhost:3000,http://127.0.0.1:3000,"
         "http://localhost:5173,http://127.0.0.1:5173"

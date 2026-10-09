@@ -17,6 +17,9 @@ os.environ["COMPLIANCE_RATE_LIMIT_AUTH"] = "1000/minute"
 os.environ["COMPLIANCE_RATE_LIMIT_UPLOAD"] = "1000/minute"
 os.environ["COMPLIANCE_RATE_LIMIT_ANALYZE"] = "1000/minute"
 os.environ["DATABASE_URL"] = "sqlite+pysqlite:///:memory:"
+# The app skips engine construction on Windows unless asked; the engine is
+# stubbed below, so always ask.
+os.environ["COMPLIANCE_LOAD_RAG"] = "1"
 
 # ── Stub heavy optional deps so `import backend.main` is light ─
 for name in ("torch", "faiss", "faiss_cpu", "sentence_transformers", "transformers", "datasets"):
