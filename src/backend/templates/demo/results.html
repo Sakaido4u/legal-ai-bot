@@ -1,0 +1,55 @@
+{% extends "demo/base.html" %}
+{% block title %}Results #{{ r.id }} &middot; Legal AI Compliance Assistant{% endblock %}
+{% block content %}
+<section class="card">
+  <p class="muted small">Report #{{ r.id }} &middot; {{ "All regulations" if r.regulation == "ALL" else r.regulation }}</p>
+  <h1 class="query">{{ r.query }}</h1>
+
+  <div class="risk risk-{{ r.risk_level }}">
+    <div class="risk-score">
+      <span class="risk-number">{{ r.risk_score }}</span><span class="risk-max">/ 100</span>
+      <span class="risk-caption">Risk score</span>
+    </div>
+    <div class="risk-level">
+      <span class="badge">{{ r.risk_level | upper }} RISK</span>
+      <span class="risk-caption">Peak keyword-based risk across the cited passages</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary" href="/demo/results/{{ r.id }}/pdf">Download PDF report</a>
+    <a class="btn btn-quiet" href="/demo/query">New query</a>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Answer</h2>
+  <p class="answer {% if r.answer_refused %}muted{% endif %}">{{ r.answer }}</p>
+</section>
+
+<section class="card">
+  <h2>Cited sources</h2>
+  <p class="muted small">
+    Showing {{ r.citations | length }} of {{ r.retrieved_count }} retrieved passages with a relevance score above
+    {{ "%.0f" | format(r.threshold * 100) }}% (cosine similarity).
+  </p>
+  {% if r.citations %}
+  <ol class="citations">
+    {% for c in r.citations %}
+    <li>
+      <div class="cite-head">
+        <span class="tag">{{ c.jurisdiction }}</span>
+        <span class="cite-id">[{{ c.citation_id }}]</span>
+        {% if c.section %}<span class="section">{{ c.section }}</span>{% endif %}
+        <span class="relevance">{{ "%.1f" | format(c.score * 100) }}% relevant</span>
+      </div>
+      <p class="excerpt">{{ c.excerpt }}</p>
+      {% if c.document %}<p class="muted small">Source: {{ c.document }}</p>{% endif %}
+    </li>
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p>No sources scored above the threshold for this question.</p>
+  {% endif %}
+</section>
+{% endblock %}

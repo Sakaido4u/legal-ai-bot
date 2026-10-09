@@ -1,0 +1,155 @@
+/* Plain CSS for the server-rendered demo pages. */
+:root {
+  --bg: #f6f6f4;
+  --surface: #ffffff;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --line: #e4e3df;
+  --accent: #2a78d6;
+  --accent-dark: #1c5cab;
+  --low: #0a7f0a;
+  --low-bg: #e8f6e8;
+  --medium: #946200;
+  --medium-bg: #fff4d6;
+  --high: #b02a2a;
+  --high-bg: #fde8e8;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 12px 24px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+.brand { font-weight: 700; color: var(--ink); text-decoration: none; }
+.session { display: flex; align-items: center; gap: 12px; }
+.who { color: var(--ink-2); font-size: 14px; }
+
+.page { max-width: 860px; margin: 32px auto; padding: 0 16px; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.card.narrow { max-width: 420px; margin: 48px auto; }
+
+h1 { font-size: 24px; margin: 0 0 8px; }
+h1.query { font-size: 20px; }
+h2 { font-size: 18px; margin: 0 0 8px; }
+
+.muted { color: var(--ink-2); }
+.small { font-size: 14px; }
+
+.stack { display: flex; flex-direction: column; gap: 8px; }
+label { font-weight: 600; margin-top: 8px; }
+input, textarea, select {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid #c9c8c2;
+  border-radius: 8px;
+  background: #fff;
+  width: 100%;
+}
+input:focus, textarea:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+.btn {
+  display: inline-block;
+  font: inherit;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+}
+.btn-primary { background: var(--accent); color: #fff; margin-top: 12px; }
+.btn-primary:hover { background: var(--accent-dark); }
+.btn-primary:disabled { opacity: 0.6; cursor: wait; }
+.btn-quiet { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-quiet:hover { background: var(--bg); }
+
+.alert {
+  background: var(--high-bg);
+  color: var(--high);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+/* Risk summary: number + labelled level, colored by level */
+.risk {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 20px 0;
+  padding: 20px;
+  border-radius: var(--radius);
+  border-left: 8px solid var(--risk-color);
+  background: var(--risk-bg);
+}
+.risk-low { --risk-color: var(--low); --risk-bg: var(--low-bg); }
+.risk-medium { --risk-color: var(--medium); --risk-bg: var(--medium-bg); }
+.risk-high { --risk-color: var(--high); --risk-bg: var(--high-bg); }
+.risk-score, .risk-level { display: flex; flex-direction: column; }
+.risk-number { font-size: 64px; font-weight: 800; line-height: 1; color: var(--risk-color); }
+.risk-max { font-size: 18px; color: var(--ink-2); margin-left: 4px; }
+.risk-score { flex-direction: row; flex-wrap: wrap; align-items: baseline; }
+.risk-score .risk-caption { flex-basis: 100%; }
+.risk-caption { font-size: 13px; color: var(--ink-2); margin-top: 4px; }
+.badge {
+  align-self: flex-start;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--risk-color);
+  border-radius: 999px;
+  padding: 4px 16px;
+}
+
+.actions { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.actions .btn-primary { margin-top: 0; }
+
+.answer { white-space: pre-wrap; margin: 0; }
+
+.citations { padding-left: 20px; margin: 0; }
+.citations li { padding: 14px 0; border-top: 1px solid var(--line); }
+.citations li:first-child { border-top: 0; }
+.cite-head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.tag {
+  font-size: 12px;
+  font-weight: 700;
+  background: #e7eefa;
+  color: var(--accent-dark);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+.cite-id { color: var(--ink-2); font-size: 14px; }
+.section { font-weight: 600; }
+.relevance { margin-left: auto; font-size: 14px; color: var(--ink-2); }
+.excerpt { margin: 6px 0 4px; }
+
+.disclaimer {
+  text-align: center;
+  color: var(--ink-2);
+  font-size: 13px;
+  padding: 16px 16px 32px;
+}
