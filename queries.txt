@@ -1,0 +1,6 @@
+# One query per line. Blank lines and lines starting with # are ignored.
+What is the lawful basis for processing personal data under GDPR?
+When is a data protection impact assessment required?
+What rights do data subjects have to erasure of their personal data?
+What are the conditions for valid consent when processing children's data?
+What are the obligations for notifying a personal data breach to the supervisory authority?

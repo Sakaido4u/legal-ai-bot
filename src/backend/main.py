@@ -10,6 +10,7 @@ from typing import Annotated, Any
 
 from fastapi import Depends, FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.middleware import SlowAPIMiddleware
@@ -31,6 +32,8 @@ from .auth import (
     verify_password,
 )
 from .config import Settings
+from .demo import STATIC_DIR as DEMO_STATIC_DIR
+from .demo import router as demo_router
 from .deps import get_engine, set_engine
 from .email_service import send_password_reset_email
 from .middleware import RequestLoggingMiddleware
@@ -133,6 +136,9 @@ app.add_middleware(
 )
 
 app.include_router(router)
+# Server-rendered demo flow (login -> query -> results -> PDF) at /demo.
+app.include_router(demo_router)
+app.mount("/demo/static", StaticFiles(directory=str(DEMO_STATIC_DIR)), name="demo-static")
 
 
 def _auth_response(user: User, settings: Settings | None = None) -> AuthTokenResponse:

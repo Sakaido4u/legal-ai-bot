@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Legal AI Compliance Assistant{% endblock %}</title>
+  <link rel="stylesheet" href="/demo/static/demo.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/demo">Legal AI Compliance Assistant</a>
+    {% if user %}
+    <div class="session">
+      <span class="who">{{ user.name }} &middot; {{ user.email }}</span>
+      <form method="post" action="/demo/logout">
+        <button type="submit" class="btn btn-quiet">Log out</button>
+      </form>
+    </div>
+    {% endif %}
+  </header>
+
+  <main class="page">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="disclaimer">{{ disclaimer }}</footer>
+</body>
+</html>

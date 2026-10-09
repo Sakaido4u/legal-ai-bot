@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any
+from typing import Any, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from ml.schemas import (
     Citation,
@@ -170,6 +170,63 @@ class LegalQueryResponse(BaseModel):
     citation_ids_used: list[str] = Field(default_factory=list)
     response_time: float
     meta: dict = Field(default_factory=dict)
+
+
+class BatchQueryRequest(BaseModel):
+    """POST /query/batch — several questions, one shared relevance threshold."""
+
+    queries: list[str] = Field(..., min_length=1, max_length=25)
+    threshold: float = Field(default=0.5, ge=0.0, le=1.0)
+    score_mode: Literal["clip", "shift"] = "clip"
+    product_feature: str = Field(default="General compliance review", min_length=2, max_length=2000)
+    jurisdictions: list[str] = Field(
+        default_factory=lambda: [Jurisdiction.GDPR.value, Jurisdiction.DPDP.value, Jurisdiction.CCPA.value]
+    )
+    document_id: int | None = Field(default=None, ge=1)
+    top_k: int | None = Field(default=None, ge=1, le=24)
+
+    @field_validator("queries")
+    @classmethod
+    def clean_queries(cls, value: list[str]) -> list[str]:
+        cleaned = [q.strip() for q in value]
+        for q in cleaned:
+            if not 3 <= len(q) <= 4000:
+                raise ValueError("each query must be 3-4000 characters")
+        return cleaned
+
+
+class BatchHit(BaseModel):
+    rank: int
+    citation_id: str | None = None
+    chunk_id: str | None = None
+    section: str | None = None
+    document: str | None = None
+    jurisdiction: str | None = None
+    cosine: float
+    score: float
+    risk_level: str | None = None
+    risk_score: float | None = None
+    excerpt: str = ""
+
+
+class BatchQueryItem(BaseModel):
+    query: str
+    answer: str = ""
+    retrieved_count: int
+    hit_count: int
+    top_score: float | None = None
+    avg_score: float | None = None
+    response_time: float | None = None
+    error: str | None = None
+    hits: list[BatchHit] = Field(default_factory=list)
+
+
+class BatchQueryResponse(BaseModel):
+    threshold: float
+    score_mode: str
+    total_queries: int
+    total_hits: int
+    results: list[BatchQueryItem]
 
 
 class RiskAnalysisRequest(BaseModel):
