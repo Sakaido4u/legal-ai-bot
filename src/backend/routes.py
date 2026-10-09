@@ -11,7 +11,7 @@ from backend.auth import get_current_user
 from backend.config import Settings
 from backend.deps import get_engine, get_settings
 from backend.rag_service import RAGEngine
-from backend.rate_limit import UPLOAD_LIMIT, limiter
+from backend.rate_limit import ANALYZE_LIMIT, UPLOAD_LIMIT, limiter
 from database import crud
 from database.session import get_db
 from ml.schemas import Jurisdiction
@@ -20,10 +20,13 @@ from services.document_service import (
     document_to_dict,
     process_document_upload,
 )
+from services.batch_service import run_batch_queries
 from services.query_service import run_legal_query
 from services.risk_service import run_risk_analysis
 
 from .schemas import (
+    BatchQueryRequest,
+    BatchQueryResponse,
     DeleteResponse,
     DocumentDetailResponse,
     DocumentListResponse,
@@ -242,6 +245,66 @@ async def legal_query(
 
     return LegalQueryResponse(
         **result
+    )
+
+
+@router.post(
+    "/query/batch",
+    response_model=BatchQueryResponse,
+)
+@limiter.limit(ANALYZE_LIMIT)
+async def batch_query(
+    request: Request,
+    body: BatchQueryRequest,
+    db: Annotated[Session, Depends(get_db)],
+    engine: Annotated[RAGEngine, Depends(get_engine)],
+):
+    """Run several questions through run_legal_query; keep hits above the threshold."""
+    if engine.store.is_empty():
+        raise HTTPException(
+            status_code=503,
+            detail=(
+                "Vector index is empty. Upload documents or set "
+                "COMPLIANCE_USE_DEMO_INDEX=true."
+            ),
+        )
+
+    if (
+        body.document_id is not None
+        and crud.get_document(
+            db,
+            body.document_id,
+        )
+        is None
+    ):
+        raise HTTPException(
+            status_code=404,
+            detail="Referenced document not found.",
+        )
+
+    jurisdictions = _parse_jurisdictions(
+        body.jurisdictions
+    )
+
+    summaries = await asyncio.to_thread(
+        run_batch_queries,
+        db,
+        engine,
+        body.queries,
+        threshold=body.threshold,
+        score_mode=body.score_mode,
+        product_feature=body.product_feature,
+        jurisdictions=jurisdictions,
+        document_id=body.document_id,
+        top_k=body.top_k,
+    )
+
+    return BatchQueryResponse(
+        threshold=body.threshold,
+        score_mode=body.score_mode,
+        total_queries=len(summaries),
+        total_hits=sum(s["hit_count"] for s in summaries),
+        results=summaries,
     )
 
 
