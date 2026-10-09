@@ -1,0 +1,35 @@
+{
+  "_note": "Author (non-lawyer) spot-check of 20 claims sampled from faithfulness.json for generation_llama3.2-3b_fixed_run1.json (seed 7: 8 NLI-entailed, 10 NLI-neutral, 2 NLI-contradicted). Judgment = does the cited excerpt support the claim as written? 'partial' = content supported but modality overstated or a statute reference (article/section number) is wrong.",
+  "judgments": [
+    {"idx": 0, "qid": "D10", "nli": "entailment", "author": "supported", "comment": "near-verbatim; drops the retention exception"},
+    {"idx": 1, "qid": "G19", "nli": "entailment", "author": "supported"},
+    {"idx": 2, "qid": "C01", "nli": "entailment", "author": "supported"},
+    {"idx": 3, "qid": "G08", "nli": "entailment", "author": "partial", "comment": "recital says 'should be able to provide'; claim says 'must provide'"},
+    {"idx": 4, "qid": "G10", "nli": "entailment", "author": "supported"},
+    {"idx": 5, "qid": "G14", "nli": "entailment", "author": "supported"},
+    {"idx": 6, "qid": "D17", "nli": "entailment", "author": "supported"},
+    {"idx": 7, "qid": "G08", "nli": "entailment", "author": "supported"},
+    {"idx": 8, "qid": "G32", "nli": "neutral", "author": "unsupported", "comment": "excerpt is Art. 6(1)(e)-(f) lawful bases, not restriction of processing"},
+    {"idx": 9, "qid": "G04", "nli": "neutral", "author": "unsupported", "comment": "claim that GDPR does not address biometric data is false and not in excerpt"},
+    {"idx": 10, "qid": "G14", "nli": "neutral", "author": "supported", "comment": "NLI false negative"},
+    {"idx": 11, "qid": "X06", "nli": "neutral", "author": "supported", "comment": "paraphrase of recital 101; NLI false negative"},
+    {"idx": 12, "qid": "X03", "nli": "neutral", "author": "supported", "comment": "verbatim; NLI false negative"},
+    {"idx": 13, "qid": "G12", "nli": "neutral", "author": "partial", "comment": "sentence supported verbatim but attributed to 'Article 16' - the parser's wrong heading, repeated by the model"},
+    {"idx": 14, "qid": "D03", "nli": "neutral", "author": "unsupported", "comment": "excerpt is s.40 rule-making power; 'Section 8 (part 23)' is the parser's wrong label"},
+    {"idx": 15, "qid": "G15", "nli": "neutral", "author": "unsupported", "comment": "recital 156 is about archiving safeguards; 'Article 263' is the parser's wrong heading"},
+    {"idx": 16, "qid": "X05", "nli": "neutral", "author": "supported", "comment": "figures match Art. 83(5)-(6) text in excerpt; NLI false negative"},
+    {"idx": 17, "qid": "G09", "nli": "neutral", "author": "supported", "comment": "NLI false negative"},
+    {"idx": 18, "qid": "D05", "nli": "contradiction", "author": "partial", "comment": "nomination content is in the excerpt tail; 'Section 7 (part 3)' is wrong (s.14)"},
+    {"idx": 19, "qid": "D07", "nli": "contradiction", "author": "unsupported", "comment": "excerpt is s.12(2) correction duties, not a consent exemption"}
+  ],
+  "summary": {
+    "n": 20,
+    "author_supported": 12,
+    "author_partial": 3,
+    "author_unsupported": 5,
+    "nli_entailed_and_author_supported": 7,
+    "nli_entailed_and_author_partial": 1,
+    "nli_not_entailed_but_author_supported": 5,
+    "claims_quoting_a_wrong_article_or_section_number_inherited_from_parser_heading": 4
+  }
+}

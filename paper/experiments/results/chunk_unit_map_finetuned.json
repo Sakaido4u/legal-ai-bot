@@ -1,0 +1,905 @@
+{
+  "chunks": {
+    "GDPR-744b3cfb13166663": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-5cadc42e27f56f48": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-2df05dec083d8d54": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-158f2303c0139962": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-dcac7410e8487a10": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-b96352d352ea925f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-9db8a179cc329114": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "heading": "Introduction"
+    },
+    "GDPR-c936fde3996d7657": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-f189d566622a54d7": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-27c1cd60e753e7ac": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-142f101b8df07467": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-dadd9b08b6aa9837": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-c3270dba427f7e27": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-2a823a482ca72ce1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-6ece4bc950d11ca9": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-fbde140dbc3b13a6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-3189863db63f5fd3": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "heading": "Introduction"
+    },
+    "GDPR-32634410f29f27ca": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "heading": "Introduction"
+    },
+    "GDPR-45339481a4440aed": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-930d5136fa07467b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-63f8157b5debc341": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-20baf6e32941715a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-87d3d03946ecea70": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-eb97034d46b664b0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-a301acc32a8f3c22": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-ed67a06d18cac048": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-6978950fb214ac87": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-d15d27dd37d23ac4": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-295352b5eed70da2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-e528e1e5fd31b703": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-87e753f2e58dc440": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-20e3d855c61aa80f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-e792bfe9bbc1adb2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-72ddfe00b80fced2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-52acb36321bae560": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-c24e0e160a84f744": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-12c172aa7ca1337f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "heading": "Introduction"
+    },
+    "GDPR-c594ff28532eaddd": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 15",
+      "heading": "Introduction"
+    },
+    "GDPR-ee1b9f6a5e56f3aa": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "heading": "Introduction"
+    },
+    "GDPR-d38ab8a91b386834": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "heading": "Introduction"
+    },
+    "GDPR-8ff447f79a31e84d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "heading": "Introduction"
+    },
+    "GDPR-b99bca459f47f03e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "heading": "Introduction"
+    },
+    "GDPR-6ac836f94df49578": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "heading": "Introduction"
+    },
+    "GDPR-76a2824959eb2891": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "heading": "Introduction"
+    },
+    "GDPR-ce6da8e6cf12f43f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 5",
+      "heading": "Introduction"
+    },
+    "GDPR-db4f8bad6e141218": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "heading": "Introduction"
+    },
+    "GDPR-f7d532ca5baeec5f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "heading": "Introduction"
+    },
+    "GDPR-6a135e050e21a141": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "heading": "Introduction"
+    },
+    "GDPR-dd2137e9e2c634b7": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 22",
+      "heading": "Introduction"
+    },
+    "GDPR-71fabd5fc6138a13": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "heading": "Introduction"
+    },
+    "GDPR-9b76ac4accdbb659": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 22",
+      "heading": "Introduction"
+    },
+    "GDPR-469e3b68202a0f2a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 22",
+      "heading": "Introduction"
+    },
+    "DPDP-254e9eff7917be17": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "heading": "Consent"
+    },
+    "DPDP-b082079c3c9ba693": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 9",
+      "heading": "Processing of personal data of children"
+    },
+    "DPDP-67b88287238112ba": {
+      "jurisdiction": "DPDP",
+      "unit": "UNLOCATED",
+      "heading": "Right to erasure"
+    },
+    "CCPA-e8b9eeccf5166b54": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 0",
+      "topics": [
+        "overview",
+        "right_to_know",
+        "right_to_delete",
+        "opt_out_sale",
+        "non_discrimination"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-bf031482c66a42d3": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 1",
+      "topics": [
+        "right_to_know",
+        "right_to_delete",
+        "opt_out_sale",
+        "non_discrimination",
+        "right_to_correct"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-d51f4ef145a8389c": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 2",
+      "topics": [
+        "right_to_correct",
+        "limit_sensitive_pi",
+        "business_obligations",
+        "notices"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-b48d017d7e64c01f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 3",
+      "topics": [
+        "topic_index"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-92552165af1477d4": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 4",
+      "topics": [
+        "faq_disclaimer"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-82552ce0a8db883a": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 5",
+      "topics": [
+        "non_discrimination",
+        "financial_incentive"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-de7edd243009883f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 6",
+      "topics": [
+        "external_resources"
+      ],
+      "heading": "Links to Topics"
+    },
+    "CCPA-3a684a6d90910e94": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 7",
+      "topics": [],
+      "heading": "Frequently Asked Questions (FAQs)"
+    },
+    "CCPA-41f0a6b59dd11a39": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 8",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-7f0ee7d8e7b00519": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 9",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-5866c5e4152a8530": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 10",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-2897e46c7452c95f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 11",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-4e20210c9e4ba5c9": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 12",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-855d42c6f9b85e30": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 13",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-6493e5bf7a682721": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 14",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-ff2df64ccc3db977": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 15",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-4c9ecf27b29a6562": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 16",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-e68284aca027f4fc": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 17",
+      "topics": [],
+      "heading": "1. What rights do I have under the CCPA?"
+    },
+    "CCPA-2fbad86c2b162b60": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 18",
+      "topics": [],
+      "heading": "2. What if I am not a California resident?"
+    },
+    "CCPA-2ee4fd32d6f22739": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 19",
+      "topics": [],
+      "heading": "3. What is considered personal information and sensitive personal information under the CCPA?"
+    },
+    "CCPA-8720f6d57233ebf8": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 20",
+      "topics": [],
+      "heading": "4. What is not considered personal information under the CCPA?"
+    },
+    "CCPA-b0b55c6abe977aa6": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 21",
+      "topics": [],
+      "heading": "5. What businesses does the CCPA apply to?"
+    },
+    "CCPA-edb2af03ff94a0e3": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 22",
+      "topics": [],
+      "heading": "6. Does the CCPA apply to nonprofits or government agencies?"
+    },
+    "CCPA-6d89e265d3bf483b": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 23",
+      "topics": [],
+      "heading": "7. What can I do if I think a business violated the CCPA?"
+    },
+    "CCPA-d3e3772f0459f72e": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 24",
+      "topics": [],
+      "heading": "7. What can I do if I think a business violated the CCPA?"
+    },
+    "CCPA-53f5b529553cffc9": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 25",
+      "topics": [],
+      "heading": "7. What can I do if I think a business violated the CCPA?"
+    },
+    "CCPA-5edf24f4e1d6bb79": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 26",
+      "topics": [],
+      "heading": "7. What can I do if I think a business violated the CCPA?"
+    },
+    "CCPA-bfb3bd8c202ce0bc": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 27",
+      "topics": [],
+      "heading": "7. What can I do if I think a business violated the CCPA?"
+    },
+    "CCPA-e9a79f42889a36a3": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 28",
+      "topics": [],
+      "heading": "8. What kind of data breach can I sue a business for under the CCPA?"
+    },
+    "CCPA-29e433ceccbda5f5": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 29",
+      "topics": [],
+      "heading": "8. What kind of data breach can I sue a business for under the CCPA?"
+    },
+    "CCPA-dad04f8d4a60f9a9": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 30",
+      "topics": [],
+      "heading": "8. What kind of data breach can I sue a business for under the CCPA?"
+    },
+    "CCPA-0566e03feed55500": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 31",
+      "topics": [],
+      "heading": "8. What kind of data breach can I sue a business for under the CCPA?"
+    },
+    "CCPA-07c1455e1cba1e8e": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 32",
+      "topics": [],
+      "heading": "8. What kind of data breach can I sue a business for under the CCPA?"
+    },
+    "CCPA-96e981e306a8a514": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 33",
+      "topics": [],
+      "heading": "8. What kind of data breach can I sue a business for under the CCPA?"
+    },
+    "CCPA-e916de7d426df81e": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 34",
+      "topics": [],
+      "heading": "9. Do businesses need to comply with the statutory CPRA amendments to the CCPA that went into effect on January 1, 2023?"
+    },
+    "CCPA-ffc850eba6100e3b": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 35",
+      "topics": [],
+      "heading": "10. Are there any CCPA regulations currently in effect?"
+    },
+    "CCPA-6527d86009af6ec4": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 36",
+      "topics": [],
+      "heading": "11. Are the statutory exemptions for employee data and business-to-business transactions still in effect?"
+    },
+    "CCPA-371f85b6fbaa4166": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 37",
+      "topics": [],
+      "heading": "12. Can I use an authorized agent to submit a request?"
+    },
+    "CCPA-6618157d87b8b8ca": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 38",
+      "topics": [],
+      "heading": "1. What is the right to opt-out?"
+    },
+    "CCPA-e81b9cfc273d4adf": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 39",
+      "topics": [],
+      "heading": "2. Can businesses sell a child’s personal information?"
+    },
+    "CCPA-f65cebb38799e5dc": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 40",
+      "topics": [],
+      "heading": "3. How do I submit my opt-out request?"
+    },
+    "CCPA-3e70095a2d59eb11": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 41",
+      "topics": [],
+      "heading": "4. How long does the business have to respond to my opt-out request?"
+    },
+    "CCPA-fc2c3af9cb2e1bf5": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 42",
+      "topics": [],
+      "heading": "5. Why is the business asking me for more information?"
+    },
+    "CCPA-d30a77087d73b434": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 43",
+      "topics": [],
+      "heading": "6. Why did the business deny my opt-out request?"
+    },
+    "CCPA-f0e65b4692fc3f19": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 44",
+      "topics": [],
+      "heading": "7. Why did I get a response that the business is a service provider that does not have to act on my request?"
+    },
+    "CCPA-8cff99574487ae04": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 45",
+      "topics": [],
+      "heading": "8. What is the GPC?"
+    },
+    "CCPA-c08c812087f20c91": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 46",
+      "topics": [],
+      "heading": "9. How do I submit my opt-out request using the GPC?"
+    },
+    "CCPA-a9ebf31648dc8629": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 47",
+      "topics": [],
+      "heading": "1. What is the right to know?"
+    },
+    "CCPA-fa9b525088b05755": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 48",
+      "topics": [],
+      "heading": "2. How do I submit my request to know?"
+    },
+    "CCPA-2641c945f9e1dfb7": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 49",
+      "topics": [],
+      "heading": "3. How long does the business have to respond to my request to know?"
+    },
+    "CCPA-45d819d82334c879": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 50",
+      "topics": [],
+      "heading": "4. Why is the business asking me for more information?"
+    },
+    "CCPA-10967c77e6a4c348": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 51",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to know?"
+    },
+    "CCPA-2d48e61bd102c200": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 52",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to know?"
+    },
+    "CCPA-53cf1ed173e08c9a": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 53",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to know?"
+    },
+    "CCPA-b0174d4c3e7fd763": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 54",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to know?"
+    },
+    "CCPA-8a7d6cb172fd2381": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 55",
+      "topics": [],
+      "heading": "6. Why did I get a response that the business is a service provider that does not have to act on my request?"
+    },
+    "CCPA-1d786cb06007e0e4": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 56",
+      "topics": [],
+      "heading": "1. What is my right to delete personal information?"
+    },
+    "CCPA-e0edf899427a4987": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 57",
+      "topics": [],
+      "heading": "2. How do I submit my right to delete?"
+    },
+    "CCPA-bd4f029ca7c29402": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 58",
+      "topics": [],
+      "heading": "3. How long does the business have to respond to my request to delete?"
+    },
+    "CCPA-48ac8edf9dc78a36": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 59",
+      "topics": [],
+      "heading": "4. Why is the business asking me for more information?"
+    },
+    "CCPA-0960a53a84ec9f87": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 60",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-e573b8b60af115eb": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 61",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-bcab44edec260078": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 62",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-bfd3eb3224a66a0f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 63",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-0c0dfc856152b7e4": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 64",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-ee7ed44e0fd2df17": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 65",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-063fb03b7847038b": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 66",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-a17aaad56968b370": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 67",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to delete?"
+    },
+    "CCPA-f06073ca2cc79f08": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 68",
+      "topics": [],
+      "heading": "6. Why did I get a response that the business is a service provider that does not have to act on my request?"
+    },
+    "CCPA-41efd0fc005d5a3d": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 69",
+      "topics": [],
+      "heading": "7. Why is a debt collector still calling me about my debt even though I asked it to delete my information?"
+    },
+    "CCPA-8391e13f2beebeb4": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 70",
+      "topics": [],
+      "heading": "8. Why is a credit reporting agency still giving out my credit information even though I asked it to delete my information?"
+    },
+    "CCPA-d3ec600b08bb7ede": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 71",
+      "topics": [],
+      "heading": "1. What is the right to correct?"
+    },
+    "CCPA-4fe5757823ea5343": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 72",
+      "topics": [],
+      "heading": "2. How do I submit my request to correct?"
+    },
+    "CCPA-6762fab8e602858d": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 73",
+      "topics": [],
+      "heading": "3. How long does the business have to respond to my request to correct?"
+    },
+    "CCPA-e6dd345bee69d80d": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 74",
+      "topics": [],
+      "heading": "4. Why is the business asking me for more information?"
+    },
+    "CCPA-5dd7d026bb5fa051": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 75",
+      "topics": [],
+      "heading": "5. Why did the business deny my request to correct?"
+    },
+    "CCPA-29c50219088b51e5": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 76",
+      "topics": [],
+      "heading": "1. What is the right to limit?"
+    },
+    "CCPA-bdf90e46ceeb40c2": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 77",
+      "topics": [],
+      "heading": "G. RIGHT TO NON-DISCRIMINATION"
+    },
+    "CCPA-838b9b106ce30bff": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 78",
+      "topics": [],
+      "heading": "1. What is a notice at collection?"
+    },
+    "CCPA-d43b7c2ac5663e4f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 79",
+      "topics": [],
+      "heading": "2. Where can I find a business’s notice at collection?"
+    },
+    "CCPA-dfbb8366478090e0": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 80",
+      "topics": [],
+      "heading": "3. What is a privacy policy?"
+    },
+    "CCPA-10e75c37eb5721f1": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 81",
+      "topics": [],
+      "heading": "4. Where can I find a business’s privacy policy?"
+    },
+    "CCPA-6e8b4d77a85be112": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 82",
+      "topics": [],
+      "heading": "1. What is a data broker?"
+    },
+    "CCPA-b73f8597e4a211f5": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 83",
+      "topics": [],
+      "heading": "2. How can I find data brokers that collect and sell my personal information?"
+    },
+    "CCPA-1ef18933fd9de9e0": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 84",
+      "topics": [],
+      "heading": "3. How can I stop a data broker from selling my personal information?"
+    },
+    "CCPA-748f43240e6de7c2": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 85",
+      "topics": [],
+      "heading": "Other Consumer Resources on CCPA"
+    },
+    "CCPA-e94a0d52aed5da9f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 86",
+      "topics": [],
+      "heading": "Sensitive personal information"
+    }
+  },
+  "stats": {
+    "index_dir": "C:\\Users\\Avane\\OneDrive\\Desktop\\Legal AI Bot\\legal-ai-bot\\vector_store\\regulatory-finetuned",
+    "chunks": {
+      "GDPR": 52,
+      "DPDP": 3,
+      "CCPA": 7
+    },
+    "unlocated": {
+      "DPDP": 1
+    },
+    "heading_field_disagrees_with_position": {
+      "GDPR": {
+        "count": 52,
+        "of": 52,
+        "rate": 1.0
+      },
+      "DPDP": {
+        "count": 2,
+        "of": 3,
+        "rate": 0.667
+      }
+    },
+    "recital_chunks_gdpr": 3,
+    "operative_units_covered": {
+      "GDPR": 7,
+      "DPDP": 2
+    },
+    "chunks_per_unit_top": [
+      [
+        "Article 9",
+        19
+      ],
+      [
+        "Article 6",
+        16
+      ],
+      [
+        "Article 17",
+        7
+      ],
+      [
+        "Recital",
+        3
+      ],
+      [
+        "Article 22",
+        3
+      ],
+      [
+        "Article 14",
+        2
+      ],
+      [
+        "Article 15",
+        1
+      ],
+      [
+        "Article 5",
+        1
+      ],
+      [
+        "Section 6",
+        1
+      ],
+      [
+        "Section 9",
+        1
+      ],
+      [
+        "UNLOCATED",
+        1
+      ],
+      [
+        "CCPA chunk 0",
+        1
+      ]
+    ]
+  }
+}

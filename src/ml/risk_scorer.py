@@ -5,6 +5,20 @@ from dataclasses import dataclass
 
 from .schemas import Jurisdiction, RetrievedPassage, RiskLevel, RiskScore
 
+# Internal feature → human-readable label (shown in UI / PDF).
+FACTOR_LABELS: dict[str, str] = {
+    "prohibition_or_hard_limit_language": "Prohibition or hard-limit language",
+    "penalty_or_enforcement_language": "Penalty or enforcement language",
+    "strict_obligation_language": "Strict obligation language",
+    "sensitive_data_category_language": "Sensitive / special-category data language",
+    "eu_prescriptive_context_prior": "EU / GDPR prescriptive context",
+}
+
+
+def humanize_factor(name: str) -> str:
+    return FACTOR_LABELS.get(name, name.replace("_", " ").strip().capitalize())
+
+
 # High-signal compliance language (English corpora; extend per locale).
 _PROHIBIT = re.compile(
     r"\b("
@@ -50,13 +64,13 @@ def score_passage(passage: RetrievedPassage) -> RiskScore:
         (_SENSITIVE, "sensitive_data_category_language", 0.28),
     ):
         if pat.search(text):
-            factors.append(name)
+            factors.append(humanize_factor(name))
             raw += w
 
     # Jurisdiction prior: EU text tends to be more prescriptive in mixed corpora (weak nudge).
     if passage.jurisdiction == Jurisdiction.GDPR and _OBLIGATION.search(text):
         raw += 0.05
-        factors.append("eu_prescriptive_context_prior")
+        factors.append(humanize_factor("eu_prescriptive_context_prior"))
 
     raw = min(1.0, raw)
     if raw >= 0.55:

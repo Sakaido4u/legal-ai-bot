@@ -1,0 +1,202 @@
+[
+  {
+    "idx": 0,
+    "qid": "D10",
+    "claim": "A Data Principal shall make a request in such manner as may be prescribed to the Data Fiduciary for erasure of her personal data, and upon receipt of such a request, the Data Fiduciary shall erase her personal data.",
+    "cited": [
+      "C1"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9853833913803101
+  },
+  {
+    "idx": 1,
+    "qid": "G19",
+    "claim": "The data protection officer may be a staff member of the controller or processor, or fulfill tasks on the basis of a service contract.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9948034882545471
+  },
+  {
+    "idx": 2,
+    "qid": "C01",
+    "claim": "The CCPA applies to many businesses, including data brokers, and requires them to give consumers certain notices explaining their privacy practices.",
+    "cited": [
+      "C3"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9859099388122559
+  },
+  {
+    "idx": 3,
+    "qid": "G08",
+    "claim": "The controller must provide the data subject with direct access to their personal data, where possible, through a secure system.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9973909258842468
+  },
+  {
+    "idx": 4,
+    "qid": "G10",
+    "claim": "The exercise of the right to data portability must be without prejudice to Article 17, and the right shall not apply to processing necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller, as per Article 20.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9949843883514404
+  },
+  {
+    "idx": 5,
+    "qid": "G14",
+    "claim": "The purposes of the processing, categories of data subjects and personal data, and categories of recipients must be included in the record.",
+    "cited": [
+      "C2"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9956074357032776
+  },
+  {
+    "idx": 6,
+    "qid": "D17",
+    "claim": "The DPDP does not restrict the applicability of any law for the time being in force in India that provides for a higher degree of protection for or restriction on transfer of personal data by a Data Fiduciary outside India.",
+    "cited": [
+      "C1"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9426751732826233
+  },
+  {
+    "idx": 7,
+    "qid": "G08",
+    "claim": "The controller should not refuse to provide all information to the data subject, but may request that the data subject specify the information or processing activities to which the request relates, especially for large quantities of information.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "entailment",
+    "p_entail": 0.9963858127593994
+  },
+  {
+    "idx": 8,
+    "qid": "G32",
+    "claim": "The GDPR allows for restriction of processing in certain cases, such as when the processing is necessary for the performance of a task carried out in the public interest or in the exercise of official authority vested in the controller.",
+    "cited": [
+      "C3"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.045369572937488556
+  },
+  {
+    "idx": 9,
+    "qid": "G04",
+    "claim": "The GDPR does not explicitly address the processing of biometric health data without explicit consent, but it does require that controllers provide clear and transparent information to data subjects about the processing of their personal data.",
+    "cited": [
+      "C2"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.0004465790407266468
+  },
+  {
+    "idx": 10,
+    "qid": "G14",
+    "claim": "The record must also include information on the categories of recipients, including those in third countries or international organisations.",
+    "cited": [
+      "C2"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.2176404744386673
+  },
+  {
+    "idx": 11,
+    "qid": "X06",
+    "claim": "The GDPR allows for the transfer of personal data to third countries or international organisations if the conditions laid down in the Regulation are complied with.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.011896338313817978
+  },
+  {
+    "idx": 12,
+    "qid": "X03",
+    "claim": "The notification may result in an intervention of the supervisory authority in accordance with its tasks and powers laid down in the GDPR.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.0010996022028848529
+  },
+  {
+    "idx": 13,
+    "qid": "G12",
+    "claim": "Automated decision-making and profiling based on special categories of personal data should be allowed only under specific conditions, as stated in Article 16 of the GDPR.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.0001291138760279864
+  },
+  {
+    "idx": 14,
+    "qid": "D03",
+    "claim": "The notice given by the Data Fiduciary to the Data Principal must inform her of the purpose of processing her personal data, as per Section 8 (part 23) of the DPDP Act, 2023.",
+    "cited": [
+      "C2"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.0759086161851883
+  },
+  {
+    "idx": 15,
+    "qid": "G15",
+    "claim": "Implement technical and organisational measures to ensure the principle of data minimisation, as required by Article 263 of the GDPR.",
+    "cited": [
+      "C1"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.0002915350196417421
+  },
+  {
+    "idx": 16,
+    "qid": "X05",
+    "claim": "Non-compliance with GDPR regulations can result in administrative fines up to 20,000,000 EUR or 4% of the total worldwide annual turnover of the preceding financial year, whichever is higher.",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.017896493896842003
+  },
+  {
+    "idx": 17,
+    "qid": "G09",
+    "claim": "A controller may charge a reasonable fee for providing a copy of personal data if the request is \"manifestly unfounded or excessive\".",
+    "cited": [
+      "C0"
+    ],
+    "nli_label": "neutral",
+    "p_entail": 0.006786272395402193
+  },
+  {
+    "idx": 18,
+    "qid": "D05",
+    "claim": "In the event of death or incapacity of the Data Principal, the rights of the Data Principal shall be exercised by another individual, as per Section 7 (part 3) of the DPDP Act, 2023.",
+    "cited": [
+      "C2"
+    ],
+    "nli_label": "contradiction",
+    "p_entail": 6.48684726911597e-05
+  },
+  {
+    "idx": 19,
+    "qid": "D07",
+    "claim": "Personal data can be processed without consent for the purpose of correcting, completing, or updating personal data, as per Section 7 (part 2) of the DPDP Act.",
+    "cited": [
+      "C1"
+    ],
+    "nli_label": "contradiction",
+    "p_entail": 0.0003824983723461628
+  }
+]

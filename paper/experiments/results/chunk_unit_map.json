@@ -1,0 +1,5845 @@
+{
+  "chunks": {
+    "GDPR-1ccb5bf3d8ad1298": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-c64a9b7f54ef59bd": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-1eedc5640208b5a4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-48d4236a55df5d55": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-b845416905ed11db": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-ab6ba18a5366ac8d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-fde525ec5efd3c9d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-3f378ea4885fa103": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-f8cafe091e93a132": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-ee3b1089a566db66": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-18c2c54d1109d32d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-f8ece09a148decbd": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-f311e23a975cb18e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-634b165ba0ab6f9d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-55bc9761005bf781": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-750a2db1adcfd27c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3c6fdc9a6539e915": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e39d2849c338e07a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-adca4ea75e431340": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-cfd642b5a3e67182": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-9daf4bdf31879b5c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-729d09cd7688a24a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e7ec043336f160d1": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-224e10bd3cdf9aed": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a22050627063b4a8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-0a7ac1ffdb247155": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a5514cdda6468e38": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b92960abfa4152e4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-65b814d4ad0cb455": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ba8377e4cebc4057": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ed2b77c68fcc68ae": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-0073140125c10be6": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2d19cf6a2706e170": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-6ca9ad6adf1993d7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-9f50ad14eb51ebf2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-4d9eec25141d1d6a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d46873edfefce01a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a15dbc6cfda9b06e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-38c4b1a6a9729ca6": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-21fefb56b81e1c5c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a2f45e100e64d99f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-58f029e8120a3d75": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-35ea6f613fba4aee": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a390e69f272ca01b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3a44d54e29ce6e1d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2dafd977434c90ec": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b406e3d23628718f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b46102a6e6782a54": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3a120b447f7df8d7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a3d45b107684627d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a8dea5cf9d84d142": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3ad272687921b841": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-9d95fd3383501379": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e8f225943da7d55f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-981e481f06042440": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-75f3df51eb581bbd": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-81a0fef7187e8980": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-6ea261114ab425a9": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3f79e8b7cb36528e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-0cae88732ce79dfa": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-bbde094cd1d6557b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-72a62fe953728a24": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-174f96022936919d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-c4f4714a23e8ef50": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-79afebc9a54e8263": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-492fe3bb0f4c1bbd": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ad72f1d077ac94ce": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-23603f524c45acdc": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-fc805cfe127926a5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d50fa4729f5ce611": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ea07afd737046908": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5ec17973df553e26": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-9fc83f7065350ad9": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-027778a552b4d272": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ca0cf141e68022ca": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-41c4c6fe7c953b1d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5c974f98a4e41c6e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-68762c6a9ced5bd5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a44492b19db7790b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d02810b8bf73f0c2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-0687922c36ec75fc": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-294d3cb98c8a3394": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5360ffe1fd683545": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a6e2ab245f2e7025": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d354f4d7e69623ff": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-20096e601a8a532f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2ad94bee7af8c552": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-76d5522d4b3837a7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ae2109e5aabcb3b4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-f6df52c8745dff91": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e6d1c428419e6a8f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d29ea2de84c917be": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-67d1bb46a9f5b727": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-967b5a79a58f65b9": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8110b454010e580e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-706eb95189054ba2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-f6d3aaf2f8628783": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e67bbd40bbdd5031": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-faff55feca2f5d24": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5c316c1a81786b54": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-9beb8cc06b38976f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-36c2c43020a56976": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-49007db7d49eb6d3": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-98e65e2b566305e6": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-7d0c742cca4055c4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-7a04ee3ecfbba284": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-55ad20c1d5289093": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-f89e42cf52038b08": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-aeae94ee329a9319": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-4517e8a6ee95c924": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2f85f9124affd08c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d218f277624a3100": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-21a3034a2dac3ce9": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-923123ee640534c5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-fd982e601adf7e68": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-759a22568711668e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3778425d8fdc29dc": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5b3d9c3ad645210d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3697186c5346cc32": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-f8b7931061143834": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-455c4107139be018": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-4365c7cee059a805": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5a0eabcea9eb067a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-067c41914dd5511b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ed5c882b9f688ad7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a2332c6b97ade263": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-c68c37281c97ec48": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ff27c17ba4c48dbb": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ea9eb0093caaa180": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a8d420b90d8ddf1c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3e13e6f77ede762a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-fbcda89079bbf0fd": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-99d2092303d22de3": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-f58994758a8264c7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-03aa321bf4cb2672": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3d9d1c20140341ef": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e4ff3f67d74bf59e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-c7023c7026958145": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3b188a76960adac7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a2eb64beb754bd82": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d168a3e146fbf7aa": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-c164cc64029230a1": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-6244f17fbe162ab6": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-7c683268d28567f2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3de604710d707450": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-6e44c0cc04f7b103": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-80234c7f52d1784f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8b871c64a7e9b33e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e61af3e5db984df2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2912f2d386ec5148": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-12c6e2cb6cf2ccd5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3e9e3013849e2071": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3c28a50535e2ffc2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-9d438aa093ed2ab1": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8a9a3680912ae250": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-0ce781c59ffbe042": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-085e03dbcc24b636": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-02e5224c85511ba8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-036f96fb5f4499dc": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2b091ac4cee92207": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3a389d03deaafdd7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-93b7205e4aa58007": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8ff9e0ee46d37e8c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-25dba20494fba9cf": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-c55be71480748f6e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5958e8e2cdb1bbe2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-eca531df890e9840": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d1aa95fadc253384": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-73530640ccf02ad6": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d407a7b1c47fbb4e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-6cf6d3cb42958a1a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-09e22d69adab8192": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5bcfdd61720cd775": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3121a6bd08aefb27": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-35439e8e8109705d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-27925cc274961a25": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-32b778115cad54a2": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-cff342893453e348": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-579d5cf1023ed706": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3d288eef77a8d88c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-169d6283df5a14eb": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-322c6c7c884a5f2a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-835bde26f5196664": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-820b8e15dc9eecce": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ac5106aff144097b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5129577c6e8f6204": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-17eaa8b1be60e4fe": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-4898667325c8f5bf": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8cdc696d739683b3": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-17f2680a238e0d34": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-56751406de9a3c37": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-69d2837f56b40c65": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2eaaadd701f92e19": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-65f26b98f60f429e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5e9ead3e1b04b909": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-908ded5aae6c3b98": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-28eeaa079cf9859d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d37c1f4d609c5df3": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b5b96399e3bd80b5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-cdae01aa94539e26": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a7be6f01ac7405f5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d023460dc2da1bac": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-717f00e98d9b44ef": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-fcdd251844a369ff": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-5f302dff574954a9": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b4b49c85107b457f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-167ec4851150267a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-22b37641f93720ff": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-f6e7f24a00387be5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d0f3dcc116de1809": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-32c9c831b29d8e6c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-1efa7f7d85211af4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-00b8a7f98c519010": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8050f907c3be8241": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b4dbfd9bb1915859": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-472b6fe0536fca2c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-85dd2220b8887610": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e636f10a5fb15a12": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ab593c36a00a3898": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e8ab09690d1df2e1": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8c4e22c82ef61643": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a8ea9bf3a8c31ebd": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b4cc480604ebe5e9": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-0231b783453c2905": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-3b8050768bb608eb": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-7ea17e418861e03b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-012aa57cbde2d8c3": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b57ba6d3cf97c2ae": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-31e9f10edc564b99": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d26375cdf117a3c8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e1245529aacc29f1": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-a97064b26092b7b9": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-4aad17feed1c7228": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8b13000c2f2c47b7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-0054a102c8aebf5b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2eff170be62f8936": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-de7ae70adfd15b92": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ca7ad59bbe7d51eb": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-c0b06ca8015dc76a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-fc2aaf7e1451079d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b47afd99e37708d4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-042e73c7641f6e12": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-34b328fd26c5a2ae": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-726ac1e7fa4ea1e0": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-4c2f370aeedb1011": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-badc60fa30666148": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-2a809b8ffc3e50d8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-aaea99cbacbe4ec8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-565bc6929d635056": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-f678b976e08c518c": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-4207cf9439421e45": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-6d2f23133d88acf3": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-388b668899944060": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-8a58a857dac3d8e8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-ced5180fa6e033dc": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-d542d9a09613525f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-b36d683ebea9cd9b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-6d7199d5d9df2109": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-e60f878e28686edf": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-3688403c4b08af94": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 267"
+    },
+    "GDPR-35050f539e0f7821": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-ea5b66e5defc072a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-f3798caa0ac6550f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-7457aecdef3e069d": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-80c2136be79d95ce": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-0a3bcfb7fca7654a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-7429838d44cbeae7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-11aadbf2c1abc5ff": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-50f7a7e108434151": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-706d0e055a781bc7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-27ea3e153b0c4a2f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-dfc1020e9091f239": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-4444c99826de49b1": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-3f9a671faef88d44": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-ee151d49a5c4226b": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-ad101e24207d58f4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-4cb30a10f047c7c4": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-c659e8b83df5c249": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-7a8954523f001fe5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-98f8260b58c507f5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-347991d830f49c57": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-d3747ce2fb8f7334": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-a4e05d550f47ce89": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-b22d9744f04544e5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-9eefec182951b382": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-95dd329bbb4e1480": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-6443aa402f9d5da7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-3220ed4b96afd558": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-58f624978ff70a42": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-6291ef04492cf916": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-11828d61f2b5343e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-236399b1bbdb5ca5": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-b086d076383b3c88": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-c08f3e815806e0a0": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-f86003602bcf8ac6": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-6e94c4bbe5738412": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-6a88fb4b2e85732a": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-a7fe2d3c7ad5e314": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-22603892334c088f": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-e0a54d1e4a1e65ac": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-ef7f03f604e594bc": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-9ba0299fc9fd30e8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-7955e707d074a8f8": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-addcbb6fa159bd37": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-030850bb8b3ea21e": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-fc2c5735adc22af7": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 263"
+    },
+    "GDPR-782b091a26bf1dff": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 1",
+      "units": [
+        "Article 1",
+        "Article 2"
+      ],
+      "heading": "Article 1"
+    },
+    "GDPR-5a8a416e1c5df5da": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 2",
+      "units": [
+        "Article 2",
+        "Article 3"
+      ],
+      "heading": "Article 2"
+    },
+    "GDPR-df61438a34b5d321": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 3",
+      "units": [
+        "Article 3",
+        "Article 4"
+      ],
+      "heading": "Article 3"
+    },
+    "GDPR-20258122b1aa52c4": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-40b9c2fd45916baf": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-fde8f41cca310aa2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-be46929055f4ae22": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-c6f173fbb300ea39": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-31f8e40c6f19d804": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-c4a34a113b870e51": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-cafdb666ce7d3be9": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-8fea7a441d9a6690": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-b5cc7bfa204b8b5b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-4109da2e74be2742": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-2245cbbd23899576": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-081862cbc198814a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-6ae4ac4e4e3e65ab": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-bcc05c98b2355a67": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-2121593f8f3e0181": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-e49c0d1ba0bafb85": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-d188443ef8969bd1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-dc9521335c96d6fd": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-1fec39cf76186764": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-e1dea0f416fa47e1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 4",
+      "units": [
+        "Article 4"
+      ],
+      "heading": "Article 4"
+    },
+    "GDPR-8e2c82ceb1e59d29": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 5",
+      "units": [
+        "Article 5"
+      ],
+      "heading": "Article 5"
+    },
+    "GDPR-c9b9babd49e3e52a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 5",
+      "units": [
+        "Article 5"
+      ],
+      "heading": "Article 5"
+    },
+    "GDPR-2d8537fe9fc7ab42": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 5",
+      "units": [
+        "Article 5"
+      ],
+      "heading": "Article 5"
+    },
+    "GDPR-7d11452130c8ca36": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 5",
+      "units": [
+        "Article 5"
+      ],
+      "heading": "Article 5"
+    },
+    "GDPR-71122f50f9fbb264": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-cee131f423571e96": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-f4315dd39d584902": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-60c713581f9332d6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-7b1a6a93093093a3": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-921638e91f48b1bc": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-babfb2166962055a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-aa9954e544bd58a6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 6",
+      "units": [
+        "Article 6"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-ca980d38eb86dbab": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 7",
+      "units": [
+        "Article 7",
+        "Article 8"
+      ],
+      "heading": "Article 7"
+    },
+    "GDPR-1c886d32ef35a92f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 8",
+      "units": [
+        "Article 8"
+      ],
+      "heading": "Article 8"
+    },
+    "GDPR-44a99b3371a599df": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-09344b1648abf6e9": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-7ba28fba9da67c0b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-d4e5196634494b58": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-1594b33b855c34a4": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-e29493e2cc887363": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-51f5fd3bec903d2d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-bb77f827c10b81ef": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 9",
+      "units": [
+        "Article 9"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-5f2f3873b5b63384": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 10",
+      "units": [
+        "Article 10"
+      ],
+      "heading": "Article 10"
+    },
+    "GDPR-e73920cd241decba": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 10",
+      "units": [
+        "Article 10"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-e0716c82c8b761e5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 11",
+      "units": [
+        "Article 11"
+      ],
+      "heading": "Article 11"
+    },
+    "GDPR-5c5ebc265e2f00f5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 12",
+      "units": [
+        "Article 12"
+      ],
+      "heading": "Article 12"
+    },
+    "GDPR-02f2aa78cdc3366c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 12",
+      "units": [
+        "Article 12"
+      ],
+      "heading": "Article 11"
+    },
+    "GDPR-8ada443b88f2babd": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 12",
+      "units": [
+        "Article 12"
+      ],
+      "heading": "Article 11"
+    },
+    "GDPR-dec19954031684a0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 12",
+      "units": [
+        "Article 12"
+      ],
+      "heading": "Article 11"
+    },
+    "GDPR-7906a1e0bb25d774": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 12",
+      "units": [
+        "Article 12"
+      ],
+      "heading": "Article 11"
+    },
+    "GDPR-a14bd9500bf3dcb6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 12",
+      "units": [
+        "Article 12"
+      ],
+      "heading": "Article 11"
+    },
+    "GDPR-3270f2e073136ca6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 12",
+      "units": [
+        "Article 12"
+      ],
+      "heading": "Section 2"
+    },
+    "GDPR-c278501e9f88420c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 13",
+      "units": [
+        "Article 13"
+      ],
+      "heading": "Article 13"
+    },
+    "GDPR-472298bd0e2bd203": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 13",
+      "units": [
+        "Article 13"
+      ],
+      "heading": "Article 13"
+    },
+    "GDPR-13a7e6ff1c591cdc": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 13",
+      "units": [
+        "Article 13"
+      ],
+      "heading": "Article 13"
+    },
+    "GDPR-0d55deaba0478be2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 13",
+      "units": [
+        "Article 13"
+      ],
+      "heading": "Article 13"
+    },
+    "GDPR-31d91432677ac290": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 13",
+      "units": [
+        "Article 13"
+      ],
+      "heading": "Article 13"
+    },
+    "GDPR-37e3eed03819661c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "units": [
+        "Article 14"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-077563beb3961cde": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 13",
+      "units": [
+        "Article 13"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-bfc14e842f13ded1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 13",
+      "units": [
+        "Article 13"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-bde411c79167161c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "units": [
+        "Article 14"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-0d046e8c8b24fac9": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "units": [
+        "Article 14"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-82d147895bea4d72": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "units": [
+        "Article 14"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-4db8ef2df52f5b37": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "units": [
+        "Article 14"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-a7acd7919b798210": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 14",
+      "units": [
+        "Article 14"
+      ],
+      "heading": "Article 14"
+    },
+    "GDPR-9003c7109d811c44": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 15",
+      "units": [
+        "Article 15"
+      ],
+      "heading": "Article 15"
+    },
+    "GDPR-4b4cdabde5a73542": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 15",
+      "units": [
+        "Article 15"
+      ],
+      "heading": "Article 15"
+    },
+    "GDPR-f51df6e279805920": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 15",
+      "units": [
+        "Article 15"
+      ],
+      "heading": "Article 15"
+    },
+    "GDPR-c667f830c0eaff04": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 15",
+      "units": [
+        "Article 15"
+      ],
+      "heading": "Article 15"
+    },
+    "GDPR-808553e2f1898c0d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 16",
+      "units": [
+        "Article 16"
+      ],
+      "heading": "Article 16"
+    },
+    "GDPR-971d8456790a4049": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "units": [
+        "Article 17"
+      ],
+      "heading": "Article 17"
+    },
+    "GDPR-c961fa0d4e06e9c1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "units": [
+        "Article 17"
+      ],
+      "heading": "Article 17"
+    },
+    "GDPR-092077d8f8cc579a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 17",
+      "units": [
+        "Article 17"
+      ],
+      "heading": "Article 17"
+    },
+    "GDPR-760ab72a90c9901b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 18",
+      "units": [
+        "Article 18",
+        "Article 19"
+      ],
+      "heading": "Article 18"
+    },
+    "GDPR-e1180cf799d076ba": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 19",
+      "units": [
+        "Article 19"
+      ],
+      "heading": "Article 19"
+    },
+    "GDPR-e0606577e9c89fc3": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 20",
+      "units": [
+        "Article 20"
+      ],
+      "heading": "Article 20"
+    },
+    "GDPR-0305c11cef2195cd": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 20",
+      "units": [
+        "Article 20"
+      ],
+      "heading": "Section 4"
+    },
+    "GDPR-a0378952dfe50dd0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 21",
+      "units": [
+        "Article 21"
+      ],
+      "heading": "Article 21"
+    },
+    "GDPR-c0d22f66c2d71b5b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 21",
+      "units": [
+        "Article 21"
+      ],
+      "heading": "Article 89"
+    },
+    "GDPR-54b82f147d69f0e5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 22",
+      "units": [
+        "Article 22"
+      ],
+      "heading": "Article 22"
+    },
+    "GDPR-387264ed35293261": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 22",
+      "units": [
+        "Article 22"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-2bfb4919b2d8de86": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 23",
+      "units": [
+        "Article 23"
+      ],
+      "heading": "Article 23"
+    },
+    "GDPR-a3ac5167e8f265a1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 23",
+      "units": [
+        "Article 23"
+      ],
+      "heading": "Article 23"
+    },
+    "GDPR-6f12d4744c8c89fe": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 23",
+      "units": [
+        "Article 23"
+      ],
+      "heading": "Article 23"
+    },
+    "GDPR-f4e9b32fd180fbfc": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 23",
+      "units": [
+        "Article 23"
+      ],
+      "heading": "Article 23"
+    },
+    "GDPR-ccc1eb5141af8565": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 24",
+      "units": [
+        "Article 24",
+        "Article 25"
+      ],
+      "heading": "Article 24"
+    },
+    "GDPR-a378602575369e40": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 25"
+    },
+    "GDPR-d218d1050211d4cf": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 26",
+      "units": [
+        "Article 26",
+        "Article 27"
+      ],
+      "heading": "Article 26"
+    },
+    "GDPR-b8a3621e463d9644": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 27",
+      "units": [
+        "Article 27"
+      ],
+      "heading": "Article 27"
+    },
+    "GDPR-1adc23f9acebfb0c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-245e948795d74cd6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-d3804b87d68148a3": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-66dfbad5ea621787": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-ac51d11d7e205d04": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-7b80cff957f1d4f5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-31ae09a4e5f60c50": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-f70de82b7db34a20": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-ad03c15e48c1968a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-3afb280864c9e774": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 28",
+      "units": [
+        "Article 28"
+      ],
+      "heading": "Article 28"
+    },
+    "GDPR-d33cacf6bc935fad": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 29",
+      "units": [
+        "Article 29"
+      ],
+      "heading": "Article 29"
+    },
+    "GDPR-98c52c5962946849": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 30",
+      "units": [
+        "Article 30"
+      ],
+      "heading": "Article 30"
+    },
+    "GDPR-4f1c7ef3eb3a9f7e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 30",
+      "units": [
+        "Article 30"
+      ],
+      "heading": "Article 30"
+    },
+    "GDPR-68716c0d9bd19d57": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 30",
+      "units": [
+        "Article 30"
+      ],
+      "heading": "Article 30"
+    },
+    "GDPR-7bb9f851c64ecb6f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 30",
+      "units": [
+        "Article 30"
+      ],
+      "heading": "Article 30"
+    },
+    "GDPR-330109ab443766e5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 30",
+      "units": [
+        "Article 30"
+      ],
+      "heading": "Article 9"
+    },
+    "GDPR-8a779874d93fef81": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 31",
+      "units": [
+        "Article 31"
+      ],
+      "heading": "Article 31"
+    },
+    "GDPR-6fa94eb7624a0b3c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 32",
+      "units": [
+        "Article 32"
+      ],
+      "heading": "Article 32"
+    },
+    "GDPR-a27b0bbab03a4d25": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 33",
+      "units": [
+        "Article 33"
+      ],
+      "heading": "Article 33"
+    },
+    "GDPR-569cba6e21dc52b3": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 34",
+      "units": [
+        "Article 34"
+      ],
+      "heading": "Article 34"
+    },
+    "GDPR-0e3e6151c3632130": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 34",
+      "units": [
+        "Article 34"
+      ],
+      "heading": "Section 3"
+    },
+    "GDPR-69612eccc75bfb8a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-cbc27f5351bc0d35": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-62b3ba053e605312": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-6141df75f188875b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-7acb2a4b09c8f61f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-e5395518814f7187": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-c9941febb91b9c28": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-574b329abab6a51c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 35",
+      "units": [
+        "Article 35"
+      ],
+      "heading": "Article 35"
+    },
+    "GDPR-f0ad7b16bf1e4711": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 36",
+      "units": [
+        "Article 36"
+      ],
+      "heading": "Article 36"
+    },
+    "GDPR-c429dfaf2cbafdf0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 36",
+      "units": [
+        "Article 36"
+      ],
+      "heading": "Article 36"
+    },
+    "GDPR-b909cf5d0b640b0c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 36",
+      "units": [
+        "Article 36"
+      ],
+      "heading": "Article 36"
+    },
+    "GDPR-434cfe4f8cdba1c9": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 36",
+      "units": [
+        "Article 36"
+      ],
+      "heading": "Article 36"
+    },
+    "GDPR-714f6e3c497ddd2f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 37",
+      "units": [
+        "Article 37"
+      ],
+      "heading": "Article 37"
+    },
+    "GDPR-38324cd245c80177": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 37",
+      "units": [
+        "Article 37"
+      ],
+      "heading": "Article 37"
+    },
+    "GDPR-3af8ddb6191ee3a9": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 37",
+      "units": [
+        "Article 37"
+      ],
+      "heading": "Article 37"
+    },
+    "GDPR-635f5137b072880e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 37",
+      "units": [
+        "Article 37"
+      ],
+      "heading": "Article 37"
+    },
+    "GDPR-6ba33b320122e956": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 38",
+      "units": [
+        "Article 38"
+      ],
+      "heading": "Article 38"
+    },
+    "GDPR-39556f3cf8d7ec1b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 38",
+      "units": [
+        "Article 38"
+      ],
+      "heading": "Article 39"
+    },
+    "GDPR-bd71edf9eb316e04": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 39",
+      "units": [
+        "Article 39",
+        "Article 40"
+      ],
+      "heading": "Article 39"
+    },
+    "GDPR-b71825f020873287": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-7d656e43c904a2b8": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-6f09288c142338d0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-19af6b81f149e11e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-0af29e7753d3a30e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-f175267290f864ff": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-fea94338508f39d0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-581fcfb70ab2bbae": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-fc77121ecc47df74": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 40"
+    },
+    "GDPR-c524b2dd10e89b71": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 41",
+      "units": [
+        "Article 41"
+      ],
+      "heading": "Article 41"
+    },
+    "GDPR-6c7c67d11324b454": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 41",
+      "units": [
+        "Article 41"
+      ],
+      "heading": "Article 41"
+    },
+    "GDPR-23d5dc732dd6ca5a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 41",
+      "units": [
+        "Article 41"
+      ],
+      "heading": "Article 41"
+    },
+    "GDPR-82c636a9ba2114b1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 41",
+      "units": [
+        "Article 41"
+      ],
+      "heading": "Article 41"
+    },
+    "GDPR-63f64cea3854e2be": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 41",
+      "units": [
+        "Article 41"
+      ],
+      "heading": "Article 41"
+    },
+    "GDPR-48876ed8474127cb": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 40",
+      "units": [
+        "Article 40"
+      ],
+      "heading": "Article 42"
+    },
+    "GDPR-0c8f7f995f35377a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 42",
+      "units": [
+        "Article 42"
+      ],
+      "heading": "Article 58"
+    },
+    "GDPR-ab2b252e318501d8": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 41",
+      "units": [
+        "Article 41"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-bf5c03c21d21041c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-df2ebcdf8d66eada": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-7482ca42bbb1eca9": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-0e33c03bdba2e802": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-f84663cb9d58a969": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-150b17893f9713aa": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-ee393c3714f491cb": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 43"
+    },
+    "GDPR-733a9544af4d8aab": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 43",
+      "units": [
+        "Article 43"
+      ],
+      "heading": "Article 93"
+    },
+    "GDPR-7e0360c8036cefc3": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 44",
+      "units": [
+        "Article 44"
+      ],
+      "heading": "Article 44"
+    },
+    "GDPR-a718edc1d4a7d28b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-30e90305904a32e3": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-7bb88cec656f0620": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-9afae18706b67ed2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-b092998f16fd2823": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-54261a8f22169577": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-6e572396bd2007a7": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-b80c65ff6f58a120": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-2b48daed65506351": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-ef164a53477c59ad": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 45",
+      "units": [
+        "Article 45"
+      ],
+      "heading": "Article 45"
+    },
+    "GDPR-e53c874a1616768b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 46",
+      "units": [
+        "Article 46"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-e823db7575b0be59": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 46",
+      "units": [
+        "Article 46"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-939cd28588fe3513": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 46",
+      "units": [
+        "Article 46"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-92407d8223caaae1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 46",
+      "units": [
+        "Article 46"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-2793f6b05fa9d062": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 46",
+      "units": [
+        "Article 46"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-3d07656777ef8105": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-743b3315c2bd1db5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-ec3d7cee7cb01f9f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-60c22573bb312100": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-5fe9b629003ec948": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-f4d6866c32bdca90": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-59934767ff8f45c1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-48a94fab5ccfd75a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-7bfee53066be2fc2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 47",
+      "units": [
+        "Article 47"
+      ],
+      "heading": "Article 47"
+    },
+    "GDPR-e28236244be0307a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 48",
+      "units": [
+        "Article 48"
+      ],
+      "heading": "Article 48"
+    },
+    "GDPR-8a132907da2d0ff6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 49",
+      "units": [
+        "Article 49"
+      ],
+      "heading": "Article 49"
+    },
+    "GDPR-2856a970c85b46b8": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 49",
+      "units": [
+        "Article 49"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-5dbc36b6f12894e0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 49",
+      "units": [
+        "Article 49"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-10e852507d1161b5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 49",
+      "units": [
+        "Article 49"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-6732feb01f5186ba": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 49",
+      "units": [
+        "Article 49"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-3a51dd74cd502a65": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 49",
+      "units": [
+        "Article 49"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-1b86ea755ae700bc": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 49",
+      "units": [
+        "Article 49"
+      ],
+      "heading": "Article 46"
+    },
+    "GDPR-e0e4f4f5d4fc4540": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 50",
+      "units": [
+        "Article 50"
+      ],
+      "heading": "Article 50"
+    },
+    "GDPR-22fcd57ccfa24de4": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 51",
+      "units": [
+        "Article 51"
+      ],
+      "heading": "Article 51"
+    },
+    "GDPR-4091ffc7713349b2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 52",
+      "units": [
+        "Article 52",
+        "Article 53"
+      ],
+      "heading": "Article 52"
+    },
+    "GDPR-db91ac608deff74d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 53",
+      "units": [
+        "Article 53"
+      ],
+      "heading": "Article 53"
+    },
+    "GDPR-621922edbe5e74ef": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 54",
+      "units": [
+        "Article 54"
+      ],
+      "heading": "Article 54"
+    },
+    "GDPR-0d50ef3ef8a42013": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 55",
+      "units": [
+        "Article 55"
+      ],
+      "heading": "Article 55"
+    },
+    "GDPR-6b7eb1a38bb28774": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 55",
+      "units": [
+        "Article 55"
+      ],
+      "heading": "Article 6"
+    },
+    "GDPR-beb32dce102e3583": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 56",
+      "units": [
+        "Article 56",
+        "Article 57"
+      ],
+      "heading": "Article 56"
+    },
+    "GDPR-9dc954d159b1810a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 57",
+      "units": [
+        "Article 57"
+      ],
+      "heading": "Article 57"
+    },
+    "GDPR-4949a608ea238fba": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 57",
+      "units": [
+        "Article 57"
+      ],
+      "heading": "Article 57"
+    },
+    "GDPR-5fbc14f54d450c29": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 57",
+      "units": [
+        "Article 57"
+      ],
+      "heading": "Article 57"
+    },
+    "GDPR-dc36b8f51da342bc": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 57",
+      "units": [
+        "Article 57"
+      ],
+      "heading": "Article 57"
+    },
+    "GDPR-64275b441dcd2a1d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 57",
+      "units": [
+        "Article 57"
+      ],
+      "heading": "Article 57"
+    },
+    "GDPR-adaea63c45d7b071": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 57",
+      "units": [
+        "Article 57"
+      ],
+      "heading": "Article 57"
+    },
+    "GDPR-2c405da89e480e18": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 57",
+      "units": [
+        "Article 57"
+      ],
+      "heading": "Article 57"
+    },
+    "GDPR-d64dce9dfc5acc52": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 58",
+      "units": [
+        "Article 58"
+      ],
+      "heading": "Article 58"
+    },
+    "GDPR-46af3cbc669ccabc": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 58",
+      "units": [
+        "Article 58"
+      ],
+      "heading": "Article 17"
+    },
+    "GDPR-293df9e35fd270e7": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 58",
+      "units": [
+        "Article 58"
+      ],
+      "heading": "Article 17"
+    },
+    "GDPR-a0472dab72270d78": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 58",
+      "units": [
+        "Article 58"
+      ],
+      "heading": "Article 17"
+    },
+    "GDPR-fa524065b0ff9319": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 58",
+      "units": [
+        "Article 58"
+      ],
+      "heading": "Article 17"
+    },
+    "GDPR-4decbde38f5d8910": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 59",
+      "units": [
+        "Article 59"
+      ],
+      "heading": "Article 59"
+    },
+    "GDPR-b4de8999e557b399": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-f75202b3323a0a71": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-accf5793cbdd9aac": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-ece228a7311e26df": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-118375037d48fd45": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-6f463f4d64b45f0a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-1a6195435015f7f2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-cc31ac2605ec2e00": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-1cf06622ddfe5d8f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 60",
+      "units": [
+        "Article 60"
+      ],
+      "heading": "Article 60"
+    },
+    "GDPR-5fe7efc739a04472": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 61",
+      "units": [
+        "Article 61"
+      ],
+      "heading": "Article 61"
+    },
+    "GDPR-41bfde04f4cb627a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 61",
+      "units": [
+        "Article 61"
+      ],
+      "heading": "Article 61"
+    },
+    "GDPR-9d29ece4be2ffe45": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 61",
+      "units": [
+        "Article 61"
+      ],
+      "heading": "Article 61"
+    },
+    "GDPR-b67c54b727d3a156": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 61",
+      "units": [
+        "Article 61"
+      ],
+      "heading": "Article 61"
+    },
+    "GDPR-8c6b2d37d59c112c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 61",
+      "units": [
+        "Article 61"
+      ],
+      "heading": "Article 61"
+    },
+    "GDPR-ac9b2538ea6ba572": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 62",
+      "units": [
+        "Article 62"
+      ],
+      "heading": "Article 62"
+    },
+    "GDPR-25e72f316d2f2230": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 62",
+      "units": [
+        "Article 62"
+      ],
+      "heading": "Article 62"
+    },
+    "GDPR-a52ea5741292c820": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 62",
+      "units": [
+        "Article 62"
+      ],
+      "heading": "Article 62"
+    },
+    "GDPR-de08f9f9fad11b7b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 62",
+      "units": [
+        "Article 62"
+      ],
+      "heading": "Article 62"
+    },
+    "GDPR-7b5e54e7c9f7ead0": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 62",
+      "units": [
+        "Article 62"
+      ],
+      "heading": "Article 62"
+    },
+    "GDPR-457f7f9ecb08099d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 62",
+      "units": [
+        "Article 62"
+      ],
+      "heading": "Article 62"
+    },
+    "GDPR-d0ace5243f4c2b59": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 63",
+      "units": [
+        "Article 63"
+      ],
+      "heading": "Article 63"
+    },
+    "GDPR-2f8d93df32ece6b6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 64",
+      "units": [
+        "Article 64"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-af12c9748110508d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 64",
+      "units": [
+        "Article 64"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-5a662a109da4b63c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 64",
+      "units": [
+        "Article 64"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-093921a09961036e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 64",
+      "units": [
+        "Article 64"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-322ac196aa5c439d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 64",
+      "units": [
+        "Article 64"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-30f1c893dea207ee": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 64",
+      "units": [
+        "Article 64"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-fc4e4c70fa2eb874": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 65",
+      "units": [
+        "Article 65"
+      ],
+      "heading": "Article 65"
+    },
+    "GDPR-9ac05c4a9b0e7bad": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 65",
+      "units": [
+        "Article 65"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-931f314d69758087": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 65",
+      "units": [
+        "Article 65"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-55dd7e09d1ae3125": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 65",
+      "units": [
+        "Article 65"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-970e33b06fcdee5e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 65",
+      "units": [
+        "Article 65"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-2933069437b88f69": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 66",
+      "units": [
+        "Article 66"
+      ],
+      "heading": "Article 66"
+    },
+    "GDPR-38809caaef5b40b8": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 67",
+      "units": [
+        "Article 67"
+      ],
+      "heading": "Article 67"
+    },
+    "GDPR-756513f550baf874": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 68",
+      "units": [
+        "Article 68",
+        "Article 69",
+        "Article 70"
+      ],
+      "heading": "Article 68"
+    },
+    "GDPR-6fbc79d6ee363192": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 69",
+      "units": [
+        "Article 69",
+        "Article 70"
+      ],
+      "heading": "Article 69"
+    },
+    "GDPR-92f744160797f327": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-2e46e5bee2ff0221": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-cdc9731d1f450e8e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-e5c653b7c1ab55b2": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-b8f0009b2b44e9b6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-0407af11d1ac56d6": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-0081e8cd95da3793": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-60d782b27a14d582": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 70"
+    },
+    "GDPR-26bf7a9bba6a9c8e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 70",
+      "units": [
+        "Article 70"
+      ],
+      "heading": "Article 64"
+    },
+    "GDPR-7152047391cb0a50": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 71",
+      "units": [
+        "Article 71",
+        "Article 72"
+      ],
+      "heading": "Article 71"
+    },
+    "GDPR-5a260b03933ac003": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 72",
+      "units": [
+        "Article 72"
+      ],
+      "heading": "Article 72"
+    },
+    "GDPR-a407da4286880dbd": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 73",
+      "units": [
+        "Article 73"
+      ],
+      "heading": "Article 73"
+    },
+    "GDPR-d0d1c614c42b60a5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 74",
+      "units": [
+        "Article 74",
+        "Article 75"
+      ],
+      "heading": "Article 74"
+    },
+    "GDPR-226edb7af666e290": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 75",
+      "units": [
+        "Article 75"
+      ],
+      "heading": "Article 75"
+    },
+    "GDPR-f7503400aefe136f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 76",
+      "units": [
+        "Article 76"
+      ],
+      "heading": "Article 76"
+    },
+    "GDPR-06e97997165f9390": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 77",
+      "units": [
+        "Article 77"
+      ],
+      "heading": "Article 77"
+    },
+    "GDPR-a9f2852a8efb4b31": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 78",
+      "units": [
+        "Article 78"
+      ],
+      "heading": "Article 78"
+    },
+    "GDPR-d2981da564b870d1": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 79",
+      "units": [
+        "Article 79"
+      ],
+      "heading": "Article 79"
+    },
+    "GDPR-d4bc98b864630458": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 80",
+      "units": [
+        "Article 80",
+        "Article 81"
+      ],
+      "heading": "Article 80"
+    },
+    "GDPR-f03aba5fec9f80a8": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 81",
+      "units": [
+        "Article 81",
+        "Article 82"
+      ],
+      "heading": "Article 81"
+    },
+    "GDPR-e0c39ccc565fdf5c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 82",
+      "units": [
+        "Article 82",
+        "Article 83"
+      ],
+      "heading": "Article 82"
+    },
+    "GDPR-2be656caa2655018": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 83"
+    },
+    "GDPR-ac3104d5b6ff4837": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 83"
+    },
+    "GDPR-f3e0672a6d3a9c31": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 83"
+    },
+    "GDPR-0a318614ebe8928c": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 42"
+    },
+    "GDPR-f804c65d96da7d18": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 42"
+    },
+    "GDPR-43a0be3839297d31": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 42"
+    },
+    "GDPR-8d4410bc5eba31e5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 42"
+    },
+    "GDPR-38f8e127da3a8d83": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 42"
+    },
+    "GDPR-88ce17ba6ca875e5": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 83",
+      "units": [
+        "Article 83"
+      ],
+      "heading": "Article 42"
+    },
+    "GDPR-efcc063fcc8c1062": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 84",
+      "units": [
+        "Article 84"
+      ],
+      "heading": "Article 84"
+    },
+    "GDPR-a9358b416adb2b62": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 85",
+      "units": [
+        "Article 85"
+      ],
+      "heading": "Article 85"
+    },
+    "GDPR-3e563591242ee63d": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 86",
+      "units": [
+        "Article 86"
+      ],
+      "heading": "Article 86"
+    },
+    "GDPR-fec23712d8305b27": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 87",
+      "units": [
+        "Article 87"
+      ],
+      "heading": "Article 87"
+    },
+    "GDPR-8e9332d32dbad7a6": {
+      "jurisdiction": "GDPR",
+      "unit": "Recital",
+      "units": [
+        "Recital"
+      ],
+      "heading": "Article 88"
+    },
+    "GDPR-29f614d35ea3230a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 89",
+      "units": [
+        "Article 89"
+      ],
+      "heading": "Article 89"
+    },
+    "GDPR-b5d4d58c57834083": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 90",
+      "units": [
+        "Article 90",
+        "Article 91"
+      ],
+      "heading": "Article 90"
+    },
+    "GDPR-11c93a502efbea52": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 91",
+      "units": [
+        "Article 91"
+      ],
+      "heading": "Article 91"
+    },
+    "GDPR-936a6809e947527a": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 92",
+      "units": [
+        "Article 92",
+        "Article 93"
+      ],
+      "heading": "Article 92"
+    },
+    "GDPR-2aa8e5e30645cd4f": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 93",
+      "units": [
+        "Article 93"
+      ],
+      "heading": "Article 93"
+    },
+    "GDPR-7245806e8b6eab22": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 94",
+      "units": [
+        "Article 94",
+        "Article 95"
+      ],
+      "heading": "Article 94"
+    },
+    "GDPR-77ad914b455ff69b": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 95",
+      "units": [
+        "Article 95"
+      ],
+      "heading": "Article 95"
+    },
+    "GDPR-b6fc3108b37cf454": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 96",
+      "units": [
+        "Article 96"
+      ],
+      "heading": "Article 96"
+    },
+    "GDPR-e85a38f57f510e28": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 97",
+      "units": [
+        "Article 97",
+        "Article 98"
+      ],
+      "heading": "Article 97"
+    },
+    "GDPR-952cec397c324986": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 98",
+      "units": [
+        "Article 98"
+      ],
+      "heading": "Article 98"
+    },
+    "GDPR-19f854609141908e": {
+      "jurisdiction": "GDPR",
+      "unit": "Article 99",
+      "units": [
+        "Article 99"
+      ],
+      "heading": "Article 99"
+    },
+    "DPDP-084908b6cfc4dc5b": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 1",
+      "units": [
+        "Section 1"
+      ],
+      "heading": "(2)  It shall come into force on such date as the Central Government may, by notification"
+    },
+    "DPDP-db1bc032ba49f903": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(a) “Appellate Tribunal” means the Telecom Disputes Settlement and  Appellate"
+    },
+    "DPDP-34865df498416477": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(b) “automated” means any digital process capable of operating automatically"
+    },
+    "DPDP-e6ceded4f32d6edc": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(g) “Consent Manager” means a person registered with the Board, who acts as"
+    },
+    "DPDP-ed5c6afee9581ed2": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(h) “data” means a representation of information, facts, concepts, opinions or"
+    },
+    "DPDP-18b80069a250f0f1": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(i) “Data Fiduciary” means any person who alone or in conjunction with other"
+    },
+    "DPDP-1b56f9ae75265a17": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(l) “Data Protection Officer” means an individual appointed by the Significant"
+    },
+    "DPDP-9bdcc9dff1a8fb4f": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(m) “digital office” means an office that adopts an online mechanism wherein"
+    },
+    "DPDP-82a7a887265ee4b7": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(ii) an opportunity to earn remuneration or greater remuneration or to"
+    },
+    "DPDP-1aa409d99eaefa7e": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(ii) a loss of opportunity to earn remuneration or greater remuneration or"
+    },
+    "DPDP-4951708565c3ac83": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(r) “notification” means a notification published in the Official Gazette and the"
+    },
+    "DPDP-8260229abc97e0ab": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(u) “personal data breach” means any unauthorised processing of personal"
+    },
+    "DPDP-5348927f2cee6630": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(x) “processing” in relation to personal data, means a wholly or partly automated"
+    },
+    "DPDP-36e35f0bddb6af2e": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(z) “Significant Data Fiduciary” means any Data Fiduciary or class of Data"
+    },
+    "DPDP-6bf0fc1130ab649c": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 2",
+      "units": [
+        "Section 2"
+      ],
+      "heading": "(za) “specified purpose” means the purpose mentioned in the notice given by"
+    },
+    "DPDP-0f4359572dfc90ee": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 3",
+      "units": [
+        "Section 3"
+      ],
+      "heading": "(a) apply to the processing of digital personal data within the territory of India"
+    },
+    "DPDP-5b7de32fb9b2bf21": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 3",
+      "units": [
+        "Section 3"
+      ],
+      "heading": "(a) apply to the processing of digital personal data within the territory of India"
+    },
+    "DPDP-1b806a27adc70904": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 3",
+      "units": [
+        "Section 3"
+      ],
+      "heading": "(b) also apply to processing of digital personal data outside the territory of"
+    },
+    "DPDP-79b0ac9f56f31d15": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 3",
+      "units": [
+        "Section 3"
+      ],
+      "heading": "(B) any other person who is under an obligation under any law for"
+    },
+    "DPDP-6b6e2b30127a0e2f": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 4",
+      "units": [
+        "Section 4"
+      ],
+      "heading": "(2) For the purposes of this section, the expression “lawful purpose” means any"
+    },
+    "DPDP-ae4dbc311f6ae0be": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 5",
+      "units": [
+        "Section 5"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-c4dafd588141bc69": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 5",
+      "units": [
+        "Section 5",
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-ab7eb92cd9697d19": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-531a293d12155275": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-0fdd00ca06c8f6d7": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-29caf481c491a209": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-a13b42d6b509430e": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-da2d88ae53660366": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-cbb5143745dd0bc2": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-2a3e14510a67990e": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-f2df8a39d6952c38": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 6",
+      "units": [
+        "Section 6",
+        "Section 7"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-d01f3a11fc0dfadc": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 7",
+      "units": [
+        "Section 7"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-d247dca9ac60bd75": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 7",
+      "units": [
+        "Section 7"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-763b14d86cdd26fc": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 7",
+      "units": [
+        "Section 7"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-704dd6682429d1bf": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 7",
+      "units": [
+        "Section 7"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-c101824553bca1ef": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 7",
+      "units": [
+        "Section 7"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-31520005d5a99c94": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 7",
+      "units": [
+        "Section 7",
+        "Section 8"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-369563c552b82d9e": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 8",
+      "units": [
+        "Section 8"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-97f84bd815b82031": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 8",
+      "units": [
+        "Section 8"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-2e9741fb28682df1": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 8",
+      "units": [
+        "Section 8"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-70cdda7de12be29d": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 8",
+      "units": [
+        "Section 8"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-2b6f2f99b79ddd21": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 8",
+      "units": [
+        "Section 8"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-75352500bff0b145": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 8",
+      "units": [
+        "Section 8"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-02d55d4afe00ab6d": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 8",
+      "units": [
+        "Section 8",
+        "Section 9"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-c4e1ef6e6dda2263": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 9",
+      "units": [
+        "Section 9"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-043b4353a9acac20": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 9",
+      "units": [
+        "Section 9",
+        "Section 10"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-7804427699a85f9c": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 10",
+      "units": [
+        "Section 10"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-9d80284472dcbe76": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 10",
+      "units": [
+        "Section 10"
+      ],
+      "heading": "Section 6"
+    },
+    "DPDP-202b99fd5b005774": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 11",
+      "units": [
+        "Section 11"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-98a7b998cbc61e4b": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 11",
+      "units": [
+        "Section 11",
+        "Section 12"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-b70278c86211618f": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 12",
+      "units": [
+        "Section 12",
+        "Section 13"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-54ca9aab0c0ede63": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 13",
+      "units": [
+        "Section 13",
+        "Section 14"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-db93928c3a5b7495": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 14",
+      "units": [
+        "Section 14",
+        "Section 15"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-5981aa386a9c5f7e": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 15",
+      "units": [
+        "Section 15",
+        "Section 16"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-6a500d38820b006a": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 16",
+      "units": [
+        "Section 16",
+        "Section 17"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-cb1f437116bbf1c1": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 17",
+      "units": [
+        "Section 17"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-9e4e5e887e4911ba": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 17",
+      "units": [
+        "Section 17"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-be2717b9923589af": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 17",
+      "units": [
+        "Section 17"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-75ff476d8e678705": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 7",
+      "units": [
+        "Section 7",
+        "Section 8"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-104b4166e0c939a4": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 17",
+      "units": [
+        "Section 17"
+      ],
+      "heading": "Section 7"
+    },
+    "DPDP-cf7b8eb5b35a007f": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 17",
+      "units": [
+        "Section 17"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-c9a8f3d92469c3b3": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 17",
+      "units": [
+        "Section 17",
+        "Section 18"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-24fcc508cc6ecb07": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 18",
+      "units": [
+        "Section 18",
+        "Section 19"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-db116e2516e89550": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 19",
+      "units": [
+        "Section 19",
+        "Section 20"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-2401c7b8bad84017": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 20",
+      "units": [
+        "Section 20",
+        "Section 21"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-1d179a977249929a": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 21",
+      "units": [
+        "Section 21",
+        "Section 22"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-2773f01729bc2397": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 22",
+      "units": [
+        "Section 22"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-faa1ac1b142654f1": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 22",
+      "units": [
+        "Section 22",
+        "Section 23"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-6e3ddcb9c19fb8dd": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 23",
+      "units": [
+        "Section 23"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-282b0ffada192c06": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 23",
+      "units": [
+        "Section 23",
+        "Section 24",
+        "Section 25"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-c5653a03e4c8f5ec": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 27",
+      "units": [
+        "Section 27"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-8fa3305343063f90": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 27",
+      "units": [
+        "Section 27"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-6596a0e211bdf0b6": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 27",
+      "units": [
+        "Section 27"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-d9e11bdd0cde13f3": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 27",
+      "units": [
+        "Section 27"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-675016f75b45d0ba": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 27",
+      "units": [
+        "Section 27",
+        "Section 28"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-250a1ad46df114f6": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 28",
+      "units": [
+        "Section 28"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-ff8814456cca9542": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 28",
+      "units": [
+        "Section 28"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-1e4a855ee478859b": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 28",
+      "units": [
+        "Section 28"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-546935a8a5cc8852": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 28",
+      "units": [
+        "Section 28",
+        "Section 29"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-390936fa675d50ef": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 29",
+      "units": [
+        "Section 29"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-eb9051425ca56d8f": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 29",
+      "units": [
+        "Section 29"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-42b244b9e8b7f415": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 29",
+      "units": [
+        "Section 29"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-c9acfe3f1e96ed80": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 29",
+      "units": [
+        "Section 29",
+        "Section 30"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-2d2eb436826be9ba": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 30",
+      "units": [
+        "Section 30",
+        "Section 31",
+        "Section 32"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-e54b12bf04044fac": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 32",
+      "units": [
+        "Section 32"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-53e535edd35f0b54": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 32",
+      "units": [
+        "Section 32",
+        "Section 33"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-935f28aedf43f7a3": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 33",
+      "units": [
+        "Section 33"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-a8e3a33dfc81e576": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 33",
+      "units": [
+        "Section 33",
+        "Section 34",
+        "Section 35"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-b081b9fe29b9e199": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 37",
+      "units": [
+        "Section 37"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-be987a9add51035c": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 37",
+      "units": [
+        "Section 37"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-6f3487254f26fb1d": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 37",
+      "units": [
+        "Section 37",
+        "Section 38"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-01fcb0d4b326d70c": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 38",
+      "units": [
+        "Section 38",
+        "Section 39",
+        "Section 40"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-19d909abc5102589": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 40",
+      "units": [
+        "Section 40"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-0089a946d260e25d": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 40",
+      "units": [
+        "Section 40"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-09604049795493b9": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 40",
+      "units": [
+        "Section 40"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-4ada6dbdf68cd4d2": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 40",
+      "units": [
+        "Section 40"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-b4995e292e4bd112": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 40",
+      "units": [
+        "Section 40"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-bccd2a9535ecf4c3": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 40",
+      "units": [
+        "Section 40"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-a7064b146aeced8d": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 40",
+      "units": [
+        "Section 40",
+        "Section 41"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-d7e1f7140de63952": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 41",
+      "units": [
+        "Section 41",
+        "Section 42"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-86f009a3f0682081": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 42",
+      "units": [
+        "Section 42",
+        "Section 43"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-8fc63a224b482633": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 43",
+      "units": [
+        "Section 43",
+        "Section 44"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-0fc40ff6ed658a7c": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 44",
+      "units": [
+        "Section 44"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-f0bfd81b1619eacd": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 44",
+      "units": [
+        "Section 44"
+      ],
+      "heading": "Section 8"
+    },
+    "DPDP-de995bea4c235311": {
+      "jurisdiction": "DPDP",
+      "unit": "Section 44",
+      "units": [
+        "Section 44"
+      ],
+      "heading": "Section 28"
+    },
+    "CCPA-dec7ac14149ee21f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 0",
+      "topics": [
+        "overview",
+        "right_to_know",
+        "right_to_delete",
+        "opt_out_sale",
+        "non_discrimination"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-2daec85d68fab357": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 1",
+      "topics": [
+        "right_to_know",
+        "right_to_delete",
+        "opt_out_sale",
+        "non_discrimination",
+        "right_to_correct"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-981a82222ec3a66f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 2",
+      "topics": [
+        "right_to_correct",
+        "limit_sensitive_pi",
+        "business_obligations",
+        "notices"
+      ],
+      "heading": "California Consumer Privacy Act (CCPA)"
+    },
+    "CCPA-744b9361ef81d38f": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 3",
+      "topics": [
+        "topic_index"
+      ],
+      "heading": "Links to Topics"
+    },
+    "CCPA-052d39af0cfd7d17": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 4",
+      "topics": [
+        "faq_disclaimer"
+      ],
+      "heading": "Frequently Asked Questions (FAQs)"
+    },
+    "CCPA-d6563fbd06621f15": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 5",
+      "topics": [
+        "non_discrimination",
+        "financial_incentive"
+      ],
+      "heading": "G. RIGHT TO NON-DISCRIMINATION"
+    },
+    "CCPA-151d4e7b5450792b": {
+      "jurisdiction": "CCPA",
+      "unit": "CCPA chunk 6",
+      "topics": [
+        "external_resources"
+      ],
+      "heading": "Other Consumer Resources on CCPA"
+    }
+  },
+  "stats": {
+    "index_dir": "C:\\Users\\Avane\\OneDrive\\Desktop\\Legal AI Bot\\legal-ai-bot\\vector_store\\regulatory",
+    "chunks": {
+      "GDPR": 600,
+      "DPDP": 105,
+      "CCPA": 7
+    },
+    "unlocated": {},
+    "heading_field_disagrees_with_position": {
+      "GDPR": {
+        "count": 350,
+        "of": 600,
+        "rate": 0.583
+      },
+      "DPDP": {
+        "count": 95,
+        "of": 105,
+        "rate": 0.905
+      }
+    },
+    "recital_chunks_gdpr": 308,
+    "operative_units_covered": {
+      "GDPR": 97,
+      "DPDP": 36
+    },
+    "chunks_per_unit_top": [
+      [
+        "Recital",
+        308
+      ],
+      [
+        "Article 4",
+        21
+      ],
+      [
+        "Section 2",
+        14
+      ],
+      [
+        "Article 28",
+        10
+      ],
+      [
+        "Article 40",
+        10
+      ],
+      [
+        "Article 45",
+        10
+      ],
+      [
+        "Article 47",
+        9
+      ],
+      [
+        "Article 60",
+        9
+      ],
+      [
+        "Article 70",
+        9
+      ],
+      [
+        "Article 83",
+        9
+      ],
+      [
+        "Section 6",
+        9
+      ],
+      [
+        "Article 6",
+        8
+      ]
+    ]
+  }
+}

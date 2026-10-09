@@ -99,6 +99,33 @@ class ComplianceVectorStore:
         hits.sort(key=lambda h: h.similarity, reverse=True)
         return hits
 
+    def vectors_for(self, passages: list[RetrievedPassage]) -> np.ndarray | None:
+        """
+        Return the stored (L2-normalised) vectors for already-retrieved passages,
+        reconstructed from the FAISS flat index — avoids re-embedding candidate
+        text at query time (the MMR re-ranker needs these vectors).
+
+        Returns ``None`` if any passage cannot be located so callers can fall back.
+        """
+        if not passages:
+            return np.zeros((0, self.dim), dtype=np.float32)
+        out = np.zeros((len(passages), self.dim), dtype=np.float32)
+        for i, p in enumerate(passages):
+            row = self._row_index(p.jurisdiction).get(p.chunk_id)
+            if row is None:
+                return None
+            out[i] = self._indices[p.jurisdiction].reconstruct(int(row))
+        return out
+
+    def _row_index(self, jurisdiction: Jurisdiction) -> dict[str, int]:
+        cache = self.__dict__.setdefault("_row_cache", {})
+        metas = self._metas[jurisdiction]
+        cached = cache.get(jurisdiction)
+        if cached is None or cached[0] != len(metas):
+            cached = (len(metas), {m["chunk_id"]: i for i, m in enumerate(metas)})
+            cache[jurisdiction] = cached
+        return cached[1]
+
     def save(self, directory: Path) -> None:
         directory.mkdir(parents=True, exist_ok=True)
         manifest: dict[str, Any] = {"dim": self.dim, "jurisdictions": {}}
