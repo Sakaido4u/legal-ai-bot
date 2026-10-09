@@ -28,6 +28,8 @@ dependencies = [
   "PyJWT>=2.8",
   "python-multipart>=0.0.9",
   "slowapi>=0.1.9",
+  "pandas>=2.0",
+  "matplotlib>=3.8",
 ]
 
 [project.optional-dependencies]
