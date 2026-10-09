@@ -65,6 +65,22 @@ _boot_settings = Settings()
 _started_at = datetime.now(timezone.utc)
 
 
+def build_engine(settings: Settings):
+    """Lazy wrapper: importing rag_service pulls in torch/FAISS, which can
+    hard-crash on some Windows builds, so defer it until actually needed.
+    Kept at module level so tests can monkeypatch ``backend.main.build_engine``."""
+    from .rag_service import build_engine as _build_engine
+
+    return _build_engine(settings)
+
+
+def run_compliance_analysis(*args, **kwargs):
+    """Lazy wrapper around ``rag_service.run_compliance_analysis`` (see above)."""
+    from .rag_service import run_compliance_analysis as _run
+
+    return _run(*args, **kwargs)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     import os
@@ -98,8 +114,6 @@ async def lifespan(app: FastAPI):
         )
     else:
         try:
-            from .rag_service import build_engine
-
             engine = build_engine(settings)
             set_engine(engine)
             logger.info("RAG engine ready (index vectors=%s)", engine.store.ntotal())
@@ -461,8 +475,6 @@ async def compliance_analyze(
     db: Annotated[Session, Depends(get_db)],
     _: Annotated[User, Depends(get_current_user)],
 ):
-    from .rag_service import run_compliance_analysis
-
     try:
         js = [Jurisdiction(j) for j in body.jurisdictions]
     except ValueError as e:
