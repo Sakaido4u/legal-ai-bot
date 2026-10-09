@@ -1,0 +1,11 @@
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Validator variant & First-attempt pass (\%) & Loop refusal (\%) \\
+\midrule
+Valid citation ids only (no per-sentence rule) & 84.5 & -- \\
+Per-sentence, original & 0.0 & 52.8 \\
+\quad + abbreviation-aware sentence splitter & 0.0 & 51.4 \\
+\quad + ignore list-introducer lines & 73.6 & 12.5 \\
+\quad + both (deployed) & 75.0 & 11.1 \\
+\bottomrule
+\end{tabular}

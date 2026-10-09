@@ -133,9 +133,12 @@ class HighPrecisionRetriever:
         subqueries = decompose_query(query)
         pool_k = max(top_k * self.pool_multipler, top_k)
         by_chunk: dict[str, RetrievedPassage] = {}
+        primary_qv: np.ndarray | None = None
 
         for sq in subqueries:
             qv = self.embedder.encode([sq])[0]
+            if primary_qv is None:
+                primary_qv = qv  # decompose_query() always puts the full query first
             hits = self.store.search(
                 qv,
                 jurisdictions=list(jurisdictions),
@@ -160,7 +163,10 @@ class HighPrecisionRetriever:
             return pool[:top_k]
 
         # MMR against the primary (full) query embedding for final diversity.
-        qv = self.embedder.encode([query])[0]
-        texts = [p.text for p in pool]
-        cand_embs = self.embedder.encode(texts)
+        # Candidate vectors are read back from the index; the previous version
+        # re-embedded candidate text here, which dominated retrieval latency.
+        qv = primary_qv if primary_qv is not None else self.embedder.encode([query])[0]
+        cand_embs = self.store.vectors_for(pool)
+        if cand_embs is None:
+            cand_embs = self.embedder.encode([p.text for p in pool])
         return _mmr_select(qv, pool, cand_embs, top_n=top_k, lambda_mult=self.mmr_lambda)

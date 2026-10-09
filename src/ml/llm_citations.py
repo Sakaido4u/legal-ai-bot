@@ -9,6 +9,28 @@ from .chunking import trim_orphaned_edges
 
 _CIT_REF = re.compile(r"\[((?:C)\d+)\]")
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
+# Tokens that end with a period but do not end a sentence: single-letter or
+# numbered enumerators ("G.", "1.", "(a)."), and common legal abbreviations
+# ("Art.", "Sec.", "para.", "No.", "e.g.", "i.e.").  Splitting after these
+# produced citation-less fragments and spurious validation failures.
+_ABBREV_END = re.compile(
+    r"(?:(?<![A-Za-z])[A-Za-z]"
+    r"|\b(?:No|Nos|Art|Arts|Sec|Secs|para|paras|cf|e\.g|i\.e|etc|vs|v|Reg|Dir|Ch|Cl|Sch|p|pp|approx|incl|resp)"
+    r"|(?<![\w.])\d+"
+    r"|\([a-z0-9]{1,3}\))\.$",
+    re.I,
+)
+
+
+def split_validation_sentences(text: str) -> list[str]:
+    """Sentence split for citation validation that does not break after abbreviations/enumerators."""
+    out: list[str] = []
+    for part in _SENTENCE_SPLIT.split(text):
+        if out and _ABBREV_END.search(out[-1]):
+            out[-1] = f"{out[-1]} {part}"
+        else:
+            out.append(part)
+    return out
 
 
 def passages_to_citations(passages: list[RetrievedPassage], citation_prefix: str = "C") -> list[Citation]:
@@ -63,6 +85,29 @@ def validate_citation_coverage(answer_text: str, allowed_ids: Iterable[str]) -> 
     return refs <= allowed if refs else False
 
 
+def substantive_lines(answer_text: str, *, skip_list_introducers: bool = True) -> list[str]:
+    """
+    Lines of an answer that carry factual content and therefore need a citation.
+
+    Skips empty lines, bullet markers without content, template scaffolding, and
+    (by default) list-introducer lines such as "Here are the key points:" — a line
+    that ends with a colon and carries no citation makes no standalone claim.
+    Treating such preambles as uncited claims was the dominant cause of validator
+    refusals in our benchmark.
+    """
+    out: list[str] = []
+    for line in answer_text.splitlines():
+        cleaned = re.sub(r"^[-*•]\s*", "", line.strip()).strip()
+        if len(cleaned) < 12:
+            continue
+        if cleaned.lower().startswith(("query focus:", "product feature:", "evidence-linked")):
+            continue
+        if skip_list_introducers and cleaned.endswith(":") and not extract_citation_ids(cleaned):
+            continue
+        out.append(cleaned)
+    return out
+
+
 def validate_per_sentence_citations(answer_text: str, allowed_ids: Iterable[str]) -> bool:
     """
     Stricter guardrail: each substantive sentence must contain at least one [C#]
@@ -72,21 +117,12 @@ def validate_per_sentence_citations(answer_text: str, allowed_ids: Iterable[str]
     if not allowed:
         return False
 
-    lines = [ln.strip() for ln in answer_text.splitlines() if ln.strip()]
-    substantive: list[str] = []
-    for line in lines:
-        cleaned = re.sub(r"^[-*•]\s*", "", line).strip()
-        if len(cleaned) < 12:
-            continue
-        if cleaned.lower().startswith(("query focus:", "product feature:", "evidence-linked")):
-            continue
-        substantive.append(cleaned)
-
+    substantive = substantive_lines(answer_text)
     if not substantive:
         return False
 
     for sentence in substantive:
-        for part in _SENTENCE_SPLIT.split(sentence):
+        for part in split_validation_sentences(sentence):
             part = part.strip()
             if len(part) < 12:
                 continue
