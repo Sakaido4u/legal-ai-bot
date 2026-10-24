@@ -16,7 +16,6 @@ demo_output.json
 # Datasets
 data/raw/
 data/processed/
-temp_auto_push.bat
 
 # Vector database
 vector_store/
@@ -28,6 +27,7 @@ models/
 logs/
 
 # IDE
+.vscode/
 .idea/
 
 # Jupyter
@@ -35,5 +35,4 @@ logs/
 
 # OS
 .DS_Store
-Thumbs.db.gitignore
-branch_structure.json
+Thumbs.db
